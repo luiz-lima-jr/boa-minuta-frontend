@@ -1,0 +1,86 @@
+@use '@angular/material' as mat;
+@import '../src/assets/colors.scss';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.titleStyleLeft {
+  width: 0.5em;
+  height: 1.8em;
+  background: mat.get-color-from-palette($primary-palette, 900);
+  align-self: center;
+  margin-right: 1em;
+}
+
+button {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 1em  !important;
+}
+
+.button-secundary {
+  border-style: solid !important;
+  border-width: thin !important;
+  color: mat.get-color-from-palette($primary-palette, 900) !important;
+}
+
+h1 {
+  text-align: center;
+}
+
+.col-{
+  width: 5%
+}
+.col-10{
+  width: 10%
+}
+.col-15{
+  width: 15%
+}
+.col-20{
+  width: 20%
+}
+.col-25{
+  width: 25%
+}
+.col-30{
+  width: 30%
+}
+.col-35{
+  width: 35%
+}
+.col-40{
+  width: 40%
+}
+.col-45{
+  width: 45%
+}
+.col-46{
+  width: 46%
+}
+.col-49{
+  width: 49%
+}
+.col-50{
+  width: 50%
+}
+.col-55{
+  width: 55%
+}
+
+.margin-r-2 {
+  margin-right: 2%;
+}
+
+.margin-l-2 {
+  margin-left: 2%;
+}
+
+.margin-l-4 {
+  margin-left: 4%;
+}
+.margin-l-6 {
+  margin-left: 6%;
+}
+.margin-l-8 {
+  margin-left: 8%;
+}

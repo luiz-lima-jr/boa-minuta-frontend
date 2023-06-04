@@ -1,0 +1,24 @@
+<mat-expansion-panel [class.mat-elevation-z0]="true">
+    <ng-container [ngTemplateOutlet]="itemParent"></ng-container>
+
+    <mat-expansion-panel-header>
+       {{item.label}}
+    </mat-expansion-panel-header>
+    <mat-nav-list>
+        <a mat-list-item routerLink="#">
+            <mat-icon>{{item.icon}}</mat-icon><span>{{item.label}}</span>
+        </a>
+    </mat-nav-list>
+</mat-expansion-panel>
+<ng-template #itemParent>
+    <mat-expansion-panel-header>
+        {{item.label}}
+     </mat-expansion-panel-header>
+</ng-template>
+<ng-template #itemChildren>
+    <mat-nav-list>
+        <a mat-list-item routerLink="#">
+            <mat-icon>{{item.icon}}</mat-icon><span>{{item.label}}</span>
+        </a>
+    </mat-nav-list>
+</ng-template>

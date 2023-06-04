@@ -1,0 +1,62 @@
+.toolbar-item-spacer {
+    flex: 1 1 auto;
+}
+
+.app-container {
+    height: 90%;
+    margin: 0;
+}  
+.app-sidenav {
+    width: 230px;
+}
+.app-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+mat-toolbar {
+    @media (max-width: 1600px) {
+        height: 13%;
+    }
+    @media (min-width: 1601px) {
+        height: 9%;
+    }
+    background-color: white;
+    border-bottom-style: groove;
+    justify-content: center;
+}
+.divMenu {
+    position: absolute; left: 0;
+}
+.divLogo {
+    position: absolute;
+    left: 3% !important;
+}
+.logo {    
+    @media (max-width: 1600px) {
+        max-height: 3em;
+    }
+    @media (min-width: 1601px) {
+        max-height: 3.2em;
+    }
+}
+
+.boaMinuta{
+    font-family: 'Montserrat Bold', 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 28px;
+    color: #7F7F7F;
+}
+
+.dadosLogin{    
+    display: flex;
+    position: absolute;
+    right: 3% !important;
+}
+
+.botaoLoginToolbar {
+    color: rgb(132, 25, 28);
+}

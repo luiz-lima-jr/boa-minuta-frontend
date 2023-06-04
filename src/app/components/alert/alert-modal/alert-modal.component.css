@@ -1,0 +1,21 @@
+mat-icon {
+    display: contents;
+    font-size: 8em;
+    text-align: center;
+}
+
+.sucess {
+    color: rgb(99, 177, 99);
+}
+
+.error {
+    color: rgb(216, 25, 25);
+}
+
+.text-alert{
+    text-align: center;
+    font-size: 1.5em;
+}
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__content {
+    text-align: center;
+}

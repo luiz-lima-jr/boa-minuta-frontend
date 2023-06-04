@@ -1,0 +1,41 @@
+.form-filial {
+  @media (max-width: 1600px) {
+    max-width: 75%;
+  }
+  @media (min-width: 1601px) {
+    max-width: 60%;
+  }
+  margin-left: 2%;
+}
+
+.div-botao-enviar {
+  align-self: center;
+}
+
+.botao-enviar {
+  float: right;
+}
+
+.title {
+  width: 100%;
+  display: inline-flex;
+}
+
+h2 mat-icon {
+  margin-right: 1%;
+  line-height: 1.2;
+}
+
+.title-cadastradas {
+  display: flex;
+}
+
+.botao-cadastrar{
+  float: right;
+  width: 15% !important;
+}
+
+.button-cadastro {  
+  width: 37% !important;
+  align-self: center;
+}
