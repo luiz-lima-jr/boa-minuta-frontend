@@ -66,6 +66,11 @@ export class FilialComponent implements OnInit {
 
   resetForm(ngForm: any){
     ngForm.resetForm();
+    this.buscarFiliais();
+  }
+
+  editarFilial(filial: Filial){
+    this.formFilial.patchValue(filial);
   }
 
   salvarFilial(ngForm: any){
