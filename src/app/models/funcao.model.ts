@@ -1,6 +1,6 @@
 export class Funcao {
     id: number;
-    funcao: FuncaoType;
+    descricao: FuncaoType;
 }
 
-export type FuncaoType = 'ADMINISTRADOR'
+export type FuncaoType = 'ADMINISTRADOR' | 'OPERACIONAL' | 'FATURISTA'

@@ -1,6 +1,5 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { MatTable } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Filial } from '../models/filial.model';
 import { FilialService } from '../services/filial.service';
 import { FormControl } from '@angular/forms';
@@ -19,19 +18,6 @@ export class FilialComponent implements OnInit {
   formFilial: FormGroup;
   displayedColumns: string[] = ['nome', 'acao'];
   filiais: Filial[] = [];
-  idControl: FormControl;
-  nomeControl: FormControl;
-  codigoMiliControl: FormControl;
-
-
-  @ViewChild(MatTable) table: MatTable<Filial>;
-
-  @ViewChild("formFilialTemplate")
-  formFilialTemplate: NgForm;
-
-  //@ViewChild(MatDialog) dialogCadastro: MatDialog;
-
-  @ViewChild('dialogCadastro', { read: TemplateRef }) dialogCadastro:TemplateRef<any>;
 
 
   constructor(private formBuilder: FormBuilder, private filialService: FilialService,
@@ -54,13 +40,10 @@ export class FilialComponent implements OnInit {
   }
 
   initFormFilliais() {
-    this.idControl = new FormControl();
-    this.nomeControl = new FormControl('', Validators.required);
-    this.codigoMiliControl = new FormControl('', Validators.required);
     this.formFilial = this.formBuilder.group({
-      id: this.idControl,
-      nome: this.nomeControl,
-      codigoMili: this.codigoMiliControl
+      id: [''],
+      nome: ['', Validators.required],
+      codigoMili: ['', Validators.required]
     })
   }
 

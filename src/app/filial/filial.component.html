@@ -6,26 +6,26 @@
         <mat-card-content  style="margin: 0.8em 0.8em 0 0.8em">
             <mat-form-field class="col-50 margin-r-2">
                 <mat-label>Nome Filial</mat-label>
-                <input matInput class="form-control" placeholder="Filial" [formControl]="nomeControl">
+                <input matInput class="form-control" placeholder="Filial" formControlName="nome">
                 <mat-error>
                     Campo obrigatório
                 </mat-error>
             </mat-form-field>
-            <mat-form-field class="col-30">
+            <mat-form-field class="col-35">
                 <mat-label>Código Mili</mat-label>
-                <input matInput class="form-control" type="number" placeholder="5" [formControl]="codigoMiliControl">
+                <input matInput class="form-control" type="number" placeholder="5" formControlName="codigoMili">
                 <mat-error>
                     Campo obrigatório
                 </mat-error>
             </mat-form-field>
         </mat-card-content>
         <mat-card-footer style="margin: 0.8em 0.8em 1.5em 0.8em">
-            <button class="margin-l-2 col-25 button-cadastro" mat-flat-button color="primary"> Gravar</button>
+            <button class="margin-l-4 col-25 button-cadastro" mat-flat-button color="primary"> Gravar</button>
             <button class="margin-l-4 button-secundary col-25 button-cadastro" mat-flat-button> Voltar</button>
         </mat-card-footer>
     </mat-card>
 </form>
-<form class="form-filial">
+<form class="form-filial tabela-filiais">
     <div class="title">
         <div class="titleStyleLeft"></div><div class="col-50"><h2>Filiais Cadastradas</h2></div>
     </div>

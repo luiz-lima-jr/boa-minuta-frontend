@@ -33,10 +33,11 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { AuthService } from './auth/auth.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FilialComponent } from './filial/filial.component';
-import { AlertComponent } from './components/alert/alert.component';
-import { AlertDialogComponent } from './components/alert/alert-modal/alert-modal.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ConfirmDialogComponent } from './components/confirm/confirm-modal/confirm-modal.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 
 @NgModule({
@@ -46,8 +47,7 @@ import { ConfirmDialogComponent } from './components/confirm/confirm-modal/confi
     LoadingComponent,
     LoginComponent,
     FilialComponent,
-    AlertComponent,
-    AlertDialogComponent,
+    UsuarioComponent,
     ConfirmComponent,
     ConfirmDialogComponent
   ],
@@ -70,12 +70,13 @@ import { ConfirmDialogComponent } from './components/confirm/confirm-modal/confi
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    MatTableModule,
+    MatOptionModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
     MatSidenavModule,
     MatSlideToggleModule,
-    MatSelectModule,
-    MatProgressSpinnerModule,
-    MatOptionModule,
+    MatSnackBarModule,
+    MatTableModule,
   ],
   providers: [
     {

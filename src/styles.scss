@@ -12,6 +12,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-right: 1em;
 }
 
+.sucesso-alerta {
+  color: white !important;
+  --mdc-snackbar-container-color: #009821 !important;
+  .mat-mdc-button {
+    color: white !important;
+  }
+}
+
+.erro-alerta {
+  color: white !important;
+  --mdc-snackbar-container-color: #ff0000 !important;
+  .mat-mdc-button {
+    color: white !important;
+  }
+}
+
 button {
   font-family: 'Montserrat', sans-serif !important;
   font-size: 1em  !important;

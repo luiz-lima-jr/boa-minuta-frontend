@@ -39,7 +39,28 @@ h2 mat-icon {
   width: 37% !important;
   align-self: center;
 }
+mat-card-content {
+  margin: 0.8em 0.8em 0 0.8em
+}
 
-.tabela-filiais {
-  margin-bottom: 2em;
+
+.alert-sucess {
+  max-width: 20%;
+  padding: 1em 1em 1em 1em;
+  color: white;
+  //position: fixed;
+  //float: right;
+}
+
+.mat-mdc-snack-bar-container {
+  &.blue-snackbar {
+    --mdc-snackbar-container-color: #2196f3 !important;
+    --mat-mdc-snack-bar-button-color: #fff  !important;
+    --mdc-snackbar-supporting-text-color: #fff  !important;
+  }
+}
+
+//in component.css
+::ng-deep .warning {
+  background: 'yellow';
 }
