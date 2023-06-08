@@ -5,5 +5,5 @@ services:
     image: boaminutafrontend
     restard: always
     ports:
-      - "9094:9090"
+      - "4300:4200"
     container_name: boaminutafrontend
