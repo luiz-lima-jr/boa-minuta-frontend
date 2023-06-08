@@ -3,6 +3,7 @@ version:  "3.7"
 services:
   aplicacao:
     image: boaminutafrontend
+    restart: always
     ports:
       - "4300:4200"
     container_name: boaminutafrontend
