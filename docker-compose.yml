@@ -6,4 +6,4 @@ services:
     restard: always
     ports:
       - "9094:9090"
-    container_name: boaminutabackend
+    container_name: boaminutafrontend
