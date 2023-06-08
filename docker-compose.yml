@@ -1,0 +1,9 @@
+version:  "3.7"
+
+services:
+  aplicacao:
+    image: boaminutafrontend
+    restard: always
+    ports:
+      - "9094:9090"
+    container_name: boaminutabackend
