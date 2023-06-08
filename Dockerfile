@@ -5,4 +5,4 @@ RUN npm install
 COPY . .
 RUN npm run build
 EXPOSE 4200
-RUN npm start
+CMD ["npm", "start"]
