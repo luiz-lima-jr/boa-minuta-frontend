@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gift-games-frontend": {
+    "boa-minuta-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/gift-games-frontend",
+            "outputPath": "dist/boa-minuta-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "gift-games-frontend:build:production"
+              "browserTarget": "boa-minuta-frontend:build:production"
             },
             "development": {
-              "browserTarget": "gift-games-frontend:build:development"
+              "browserTarget": "boa-minuta-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "gift-games-frontend:build"
+            "browserTarget": "boa-minuta-frontend:build"
           }
         },
         "test": {

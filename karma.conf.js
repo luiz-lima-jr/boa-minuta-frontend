@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/gift-games-frontend'),
+      dir: require('path').join(__dirname, './coverage/boa-minuta-frontend'),
       subdir: '.',
       reporters: [
         { type: 'html' },
