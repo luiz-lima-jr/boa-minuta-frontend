@@ -2,8 +2,8 @@ version:  "3.7"
 
 services:
   frontend:
-    image: boaminutafrontend
+    image: boa-minuta-frontend
     restart: always
     ports:
       - "4300:4200"
-    container_name: boaminutafrontend
+    container_name: boa-minuta-frontend
