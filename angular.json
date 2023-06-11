@@ -79,10 +79,7 @@
               "browserTarget": "boa-minuta-frontend:build:development"
             }
           },
-          "defaultConfiguration": "development",
-          "options": {
-            "host": "191.252.93.193"
-          }
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
