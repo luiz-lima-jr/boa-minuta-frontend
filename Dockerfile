@@ -5,4 +5,4 @@ RUN npm install
 COPY . .
 RUN npm run build
 EXPOSE 4200
-CMD ["npm", "start", "--host", "189.4.76.45"]
+CMD ["npm", "start", "--host", "191.252.93.193"]
