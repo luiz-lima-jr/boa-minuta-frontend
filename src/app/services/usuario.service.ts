@@ -22,6 +22,10 @@ export class UsuarioService {
     return this.httpClient.post(this.URI_AUTH, usuario);
   }
 
+  public alterar(usuario: Usuario): Observable<any> {
+    return this.httpClient.put(this.URI_AUTH, usuario);
+  }
+
   public excluir(idUsuario: number): Observable<any> {
     return this.httpClient.delete(`${this.URI_AUTH}/${idUsuario}`);
   }

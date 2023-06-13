@@ -10,6 +10,7 @@ import { UsuarioService } from '../services/usuario.service';
 import { FuncaoService } from '../services/funcao.service';
 import { Funcao } from '../models/funcao.model';
 import { Router } from '@angular/router';
+import { RecuperarSenhaService } from '../services/recuperar-senha.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class UsuarioComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,  private usuarioService: UsuarioService,
             private confirmService: ConfirmService,  private alertService: AlertService,
             private filialService: FilialService, private funcaoService: FuncaoService,
-            private router: Router){
+            private router: Router, private recuperarSenhaService: RecuperarSenhaService){
 
   }
 
@@ -91,24 +92,48 @@ export class UsuarioComponent implements OnInit {
   reenviarSenha(usuario: Usuario){
     this.confirmService.confirmar("Reenviar a senha do usuário " + usuario.nome + "?", 
     new Observable(() => {
-      
+      this.recuperarSenhaService.recuperar(usuario.id).subscribe({
+        next: () => {
+          this.alertService.success("Email enviado com sucesso");
+          this.buscarUsuarios();
+        },
+        error: error => this.alertService.error(error.error.detail)
+      });
      })
     );
   }
 
   salvar(ngForm: any){
-    debugger
     if(this.formUsuario.valid) {
       let usuario = this.formUsuario.getRawValue(); 
-      this.usuarioService.salvar(usuario).subscribe({
-        next: () => {
-          this.alertService.success("Usuário salvo com sucesso");
-          this.resetForm(ngForm);
-          this.buscarUsuarios();
-        },
-        error: error => this.alertService.error(error.error.detail)
-      });
+      if(usuario.id){
+        this.alterarUsuario(usuario, ngForm);
+      } else {
+        this.salvarUsuario(usuario, ngForm);
+      }
     }
+  }
+
+  salvarUsuario(usuario: Usuario, ngForm: any){
+    this.usuarioService.salvar(usuario).subscribe({
+      next: () => {
+        this.alertService.success("Usuário salvo com sucesso");
+        this.resetForm(ngForm);
+        this.buscarUsuarios();
+      },
+      error: error => this.alertService.error(error.error.detail)
+    });
+  }
+
+  alterarUsuario(usuario: Usuario, ngForm: any){
+    this.usuarioService.alterar(usuario).subscribe({
+      next: () => {
+        this.alertService.success("Usuário alterado com sucesso");
+        this.resetForm(ngForm);
+        this.buscarUsuarios();
+      },
+      error: error => this.alertService.error(error.error.detail)
+    });
   }
 
   getFiliaisLabel(usuario: Usuario) {

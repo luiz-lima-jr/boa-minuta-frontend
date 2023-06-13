@@ -6,8 +6,22 @@ import { AuthGuard } from './auth/auth.guard';
 import { FilialComponent } from './filial/filial.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { ADMINISTRADOR } from './models/funcao.model';
+import { RecuperarSenhaComponent } from './recuperar-senha/recuperar-senha.component';
+import { NovaSenhaComponent } from './nova-senha/nova-senha.component';
 
-const routes: Routes = [
+const routes: Routes = [  
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'recuperar-senha',
+    component: RecuperarSenhaComponent
+  },
+  {
+    path: 'nova-senha',
+    component: NovaSenhaComponent
+  },
   {
     path: 'inicio',
     component: HomeComponent,
@@ -17,10 +31,7 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     canActivate: [ AuthGuard ],
-    data: {
-      funcoes: [ADMINISTRADOR]
-    } 
-  }, 
+  },
   {
     path: 'filial',
     component: FilialComponent,
@@ -36,14 +47,6 @@ const routes: Routes = [
     data: {
       funcoes: [ADMINISTRADOR]
     }
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: '',
-    component: HomeComponent
   },
 ];
 

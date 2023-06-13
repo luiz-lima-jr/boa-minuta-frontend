@@ -37,6 +37,8 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ConfirmDialogComponent } from './components/confirm/confirm-modal/confirm-modal.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { RecuperarSenhaComponent } from './recuperar-senha/recuperar-senha.component';
+import { NovaSenhaComponent } from './nova-senha/nova-senha.component';
 
 
 
@@ -49,7 +51,9 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
     FilialComponent,
     UsuarioComponent,
     ConfirmComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    RecuperarSenhaComponent,
+    NovaSenhaComponent
   ],
   imports: [
     BrowserModule,
