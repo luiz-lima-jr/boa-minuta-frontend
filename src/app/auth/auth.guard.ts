@@ -1,19 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, UrlTree } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Router, CanActivate, UrlTree, ActivatedRouteSnapshot } from '@angular/router';
+import { first, map, Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { AlertService } from '../services/alert.service';
+import { possuiFuncaoAcesso } from '../helper';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authSession: AuthService, private _router: Router) {}
+  constructor(private authSession: AuthService, private _router: Router, private alertService: AlertService) {}
 
-  public canActivate(): Observable<boolean | UrlTree> {
+  public canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree  {
     return this.authSession.isAuthenticated
       .pipe(
-        map((s: boolean) => s ? true: this._router.parseUrl('/login'))
+        map((isAuthenticated: boolean) => {          
+          const funcoes = route.data['funcoes'];
+          const profile = this.authSession.getProfile();
+          if(!isAuthenticated){
+            return this._router.parseUrl('/login');
+          }
+          if(!funcoes){
+            return true;
+          }
+          if(profile?.funcoes) {
+            const temAcesso = possuiFuncaoAcesso(funcoes, profile?.funcoes);
+            if(!temAcesso){
+              this.alertService.error("Você não possui acesso a esta página")
+              return this._router.parseUrl('/inicio');
+            }
+          } else {
+            return false;
+          }
+          
+          return true;
+        }),
+        first()
       );
   }
+
+
 }

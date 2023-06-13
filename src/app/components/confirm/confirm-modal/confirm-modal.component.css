@@ -2,3 +2,7 @@
     margin-left: 9px ;
     margin-right: 9px ;
 }
+
+::ng-deep .mat-mdc-dialog-actions {
+    justify-content: center;
+}

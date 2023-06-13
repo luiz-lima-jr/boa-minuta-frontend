@@ -3,4 +3,8 @@ export class Funcao {
     descricao: FuncaoType;
 }
 
+export const ADMINISTRADOR = 'ADMINISTRADOR';
+export const OPERACIONAL = 'OPERACIONAL';
+export const FATURISTA = 'FATURISTA';
+
 export type FuncaoType = 'ADMINISTRADOR' | 'OPERACIONAL' | 'FATURISTA'

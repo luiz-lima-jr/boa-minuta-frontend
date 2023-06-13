@@ -5,22 +5,37 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth/auth.guard';
 import { FilialComponent } from './filial/filial.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { ADMINISTRADOR } from './models/funcao.model';
 
 const routes: Routes = [
   {
     path: 'inicio',
-    component: FilialComponent,
-    canActivate: [ AuthGuard ]
+    component: HomeComponent,
+    canActivate: [ AuthGuard ],
+  }, 
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [ AuthGuard ],
+    data: {
+      funcoes: [ADMINISTRADOR]
+    } 
   }, 
   {
     path: 'filial',
     component: FilialComponent,
-    canActivate: [ AuthGuard ]
+    canActivate: [ AuthGuard ],
+    data: {
+      funcoes: [ADMINISTRADOR]
+    }
   },
   {
     path: 'usuario',
     component: UsuarioComponent,
-    canActivate: [ AuthGuard ]
+    canActivate: [ AuthGuard ],
+    data: {
+      funcoes: [ADMINISTRADOR]
+    }
   },
   {
     path: 'login',

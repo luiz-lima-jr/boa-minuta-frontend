@@ -28,7 +28,7 @@
           <mat-list-item *ngIf="!menu.itens && exibirMenu(menu.funcoes)" routerLink="{{menu.action}}">
               <mat-icon>{{menu.icon}}</mat-icon><span>{{menu.label}}</span>
           </mat-list-item>
-          <mat-expansion-panel *ngIf="menu.itens" [class.mat-elevation-z0]="true">
+          <mat-expansion-panel *ngIf="menu.itens && exibirMenu(menu.funcoes)" [class.mat-elevation-z0]="true">
               <mat-expansion-panel-header>
                   {{menu.label}}
               </mat-expansion-panel-header>

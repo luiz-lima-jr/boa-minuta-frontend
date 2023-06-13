@@ -28,13 +28,6 @@ export class AuthService implements OnDestroy {
     )
   }
 
-  login1(username: string, password: string): Observable<void> {
-    return this.httpClient.post<AuthToken>(this.URI_AUTH, {username, password})
-    .pipe(
-      map((t: AuthToken) => { this.createSession(t) })
-    )
-  }
-
   logout(): Observable<void> {
     const uri = this.URI_AUTH + '/logout';
     return this.httpClient.delete(uri)
@@ -43,9 +36,9 @@ export class AuthService implements OnDestroy {
 
 
   private createSession(transaction: AuthToken): void {
-      this.authSub.next(true)
-      this.cookieService.set('sessionToken', transaction.sessionToken);
-      localStorage.setItem('sessionProfile', JSON.stringify(transaction.sessionProfile))
+    this.authSub.next(true);
+    this.cookieService.set('sessionToken', transaction.sessionToken);
+    localStorage.setItem('sessionProfile', JSON.stringify(transaction.sessionProfile));
   }
   
   private async existsCookieSession() : Promise<boolean>{

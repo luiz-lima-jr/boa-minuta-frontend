@@ -23,7 +23,6 @@ export class ConfirmComponent implements OnInit, OnDestroy {
     }
 
     openDialog() {
-        debugger
         if(this.options.mensagem !== undefined){
             const dialogRef = this.dialog.open(ConfirmDialogComponent, {data: this.options});
             dialogRef.afterClosed().subscribe(acao => acao.subscribe());

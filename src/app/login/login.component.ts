@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, Subject, take, takeUntil } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,6 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  public loginValid = true;
   public username = '';
   public password = '';
 
@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private alertService: AlertService
   ) {
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/inicio';
   }
@@ -36,15 +37,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
-    this.loginValid = true;
-
     this._authService.login(this.username, this.password).subscribe(
       resp => {
-        this.loginValid = true;
         this._router.navigateByUrl('/inicio');
+        window.location.reload();
       },
       err => {
-        this.loginValid = false
+        this.alertService.error("Usuário ou senha inválidos")
       }
     )
   }

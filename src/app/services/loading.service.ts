@@ -15,7 +15,6 @@ import { Observable, Subject } from "rxjs";
     }
     
     unblockShow(){
-      debugger
       this.isBlockShow = false;
     }
 

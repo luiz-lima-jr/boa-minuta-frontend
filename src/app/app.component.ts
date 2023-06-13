@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { FuncaoType } from './models/funcao.model';
+import { ADMINISTRADOR, FuncaoType } from './models/funcao.model';
 import { Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { SessionProfile } from './models/session-profile.model';
@@ -22,23 +22,23 @@ export class AppComponent implements OnInit, OnDestroy {
   menus : Menu[] = [
     {
       label: 'Cadastro',
-      funcoes: ['ADMINISTRADOR'],
+      funcoes: [ADMINISTRADOR],
       itens: [
         {
           label: 'Filiais',
           action: 'filial',
-          funcoes: ['ADMINISTRADOR']
+          funcoes: [ADMINISTRADOR]
         },
         {
           label: 'Usuários',
           action: 'usuario',
-          funcoes: ['ADMINISTRADOR']
+          funcoes: [ADMINISTRADOR]
         }
       ]
     },
   ]
 
-  public exibirMenu = (funcoesMenu: string[]) : boolean => {
+  public exibirMenu = (funcoesMenu: string[]) : boolean => {    
     return this.session?.funcoes?.filter(r => funcoesMenu.includes(r)).length > 0
   }
 

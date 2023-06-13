@@ -16,7 +16,6 @@ export class GiftHttpInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this._authService.validateSession();
-    debugger
     if (req.url.indexOf(STRING_NO_LOADING) === -1) {
       this.loadingService.show();
     }
@@ -66,7 +65,7 @@ export class GiftHttpInterceptor implements HttpInterceptor {
         }
         return throwError(errorResponse);
       }
-      if ( this._authService.isAuthenticatedValue() && errorResponse.status === 403) {
+      if ( this._authService.isAuthenticatedValue() && errorResponse.status === 401) {
         this._authService.removeSession()
         window.location.reload();
       }

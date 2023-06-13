@@ -9,7 +9,7 @@ import { Usuario } from '../models/usuario-cadastro.model';
 import { UsuarioService } from '../services/usuario.service';
 import { FuncaoService } from '../services/funcao.service';
 import { Funcao } from '../models/funcao.model';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class UsuarioComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,  private usuarioService: UsuarioService,
             private confirmService: ConfirmService,  private alertService: AlertService,
             private filialService: FilialService, private funcaoService: FuncaoService,
-            private snackBar: MatSnackBar){
+            private router: Router){
 
   }
 
@@ -50,7 +50,7 @@ export class UsuarioComponent implements OnInit {
     this.usuarioService.getAll().subscribe(f => this.usuarios = f);
   }
 
-  iniciarUsuarios(){
+  iniciarUsuarios() {
     this.initFormUsuarios();
     this.buscarUsuarios();
   }
@@ -69,32 +69,61 @@ export class UsuarioComponent implements OnInit {
   }
 
   voltar(){
-    this.alertService.error('Salvo com sucesso')
+    this.router.navigateByUrl('/inicio');
   }
 
   resetForm(ngForm: any){
     ngForm.resetForm();
-    this.buscarFiliais();
   }
 
-  editar(filial: Filial){
-    this.formUsuario.patchValue(filial);
+  editar(usuario: Usuario) {
+    this.formUsuario.patchValue(usuario);
+  }
+
+  compareFilial(f1: Filial, f2: Filial): boolean {
+    return f1 && f2 ? f1.id === f2.id : f1 === f2;
+  }
+
+  compareFuncoes(f1: Funcao, f2: Funcao): boolean {
+    return f1 && f2 ? f1.id === f2.id : f1 === f2;
+  }
+
+  reenviarSenha(usuario: Usuario){
+    this.confirmService.confirmar("Reenviar a senha do usuário " + usuario.nome + "?", 
+    new Observable(() => {
+      
+     })
+    );
   }
 
   salvar(ngForm: any){
+    debugger
     if(this.formUsuario.valid) {
-      let filial = this.formUsuario.getRawValue(); 
-      this.usuarioService.salvar(filial).subscribe(
-        () => this.resetForm(ngForm)
-      );
+      let usuario = this.formUsuario.getRawValue(); 
+      this.usuarioService.salvar(usuario).subscribe({
+        next: () => {
+          this.alertService.success("Usuário salvo com sucesso");
+          this.resetForm(ngForm);
+          this.buscarUsuarios();
+        },
+        error: error => this.alertService.error(error.error.detail)
+      });
     }
   }
 
-  excluir(filial: Filial){
-    this.confirmService.confirmar("Excluir a filial " + filial.nome + "?", 
+  getFiliaisLabel(usuario: Usuario) {
+    return usuario.filiais.map(f => ' ' + f.nome);
+  }
+
+  getFuncoesLabel(usuario: Usuario) {
+    return usuario.funcoes.map(f => ' ' + f.descricao);
+  }
+
+  excluir(usuario: Usuario){
+    this.confirmService.confirmar("Excluir o usuário " + usuario.nome + "?", 
     new Observable(() => { 
-      this.usuarioService.excluir(filial.id).subscribe({
-        next: () => this.buscarFiliais(),
+      this.usuarioService.excluir(usuario.id).subscribe({
+        next: () => this.buscarUsuarios(),
         error: error => this.alertService.error(error.error.detail)
       });
      })
