@@ -1,24 +1,13 @@
-.form-usuario {
-  @media (max-width: 1600px) {
-    max-width: 85%;
-  }
-  @media (min-width: 1601px) {
-    max-width: 80%;
-  }
-  margin-left: 2%;
+.form-dados {
+  width: 40%;
 }
 
-.div-botao-enviar {
-  align-self: center;
+mat-card {
+  height: 20em;
 }
 
-.botao-enviar {
-  float: right;
-}
-
-.title {
-  width: 100%;
-  display: inline-flex;
+.div-main {
+  display: flex;
 }
 
 h2 mat-icon {
@@ -31,17 +20,9 @@ h2 {
   margin-block-end: 1%;
 }
 
-.title-cadastradas {
-  display: flex;
-}
-
-.botao-cadastrar{
-  float: right;
-  width: 15% !important;
-}
 
 .button-cadastro {  
-  width: 20% !important;
+  width: 6em !important;
   align-self: center;
 }
 mat-card-content {
@@ -53,8 +34,6 @@ mat-card-content {
   max-width: 20%;
   padding: 1em 1em 1em 1em;
   color: white;
-  //position: fixed;
-  //float: right;
 }
 
 .mat-mdc-snack-bar-container {
@@ -76,4 +55,9 @@ mat-card-content {
 
 .mat-mdc-card-content {
   padding: 0;
+}
+
+.footer-dados{
+  margin-left: 0.8em;
+  margin-top: 5em;
 }

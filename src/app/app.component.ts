@@ -12,6 +12,7 @@ import { SessionProfile } from './models/session-profile.model';
 })
 export class AppComponent implements OnInit, OnDestroy {
   public title = 'Boa Minuta';
+  botaoModalPerfilClicado = false;
   session = new SessionProfile();
   public isAuthenticated = false;
   private _destroySub$ = new Subject<void>();
@@ -23,15 +24,18 @@ export class AppComponent implements OnInit, OnDestroy {
     {
       label: 'Cadastro',
       funcoes: [ADMINISTRADOR],
+      icon: 'assignment',
       itens: [
         {
           label: 'Filiais',
           action: 'filial',
+          icon: 'apartment',
           funcoes: [ADMINISTRADOR]
         },
         {
           label: 'Usuários',
           action: 'usuario',
+          icon: 'person',
           funcoes: [ADMINISTRADOR]
         }
       ]
@@ -57,12 +61,17 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public logout(): void {
+    this.showModalPerfil();
     this._authService.logout().subscribe(
       () =>{
         this._router.navigateByUrl('/login')
         window.location.reload()
       }
     );
+  }
+
+  showModalPerfil(){
+    this.botaoModalPerfilClicado = !this.botaoModalPerfilClicado;
   }
 }
 

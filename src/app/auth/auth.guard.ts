@@ -3,7 +3,7 @@ import { Router, CanActivate, UrlTree, ActivatedRouteSnapshot } from '@angular/r
 import { first, map, Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { AlertService } from '../services/alert.service';
-import { possuiFuncaoAcesso } from '../helper';
+import { possuiFuncaoAcesso } from '../util/helper';
 
 @Injectable({
   providedIn: 'root',

@@ -3,12 +3,14 @@
 }
 
 .app-container {
-    height: 90%;
+    height: 100%;
     margin: 0;
-}  
+}
+
 .app-sidenav {
     width: 230px;
 }
+
 .app-sidenav-content {
     display: flex;
     height: 100%;
@@ -21,19 +23,22 @@ mat-toolbar {
         height: 13%;
     }
     @media (min-width: 1601px) {
-        height: 9%;
+        height: 7%;
     }
     background-color: white;
     border-bottom-style: groove;
     justify-content: center;
 }
+
 .divMenu {
     position: absolute; left: 0;
 }
+
 .divLogo {
     position: absolute;
     left: 3% !important;
 }
+
 .logo {    
     @media (max-width: 1600px) {
         max-height: 3em;
@@ -54,7 +59,7 @@ mat-toolbar {
 .dadosLogin{    
     display: flex;
     position: absolute;
-    right: 3% !important;
+    right: 1% !important;
 }
 
 .botaoLoginToolbar {
@@ -68,3 +73,42 @@ mat-toolbar {
     font-weight: var(--mdc-list-list-item-label-text-weight);
     letter-spacing: var(--mdc-list-list-item-label-text-tracking);
 }
+
+.background-login {
+    background-image: url('file:/src/assets/img/caminhao.jpg');
+    background-position: 20% 70%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 120% 140%;
+}
+
+.icon-menu {
+    margin-right: 5%;
+    font-size: 1.3em;
+    align-self: center;
+    margin-top: 1%;
+}
+
+mat-expansion-panel {
+    width: 90%;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+    color: white !important;
+}
+
+.corpo-modal{
+    display: flex;
+    position: absolute;
+    right: 1%;
+    z-index: 9999;
+    height: 8em;
+    width: 12em;
+    background-color: white;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    --mdc-elevated-card-container-color: #fff;
+    border-radius: var(--mdc-elevated-card-container-shape, var(--mdc-shape-medium, 4px)); 
+    mat-nav-list{
+        width: 100%
+    }
+  }

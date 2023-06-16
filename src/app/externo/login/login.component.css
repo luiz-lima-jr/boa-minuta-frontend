@@ -1,0 +1,45 @@
+mat-card {
+  width: 100%;
+  max-width: 400px;
+  margin: 2em auto;
+  margin-left: 25%;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 20px 20px 20px 20px !important;
+}
+
+h2 {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+a {
+  float: right;
+  margin-top: -0.5em;
+}
+
+button {
+  margin-top: 2em;
+  margin-bottom: 4em;
+}
+
+mat-form-field {
+  display: block;
+}
+
+.email {
+  margin-bottom: 1em;
+}
+
+.divLogo {
+  position: relative;
+  align-self: center;
+  margin-right: 12%;
+}
+
+img {
+  position: relative;
+  align-self: center;
+  border-radius: 50%;
+  width: 80%;
+}

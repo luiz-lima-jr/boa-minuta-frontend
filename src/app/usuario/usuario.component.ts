@@ -10,7 +10,7 @@ import { UsuarioService } from '../services/usuario.service';
 import { FuncaoService } from '../services/funcao.service';
 import { Funcao } from '../models/funcao.model';
 import { Router } from '@angular/router';
-import { RecuperarSenhaService } from '../services/recuperar-senha.service';
+import { SenhaInternoService } from '../services/senha-interno.service';
 
 
 @Component({
@@ -21,7 +21,7 @@ import { RecuperarSenhaService } from '../services/recuperar-senha.service';
 export class UsuarioComponent implements OnInit {
 
   formUsuario: FormGroup;
-  displayedColumns: string[] = ['usuario', 'filiais', 'funcoes', 'acao'];
+  displayedColumns: string[] = ['usuario', 'filiais', 'funcoes', 'email', 'situacao', 'acao'];
   usuarios: Usuario[] = [];
   filiais: Filial[] = [];
   funcoes: Funcao[] = [];
@@ -29,7 +29,7 @@ export class UsuarioComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,  private usuarioService: UsuarioService,
             private confirmService: ConfirmService,  private alertService: AlertService,
             private filialService: FilialService, private funcaoService: FuncaoService,
-            private router: Router, private recuperarSenhaService: RecuperarSenhaService){
+            private router: Router, private recuperarSenhaService: SenhaInternoService){
 
   }
 
@@ -56,8 +56,7 @@ export class UsuarioComponent implements OnInit {
     this.buscarUsuarios();
   }
 
-  initFormUsuarios() {
-    
+  initFormUsuarios() {    
     this.formUsuario = this.formBuilder.group({
       id: [''],
       nome: ['', Validators.required],
@@ -69,15 +68,28 @@ export class UsuarioComponent implements OnInit {
     })
   }
 
+  initFormUsuariosEdit() {    
+    this.formUsuario = this.formBuilder.group({
+      id: [''],
+      nome: ['', Validators.required],
+      email: ['', Validators.required],
+      filiais: ['', Validators.required],
+      funcoes: ['', Validators.required],
+      situacao: ['', Validators.required]
+    })
+  }
+
   voltar(){
     this.router.navigateByUrl('/inicio');
   }
 
   resetForm(ngForm: any){
     ngForm.resetForm();
+    this.initFormUsuarios();
   }
 
   editar(usuario: Usuario) {
+    this.initFormUsuariosEdit();
     this.formUsuario.patchValue(usuario);
   }
 
@@ -126,7 +138,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   alterarUsuario(usuario: Usuario, ngForm: any){
-    this.usuarioService.alterar(usuario).subscribe({
+    this.usuarioService.salvar(usuario).subscribe({
       next: () => {
         this.alertService.success("Usuário alterado com sucesso");
         this.resetForm(ngForm);
@@ -148,7 +160,10 @@ export class UsuarioComponent implements OnInit {
     this.confirmService.confirmar("Excluir o usuário " + usuario.nome + "?", 
     new Observable(() => { 
       this.usuarioService.excluir(usuario.id).subscribe({
-        next: () => this.buscarUsuarios(),
+        next: () => {
+          this.alertService.success('Usuário excluído com sucesso')
+          this.buscarUsuarios()
+        },
         error: error => this.alertService.error(error.error.detail)
       });
      })

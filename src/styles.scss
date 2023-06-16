@@ -12,6 +12,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-right: 1em;
 }
 
+
 .sucesso-alerta {
   color: white !important;
   --mdc-snackbar-container-color: #009821 !important;
@@ -22,7 +23,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .erro-alerta {
   color: white !important;
-  --mdc-snackbar-container-color: #ff0000 !important;
+  --mdc-snackbar-container-color: #a40009 !important;
   .mat-mdc-button {
     color: white !important;
   }
@@ -41,6 +42,44 @@ button {
 
 h1 {
   text-align: center;
+}
+
+hr {
+  width: 90%;
+  margin-left: 1em;
+  border-color: mat.get-color-from-palette($primary-palette, 900) !important;
+}
+
+
+.icon-vermelho {
+  color: mat.get-color-from-palette($primary-palette, 900) !important;
+}
+
+.icon-branco {
+  color: white;
+}
+
+.icon-acao-tabela {
+  color: rgb(203, 60, 60) !important; 
+}
+
+table {
+  min-width: 95% !important;
+  width: 95% !important;
+  margin-left: 1em !important;
+  margin-bottom: 1em !important;
+  box-shadow: inherit !important;
+}
+
+th {
+  color: mat.get-color-from-palette($primary-palette, 900) !important;
+}
+
+mat-expansion-panel-header {
+  border-radius: 10px !important; 
+  background-color: mat.get-color-from-palette($primary-palette, 900) !important;
+  color: white !important;
+  margin-left: 5% !important;
 }
 
 .col-{
@@ -81,6 +120,13 @@ h1 {
 }
 .col-55{
   width: 55%
+}
+
+.col-60{
+  width: 60%
+}
+.col-70{
+  width: 70%
 }
 
 .margin-r-2 {

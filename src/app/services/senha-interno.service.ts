@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AlterarSenha } from '../models/alterar-senha.model';
 
 @Injectable({
     providedIn: 'root'
   })
-  export class RecuperarSenhaService {
+  export class SenhaInternoService {
 
-    private URI_AUTH = 'recuperar-senha'
+    private URI_AUTH = 'senha'
   
 
     constructor(private httpClient: HttpClient) {
@@ -18,9 +19,9 @@ import { HttpClient } from '@angular/common/http';
         return this.httpClient.put(url, {});
     }
 
-    public recuperarPorEmail(email: string) : Observable<any>{
-        let url = this.URI_AUTH;
-        return this.httpClient.put(url, email);
+    public alterarSenha(alterar: AlterarSenha) : Observable<any>{
+      let url = this.URI_AUTH + '/alterar-senha';
+      return this.httpClient.put(url, alterar);
     }
 
   }  

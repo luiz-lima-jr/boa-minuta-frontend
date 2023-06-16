@@ -24,7 +24,7 @@ import { MatListModule } from '@angular/material/list';
 import { HomeComponent } from './home/home.component';
 import { MatDialogModule} from '@angular/material/dialog';
 
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './externo/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
 import { GiftHttpInterceptor } from 'http.interceptor';
@@ -37,8 +37,9 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ConfirmDialogComponent } from './components/confirm/confirm-modal/confirm-modal.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
-import { RecuperarSenhaComponent } from './recuperar-senha/recuperar-senha.component';
-import { NovaSenhaComponent } from './nova-senha/nova-senha.component';
+import { RecuperarSenhaComponent } from './externo/recuperar-senha/recuperar-senha.component';
+import { NovaSenhaComponent } from './externo/nova-senha/nova-senha.component';
+import { PerfilComponent } from './usuario/perfil/perfil.component';
 
 
 
@@ -53,7 +54,8 @@ import { NovaSenhaComponent } from './nova-senha/nova-senha.component';
     ConfirmComponent,
     ConfirmDialogComponent,
     RecuperarSenhaComponent,
-    NovaSenhaComponent
+    NovaSenhaComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

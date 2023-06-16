@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-content>
+      <form #loginForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input matInput type="password" placeholder="Nova senha" formControlName="password" name="password" required>
+          <mat-error>
+            Insira sua senha
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Confirmar Senha" formControlName="confirmPassword" name="confirmPassword" required>
+          <mat-error>
+            Confirmação de senha inválida
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary">Alterar<mat-icon>arrow_forward</mat-icon></button>
+      </form>
+    </mat-card-content>
+  </mat-card>

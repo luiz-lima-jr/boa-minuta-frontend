@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './externo/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
 import { FilialComponent } from './filial/filial.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { ADMINISTRADOR } from './models/funcao.model';
-import { RecuperarSenhaComponent } from './recuperar-senha/recuperar-senha.component';
-import { NovaSenhaComponent } from './nova-senha/nova-senha.component';
+import { RecuperarSenhaComponent } from './externo/recuperar-senha/recuperar-senha.component';
+import { NovaSenhaComponent } from './externo/nova-senha/nova-senha.component';
+import { PerfilComponent } from './usuario/perfil/perfil.component';
 
 const routes: Routes = [  
   {
@@ -15,11 +16,15 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'perfil',
+    component: PerfilComponent
+  },
+  {
     path: 'recuperar-senha',
     component: RecuperarSenhaComponent
   },
   {
-    path: 'nova-senha',
+    path: 'nova-senha/:token',
     component: NovaSenhaComponent
   },
   {

@@ -75,4 +75,9 @@ export class FilialComponent implements OnInit {
      })
     );
   }
+  miliAlterado($event: any){
+    if($event > 999999){
+      this.formFilial.controls['codigoMili'].setValue($event.toString().substring(0, 6))
+    }
+  }
 }
