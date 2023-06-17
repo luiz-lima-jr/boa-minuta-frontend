@@ -25,7 +25,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .erro-alerta {
   color: white !important;
-  --mdc-snackbar-container-color: #a40009 !important;
+  --mdc-snackbar-container-color: #d6020d !important;
   .mat-mdc-button {
     color: white !important;
   }
@@ -68,11 +68,6 @@ hr {
 .icon-branco {
   color: white;
 }
-
-.icon-acao-tabela {
-  color: rgb(203, 60, 60) !important; 
-}
-
 
 mat-expansion-panel-header {
   border-radius: 10px !important; 
