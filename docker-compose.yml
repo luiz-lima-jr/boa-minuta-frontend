@@ -4,7 +4,5 @@ services:
   frontend:
     image: boa-minuta-frontend
     restart: always
-    ports:
-      - "4300:4200"
     container_name: boa-minuta-frontend
     network_mode: host
