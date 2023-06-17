@@ -25,4 +25,12 @@ export class AlertService {
             horizontalPosition: 'right'
         });
     }
+
+    warning(message: string, timeout: number = 3000) {
+        this.snackBar.open(message, 'Fechar', {
+            duration: timeout,
+            panelClass: ['warning-alerta'],
+            horizontalPosition: 'right'
+        });
+    }
 }

@@ -7,7 +7,7 @@ import { AlertService } from '../../services/alert.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public username = '';
@@ -38,15 +38,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public onSubmit(): void {
     if(this.username && this.password) {
-      this._authService.login(this.username, this.password).subscribe(
-        resp => {
+      this._authService.login(this.username, this.password).subscribe({
+        next: resp => {
           this._router.navigateByUrl('/inicio');
           window.location.reload();
         },
-        err => {
-          this.alertService.error("Usuário ou senha inválidos")
+        error: err => {
+          this.alertService.warning("Usuário ou senha inválidos")
         }
-      )
+      })
     }
   }
 }

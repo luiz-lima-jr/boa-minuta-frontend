@@ -1,6 +1,6 @@
 .form-usuario {
   @media (max-width: 1600px) {
-    max-width: 85%;
+    max-width: 100%;
   }
   @media (min-width: 1601px) {
     max-width: 80%;
@@ -53,8 +53,6 @@ mat-card-content {
   max-width: 20%;
   padding: 1em 1em 1em 1em;
   color: white;
-  //position: fixed;
-  //float: right;
 }
 
 .mat-mdc-snack-bar-container {
@@ -65,7 +63,6 @@ mat-card-content {
   }
 }
 
-//in component.css
 ::ng-deep .warning {
   background: 'yellow';
 }

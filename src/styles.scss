@@ -1,5 +1,7 @@
 @use '@angular/material' as mat;
 @import '../src/assets/colors.scss';
+@import '../src/assets/table.scss';
+@import '../src/assets/comuns.scss';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -24,6 +26,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .erro-alerta {
   color: white !important;
   --mdc-snackbar-container-color: #a40009 !important;
+  .mat-mdc-button {
+    color: white !important;
+  }
+}
+
+.warning-alerta {
+  color: white !important;
+  --mdc-snackbar-container-color: #bfa017 !important;
   .mat-mdc-button {
     color: white !important;
   }
@@ -63,86 +73,10 @@ hr {
   color: rgb(203, 60, 60) !important; 
 }
 
-table {
-  min-width: 95% !important;
-  width: 95% !important;
-  margin-left: 1em !important;
-  margin-bottom: 1em !important;
-  box-shadow: inherit !important;
-}
-
-th {
-  color: mat.get-color-from-palette($primary-palette, 900) !important;
-}
 
 mat-expansion-panel-header {
   border-radius: 10px !important; 
   background-color: mat.get-color-from-palette($primary-palette, 900) !important;
   color: white !important;
   margin-left: 5% !important;
-}
-
-.col-{
-  width: 5%
-}
-.col-10{
-  width: 10%
-}
-.col-15{
-  width: 15%
-}
-.col-20{
-  width: 20%
-}
-.col-25{
-  width: 25%
-}
-.col-30{
-  width: 30%
-}
-.col-35{
-  width: 35%
-}
-.col-40{
-  width: 40%
-}
-.col-45{
-  width: 45%
-}
-.col-46{
-  width: 46%
-}
-.col-49{
-  width: 49%
-}
-.col-50{
-  width: 50%
-}
-.col-55{
-  width: 55%
-}
-
-.col-60{
-  width: 60%
-}
-.col-70{
-  width: 70%
-}
-
-.margin-r-2 {
-  margin-right: 2%;
-}
-
-.margin-l-2 {
-  margin-left: 2%;
-}
-
-.margin-l-4 {
-  margin-left: 4%;
-}
-.margin-l-6 {
-  margin-left: 6%;
-}
-.margin-l-8 {
-  margin-left: 8%;
 }

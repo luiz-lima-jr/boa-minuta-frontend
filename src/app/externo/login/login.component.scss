@@ -1,11 +1,19 @@
-mat-card {
+mat-card {  
   width: 100%;
   max-width: 400px;
-  margin: 2em auto;
-  margin-left: 25%;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.75);
   border-radius: 20px 20px 20px 20px !important;
+  
+  @media (max-width: 1600px) {
+    margin-left: 20%;
+    max-height: 29em;
+  }
+
+  @media (min-width: 1601px) {
+    margin: 2em auto;
+    margin-left: 25%;
+  }
 }
 
 h2 {
@@ -35,6 +43,14 @@ mat-form-field {
   position: relative;
   align-self: center;
   margin-right: 12%;
+
+  @media (max-width: 1600px) {
+    margin-left: 15%;
+  }
+
+  @media (min-width: 1601px) {
+    margin-right: 12%;
+  }
 }
 
 img {

@@ -12,7 +12,7 @@ import { SessionProfile } from './models/session-profile.model';
 })
 export class AppComponent implements OnInit, OnDestroy {
   public title = 'Boa Minuta';
-  botaoModalPerfilClicado = false;
+  showModalPerfil = false;
   session = new SessionProfile();
   public isAuthenticated = false;
   private _destroySub$ = new Subject<void>();
@@ -57,11 +57,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    debugger
     this._destroySub$.next();
   }
 
   public logout(): void {
-    this.showModalPerfil();
     this._authService.logout().subscribe(
       () =>{
         this._router.navigateByUrl('/login')
@@ -70,8 +70,14 @@ export class AppComponent implements OnInit, OnDestroy {
     );
   }
 
-  showModalPerfil(){
-    this.botaoModalPerfilClicado = !this.botaoModalPerfilClicado;
+  esconderModal(){    
+    console.log('esconderModal')
+    this.showModalPerfil = false;
+  }
+
+  exibirModal(){
+    console.log('exibirModal')
+    this.showModalPerfil = !this.showModalPerfil;
   }
 }
 

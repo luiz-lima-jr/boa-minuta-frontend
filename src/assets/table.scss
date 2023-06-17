@@ -1,0 +1,23 @@
+table {
+    min-width: 95% !important;
+    width: 95% !important;
+    margin-left: 1em !important;
+    margin-bottom: 1em !important;
+    box-shadow: inherit !important;
+}
+  
+
+th {
+    text-align: center !important;
+    color: mat.get-color-from-palette($primary-palette, 900) !important;
+}
+
+td {
+    text-align:center !important;
+}  
+
+table .mat-mdc-icon-button.mat-mdc-button-base {
+    padding: 0 !important;
+    width: 2em;
+    height: 2em;
+}

@@ -1,5 +1,5 @@
 <mat-toolbar *ngIf="isAuthenticated" fxLayout="row">
-  <ng-container>
+  <ng-container >
     <div class="divLogo">
       <img class="logo" src="../assets/img/logo.jpg"/>
     </div>
@@ -8,44 +8,44 @@
     </button>
     <div class="dadosLogin">
       <div style="font-size: 1em; align-self: center;" >Olá, {{session.nome}}</div>
-      <button mat-icon-button (click)="showModalPerfil()"> <mat-icon class="botaoLoginToolbar">person</mat-icon>  </button>
+      <button mat-icon-button (click)="exibirModal()"> <mat-icon class="botaoLoginToolbar">person</mat-icon>  </button>
     </div>
   </ng-container>
 </mat-toolbar>
 
-<div class="corpo-modal" *ngIf="botaoModalPerfilClicado">
+<div class="corpo-modal" (click)="esconderModal()" *ngIf="showModalPerfil">
   <mat-nav-list>
-      <mat-list-item routerLink="perfil">
-          <mat-icon class="icon-vermelho icon-menu">person</mat-icon><span>Meu Perfil</span>
-      </mat-list-item>
-      <mat-list-item (click)="logout()">
-          <mat-icon class="icon-vermelho icon-menu" >exit_to_app</mat-icon><span>Sair</span>
-      </mat-list-item>
+    <mat-list-item routerLink="perfil">
+      <mat-icon class="icon-vermelho icon-menu">person</mat-icon><span>Meu Perfil</span>
+    </mat-list-item>
+    <mat-list-item (click)="logout()">
+      <mat-icon class="icon-vermelho icon-menu" >exit_to_app</mat-icon><span>Sair</span>
+    </mat-list-item>
   </mat-nav-list>
 </div>
 
-<mat-sidenav-container class="app-container">
-  <mat-sidenav  #sidenav mode="side" [class.mat-elevation-z4]="true" class="app-sidenav">
-      <mat-nav-list>
-        <ng-container  *ngFor="let menu of menus">
-          <mat-list-item *ngIf="!menu.itens && exibirMenu(menu.funcoes)" routerLink="{{menu.action}}">
-              <mat-icon class="icon-vermelho icon-menu">{{menu.icon}}</mat-icon><span>{{menu.label}}</span>
-          </mat-list-item>
-          <mat-expansion-panel *ngIf="menu.itens && exibirMenu(menu.funcoes)" [class.mat-elevation-z0]="true">
-              <mat-expansion-panel-header>
-                <mat-icon class="icon-branco icon-menu">{{menu.icon}}</mat-icon> {{menu.label}}
-              </mat-expansion-panel-header>
-              <mat-nav-list *ngFor="let item of menu.itens">
-                  <a mat-list-item routerLink="{{item.action}}">
-                      <mat-icon class="icon-vermelho icon-menu">{{item.icon}}</mat-icon><span>{{item.label}}</span>
-                  </a>
-              </mat-nav-list>
-          </mat-expansion-panel>
-        </ng-container>
-      </mat-nav-list>
+<mat-sidenav-container  (click)="esconderModal()" class="app-container">
+  <mat-sidenav #sidenav mode="side" [class.mat-elevation-z4]="true" class="app-sidenav">
+    <mat-nav-list>
+      <ng-container *ngFor="let menu of menus">
+        <mat-list-item *ngIf="!menu.itens && exibirMenu(menu.funcoes)" routerLink="{{menu.action}}">
+          <mat-icon class="icon-vermelho icon-menu">{{menu.icon}}</mat-icon><span>{{menu.label}}</span>
+        </mat-list-item>
+        <mat-expansion-panel *ngIf="menu.itens && exibirMenu(menu.funcoes)" [class.mat-elevation-z0]="true">
+          <mat-expansion-panel-header>
+            <mat-icon class="icon-branco icon-menu">{{menu.icon}}</mat-icon> {{menu.label}}
+          </mat-expansion-panel-header>
+          <mat-nav-list *ngFor="let item of menu.itens">
+            <a mat-list-item routerLink="{{item.action}}">
+              <mat-icon class="icon-vermelho icon-menu">{{item.icon}}</mat-icon><span>{{item.label}}</span>
+            </a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </ng-container>
+    </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="{{isAuthenticated ? '' : 'background-login'}}">
-      <router-outlet> </router-outlet>
+  <mat-sidenav-content (click)="esconderModal()" class="{{isAuthenticated ? '' : 'background-login'}}">
+    <router-outlet> </router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container> 
 <app-loading></app-loading>

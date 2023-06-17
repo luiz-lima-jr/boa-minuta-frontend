@@ -21,11 +21,12 @@ export class RecuperarSenhaComponent implements OnInit {
       this.senhaService.recuperarSenhaExterno(this.email)
           .subscribe({
             next: () => {
+              debugger
               this.alertService.success("Email de alteração enviado!")
             },
             error: error => {
               debugger
-              this.alertService.error(error.error)
+              this.alertService.warning(error.error.detail)
             }
           });
     }

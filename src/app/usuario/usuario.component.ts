@@ -10,7 +10,6 @@ import { UsuarioService } from '../services/usuario.service';
 import { FuncaoService } from '../services/funcao.service';
 import { Funcao } from '../models/funcao.model';
 import { Router } from '@angular/router';
-import { SenhaInternoService } from '../services/senha-interno.service';
 
 
 @Component({
@@ -29,7 +28,7 @@ export class UsuarioComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,  private usuarioService: UsuarioService,
             private confirmService: ConfirmService,  private alertService: AlertService,
             private filialService: FilialService, private funcaoService: FuncaoService,
-            private router: Router, private recuperarSenhaService: SenhaInternoService){
+            private router: Router){
 
   }
 
@@ -84,6 +83,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   resetForm(ngForm: any){
+    ngForm.markAsUntouched();
     ngForm.resetForm();
     this.initFormUsuarios();
   }
@@ -104,7 +104,7 @@ export class UsuarioComponent implements OnInit {
   reenviarSenha(usuario: Usuario){
     this.confirmService.confirmar("Reenviar a senha do usuário " + usuario.nome + "?", 
     new Observable(() => {
-      this.recuperarSenhaService.recuperar(usuario.id).subscribe({
+      this.usuarioService.enviarLinkSenha(usuario.id).subscribe({
         next: () => {
           this.alertService.success("Email enviado com sucesso");
           this.buscarUsuarios();

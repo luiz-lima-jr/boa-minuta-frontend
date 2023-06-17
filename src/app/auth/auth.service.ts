@@ -13,6 +13,7 @@ export class AuthService implements OnDestroy {
 
   private URI_AUTH = 'auth'
   private authSub: BehaviorSubject<boolean>;
+  private pathsExterno = ['/recuperar-senha', '/nova-senha']
 
   constructor(private _router: Router, private httpClient: HttpClient, private cookieService: CookieService) {
     this.authSub = new BehaviorSubject<boolean>(false);
@@ -56,7 +57,10 @@ export class AuthService implements OnDestroy {
     return value;
   }
 
-  validateSession(){
+  validateSession() {    
+    if(this.pathsExterno.includes(this._router.url)){
+      return;
+    }
     this.isAuthenticated.subscribe(exists => exists ? true: this._router.navigateByUrl('/login'));
   }
 

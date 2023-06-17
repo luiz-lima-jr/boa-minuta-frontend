@@ -1,6 +1,7 @@
 <mat-card>
     <mat-card-content>
       <form #loginForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h2>Alterar senha</h2>
         <mat-form-field>
           <input matInput type="password" placeholder="Nova senha" formControlName="password" name="password" required>
           <mat-error>
