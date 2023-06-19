@@ -27,3 +27,10 @@ table td mat-icon {
     color: rgb(127, 127, 127) !important; 
 }
   
+.mat-mdc-table{    
+    @media (max-width: 1000px) {    
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}

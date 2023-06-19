@@ -83,9 +83,9 @@ export class UsuarioComponent implements OnInit {
   }
 
   resetForm(ngForm: any){
-    ngForm.markAsUntouched();
-    ngForm.resetForm();
+    ngForm.resetForm()
     this.initFormUsuarios();
+    ngForm.markAsUntouched();
   }
 
   editar(usuario: Usuario) {
@@ -130,8 +130,8 @@ export class UsuarioComponent implements OnInit {
     this.usuarioService.salvar(usuario).subscribe({
       next: () => {
         this.alertService.success("Usuário salvo com sucesso");
-        this.resetForm(ngForm);
         this.buscarUsuarios();
+        this.resetForm(ngForm);
       },
       error: error => this.alertService.error(error.error.detail)
     });

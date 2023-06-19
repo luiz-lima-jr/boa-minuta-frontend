@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Filial } from '../models/filial.model';
 import { FilialService } from '../services/filial.service';
-import { FormControl } from '@angular/forms';
 import { ConfirmService } from '../services/confirm.service';
 import { Observable } from 'rxjs';
 import { AlertService } from '../services/alert.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class FilialComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder, private filialService: FilialService,
-            private confirmService: ConfirmService, 
+            private confirmService: ConfirmService, private router: Router,
             private alertService: AlertService){
 
   }
@@ -49,7 +49,7 @@ export class FilialComponent implements OnInit {
 
   resetForm(ngForm: any){
     ngForm.resetForm();
-    this.buscarFiliais();
+    ngForm.markAsUntouched();
   }
 
   editarFilial(filial: Filial){
@@ -60,7 +60,10 @@ export class FilialComponent implements OnInit {
     if(this.formFilial.valid) {
       let filial = this.formFilial.getRawValue(); 
       this.filialService.salvar(filial).subscribe(
-        () => this.resetForm(ngForm)
+        () => {
+          this.buscarFiliais();
+          this.resetForm(ngForm)
+        } 
       );
     }
   }
@@ -79,5 +82,9 @@ export class FilialComponent implements OnInit {
     if($event > 999999){
       this.formFilial.controls['codigoMili'].setValue($event.toString().substring(0, 6))
     }
+  }
+
+  voltar(){
+    this.router.navigateByUrl('/inicio');
   }
 }

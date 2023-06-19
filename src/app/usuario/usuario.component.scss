@@ -43,6 +43,9 @@ h2 {
 .button-cadastro {  
   width: 20% !important;
   align-self: center;
+  @media (max-width:1000px) {
+    width: 30% !important;
+  }
 }
 mat-card-content {
   margin: 0.8em 0.8em 0 0.8em
@@ -73,4 +76,37 @@ mat-card-content {
 
 .mat-mdc-card-content {
   padding: 0;
+}
+
+.nome {
+  width: 40%;
+  @media (max-width:1000px) {
+    width: 98%;
+  }
+}
+.filiais {
+  @media (max-width:1000px) {
+    width: 48%;
+  }
+}
+.funcoes {
+  @media (max-width:1000px) {
+    width: 48%;
+  }
+}
+.email {
+  @media (max-width:1000px) {
+    width: 98%;
+  }
+}
+
+.situacao {
+  @media (max-width:1000px) {
+    width: 48%;
+  }
+}
+.senha {
+  @media (max-width:1000px) {
+    width: 48%;
+  }
 }

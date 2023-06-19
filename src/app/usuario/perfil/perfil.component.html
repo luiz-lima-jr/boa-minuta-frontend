@@ -1,66 +1,66 @@
 <br>
 <div class="div-main">
-<form style="margin-left: 2em;" class="form-dados" name="form" #formUsuarioT="ngForm"  novalidate  [formGroup]="formUsuario">
-    <mat-card class="margin-r-2">
-        <mat-card-header><h2>Meus dados</h2></mat-card-header>
-        <hr>
-        <mat-card-content>
-            <mat-form-field class="col-45 margin-r-2">
-                <mat-label>Nome</mat-label>
-                <input matInput class="form-control" placeholder="Nome" formControlName="nome">
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="col-50 margin-r-2">
-                <mat-label>Email</mat-label>
-                <input matInput class="form-control" placeholder="Email" formControlName="email">
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-        </mat-card-content>
-        <mat-card-footer class="footer-dados">
-            <button class="button-cadastro" mat-flat-button color="primary" (click)="salvar()"> Salvar</button>
-            <button class="margin-l-4 button-secundary button-cadastro" mat-flat-button (click)="voltar()"> Voltar</button>
-        </mat-card-footer>
-    </mat-card>
-</form>
-<form class="form-dados" name="form" #formSenhaT="ngForm"  novalidate  [formGroup]="formSenha">
-    <mat-card class="margin-r-2">
-        <mat-card-header><h2>Alterar senha</h2></mat-card-header>
-        <hr>
-        <mat-card-content>
-            <div>
-            <mat-form-field class="margin-r-2 col-45">
-                <mat-label>Senha Atual</mat-label>
-                <input matInput  type="password" class="form-control" placeholder="Senha Atual" formControlName="senhaAtual">
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="div-main">
-            <mat-form-field class="margin-r-2 col-45">
-                <mat-label>Nova senha</mat-label>
-                <input matInput type="password" class="form-control" placeholder="Nova Senha" formControlName="senha">
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-2 col-45">
-                <mat-label>Confirmar senha</mat-label>
-                <input matInput type="password" class="form-control" placeholder="Confirmar Senha" formControlName="confirmarSenha">
-                <mat-error>
-                    Confirmação de senha inválida
-                </mat-error>
-            </mat-form-field>
-        </div>
-        </mat-card-content>
-        <mat-card-footer style="margin: 0.8em 0.8em 1.5em 0.8em">
-            <button class="button-cadastro" mat-flat-button color="primary" (click)="alterarSenha(formSenhaT)"> Alterar</button>
-        </mat-card-footer>
-    </mat-card>
-</form>
+    <form  class="form-dados" name="form" #formUsuarioT="ngForm"  novalidate  [formGroup]="formUsuario">
+        <mat-card class="margin-r-2">
+            <mat-card-header><h2>Meus dados</h2></mat-card-header>
+            <hr>
+            <mat-card-content>
+                <mat-form-field class="col-45 margin-r-2">
+                    <mat-label>Nome</mat-label>
+                    <input matInput class="form-control" placeholder="Nome" formControlName="nome">
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-50 margin-r-2">
+                    <mat-label>Email</mat-label>
+                    <input matInput class="form-control" placeholder="Email" formControlName="email">
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-footer class="footer-dados">
+                <button class="button-cadastro" mat-flat-button color="primary" (click)="salvar()"> Salvar</button>
+                <button class="margin-l-4 button-secundary button-cadastro" mat-flat-button (click)="voltar()"> Voltar</button>
+            </mat-card-footer>
+        </mat-card>
+    </form>
+    <form class="form-dados form-senha" name="form" #formSenhaT="ngForm"  novalidate  [formGroup]="formSenha">
+        <mat-card class="margin-r-2">
+            <mat-card-header><h2>Alterar senha</h2></mat-card-header>
+            <hr>
+            <mat-card-content>
+                <div>
+                <mat-form-field class="margin-r-2 col-45">
+                    <mat-label>Senha Atual</mat-label>
+                    <input matInput  type="password" class="form-control" placeholder="Senha Atual" formControlName="senhaAtual">
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="div-main">
+                <mat-form-field class="margin-r-2 col-45">
+                    <mat-label>Nova senha</mat-label>
+                    <input matInput type="password" class="form-control" placeholder="Nova Senha" formControlName="senha">
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-2 col-45">
+                    <mat-label>Confirmar senha</mat-label>
+                    <input matInput type="password" class="form-control" placeholder="Confirmar Senha" formControlName="confirmarSenha">
+                    <mat-error>
+                        Confirmação de senha inválida
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            </mat-card-content>
+            <mat-card-footer style="margin: 0.8em 0.8em 1.5em 0.8em">
+                <button class="button-cadastro" mat-flat-button color="primary" (click)="alterarSenha(formSenhaT)"> Alterar</button>
+            </mat-card-footer>
+        </mat-card>
+    </form>
 </div>
 <br>

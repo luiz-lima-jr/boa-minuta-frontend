@@ -1,9 +1,12 @@
 .form-filial {
-  @media (max-width: 1600px) {
-    max-width: 75%;
+  @media (max-width: 1000px) {
+    width: 95%;
+  }
+  @media (min-width: 1001px) {
+    max-width: 60%;
   }
   @media (min-width: 1601px) {
-    max-width: 60%;
+    max-width: 40%;
   }
   margin-left: 2%;
 }
@@ -41,7 +44,12 @@ h2 {
 }
 
 .button-cadastro {  
-  width: 25% !important;
+  @media (max-width: 1000px) {    
+    width: 30% !important;
+  }
+  @media (min-width: 1001px) {    
+    width: 20% !important;
+  }
   align-self: center;
 }
 
@@ -50,4 +58,19 @@ h2 {
 }
 .mat-mdc-card-content{
   padding: 0;
+}
+.codigo-mili {
+  @media (max-width: 1000px) {    
+    width: 45% !important;
+  }
+  @media (min-width: 1001px) {    
+    width: 25% !important;
+  }
+}
+
+.mat-mdc-table{
+  @media (max-width: 1000px) {    
+    display: inline-table !important;
+  }
+  
 }

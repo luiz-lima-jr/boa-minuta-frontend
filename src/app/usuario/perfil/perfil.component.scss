@@ -1,5 +1,18 @@
 .form-dados {
-  width: 45%;
+  @media (max-width: 1000px) {    
+    width: 95%;
+    margin-left: 3%;
+  }
+  @media (min-width: 1001px) {    
+    width: 45%;
+    margin-left: 2em;
+  }
+}
+
+.form-senha{
+  @media (max-width: 1000px) {    
+    margin-top: 5%;
+  }
 }
 
 mat-card {
@@ -7,7 +20,9 @@ mat-card {
 }
 
 .div-main {
-  display: flex;
+  @media (min-width: 1001px) {
+    display: flex;
+  }
 }
 
 h2 mat-icon {

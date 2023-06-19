@@ -4,14 +4,14 @@
         <mat-card-header><h2>Cadastro de Usuários</h2></mat-card-header>
         <hr>
         <mat-card-content>
-            <mat-form-field class="col-40 margin-r-2">
+            <mat-form-field class="nome margin-r-2">
                 <mat-label>Nome Usuário</mat-label>
                 <input matInput class="form-control" placeholder="Nome" formControlName="nome">
                 <mat-error>
                     Campo obrigatório
                 </mat-error>
             </mat-form-field>
-            <mat-form-field appearance="fill" class="margin-r-2">
+            <mat-form-field appearance="fill" class="filiais margin-r-2">
                 <mat-label>Filiais</mat-label>
                 <mat-select [compareWith]="compareFilial" formControlName="filiais" multiple>
                   <mat-option *ngFor="let filial of filiais" [value]="filial">{{filial.nome}}</mat-option>
@@ -20,7 +20,7 @@
                     Campo obrigatório
                 </mat-error>
               </mat-form-field>
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="fill" class="funcoes">
                   <mat-label>Funções</mat-label>
                   <mat-select [compareWith]="compareFuncoes" formControlName="funcoes" multiple>
                     <mat-option *ngFor="let funcao of funcoes" [value]="funcao">{{funcao.descricao}}</mat-option>
@@ -31,14 +31,14 @@
                 </mat-form-field>
         </mat-card-content>
         <mat-card-content>
-            <mat-form-field class="col-40 margin-r-2">
+            <mat-form-field class="email margin-r-2">
                 <mat-label>Email</mat-label>
                 <input matInput class="form-control" placeholder="Email" formControlName="email">
                 <mat-error>
                     Campo obrigatório
                 </mat-error>
             </mat-form-field>
-            <mat-form-field class="margin-r-2">
+            <mat-form-field class="situacao margin-r-2">
                 <mat-label>Situação</mat-label>
                 <mat-select formControlName="situacao">
                     <mat-option  [value]="true">Ativo</mat-option>
@@ -48,7 +48,7 @@
                     Campo obrigatório
                 </mat-error>
             </mat-form-field>
-            <mat-form-field *ngIf="!formUsuario.controls['id'].value" class="margin-r-2">
+            <mat-form-field *ngIf="!formUsuario.controls['id'].value" class="senha margin-r-2">
                 <mat-label>Senha</mat-label>
                 <input matInput class="form-control" placeholder="Senha" formControlName="senha">
                 <mat-error>

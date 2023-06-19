@@ -19,7 +19,10 @@
 }
 
 mat-toolbar {
-    @media (max-width: 1600px) {
+    @media (max-width: 1000px) {
+        height: 8%;
+    }
+    @media (min-width: 1001px) {
         height: 13%;
     }
     @media (min-width: 1601px) {
@@ -34,13 +37,24 @@ mat-toolbar {
     position: absolute; left: 0;
 }
 
-.divLogo {
+.div-logo {
     position: absolute;
-    left: 3% !important;
+    @media (max-width: 1000px) {
+       margin: auto !important;
+    }
+
+    @media (min-width: 1001px) {
+        left: 3% !important;
+     }
 }
 
 .logo {    
-    @media (max-width: 1600px) {
+    @media (max-width: 1001px) {
+        max-height: 2.5em;
+        margin: auto !important;
+    }
+
+    @media (min-width: 1001px) {
         max-height: 3em;
     }
     @media (min-width: 1601px) {
@@ -48,21 +62,21 @@ mat-toolbar {
     }
 }
 
-.boaMinuta{
-    font-family: 'Montserrat Bold', 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 28px;
-    color: #7F7F7F;
-}
-
-.dadosLogin{    
+.dados-login{    
     display: flex;
     position: absolute;
     right: 1% !important;
 }
 
-.botaoLoginToolbar {
+.saudacao {
+    font-size: 1em;
+    align-self: center;
+    @media (max-width: 1001px) {
+        display: none;
+    }
+}
+
+.botao-login-toolbar {
     color: rgb(132, 25, 28);
 }
 
@@ -80,6 +94,11 @@ mat-toolbar {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 120% 140%;
+
+    @media (max-width: 1000px) {
+        background-size: 350% 100%;
+        background-position: 10%;
+    }
 }
 
 .icon-menu {
@@ -111,4 +130,12 @@ mat-expansion-panel {
     mat-nav-list{
         width: 100%
     }
+  }
+  
+  mat-sidenav{
+    z-index: 9999;
+  }
+  
+::ng-deep .mat-drawer-shown{
+    z-index: 9999 !important;
   }
