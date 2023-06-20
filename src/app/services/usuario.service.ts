@@ -40,7 +40,7 @@ export class UsuarioService {
   }
 
   enviarLinkSenha(idUsuario: number) : Observable<any> {
-    let url = this.URI_AUTH + `enviar-link-senha/${idUsuario}`;
+    let url = this.URI_AUTH + `/enviar-link-senha/${idUsuario}`;
     return this.httpClient.put(url, {});
   }
 
