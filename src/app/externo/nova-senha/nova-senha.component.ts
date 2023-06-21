@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { SenhaExternoService } from 'src/app/services/senha-externo.service';
 import { ConfirmedValidator } from 'src/app/util/validators';
@@ -17,9 +18,11 @@ export class NovaSenhaComponent implements OnInit {
   form: FormGroup;
 
   constructor(private fb: FormBuilder, private senhaService: SenhaExternoService, 
-    private activatedRoute: ActivatedRoute, private alertService: AlertService) { }
+    private activatedRoute: ActivatedRoute, private alertService: AlertService,
+    private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.removeSession();
     this.form = this.fb.group({
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]]
@@ -35,10 +38,11 @@ export class NovaSenhaComponent implements OnInit {
       this.senhaService.alterarSenhaExterno({senha: this.form.controls['password'].value, token: token})
           .subscribe({
             next: () => {
+              this.router.navigateByUrl('/login')
               this.alertService.success("Senha alterada com sucesso!")
             },
             error: error => {
-              this.alertService.error(error.error)
+              this.alertService.warning(error.error)
             }
           });
     }

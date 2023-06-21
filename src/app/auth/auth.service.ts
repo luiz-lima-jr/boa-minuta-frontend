@@ -70,9 +70,10 @@ export class AuthService implements OnDestroy {
   }
 
   removeSession(){
-      this.cookieService.delete('sessionToken');
-      this.authSub.next(false);
-      this.authSub.complete();
+    this.cookieService.delete('sessionToken');
+    this.cookieService.delete('sessionProfile');
+    this.authSub.next(false);
+    this.authSub.complete();
   }
 
 }
