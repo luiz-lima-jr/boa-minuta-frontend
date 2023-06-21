@@ -89,15 +89,15 @@ mat-toolbar {
 }
 
 .background-login {
-    background-image: url('file:/src/assets/img/caminhao.jpg');
+    background-image: url('file:/src/assets/img/caminhao.png');
     background-position: 20% 70%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 120% 140%;
 
     @media (max-width: 1000px) {
-        background-size: 350% 100%;
-        background-position: 10%;
+        background-position: 40%;
+        background-size: 400% 100%;
     }
 }
 

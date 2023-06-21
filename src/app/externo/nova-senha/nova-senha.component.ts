@@ -29,18 +29,15 @@ export class NovaSenhaComponent implements OnInit {
   }
 
   onSubmit(){
-    debugger
     if(this.form.valid){
       let token = '';
       this.activatedRoute.params.subscribe((params) => token = params['token'])
       this.senhaService.alterarSenhaExterno({senha: this.form.controls['password'].value, token: token})
           .subscribe({
             next: () => {
-              debugger
               this.alertService.success("Senha alterada com sucesso!")
             },
             error: error => {
-              debugger
               this.alertService.error(error.error)
             }
           });
