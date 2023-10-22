@@ -3,12 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './externo/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
-import { FilialComponent } from './filial/filial.component';
+import { FilialComponent } from './cadastro/filial/filial.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { ADMINISTRADOR } from './models/funcao.model';
 import { RecuperarSenhaComponent } from './externo/recuperar-senha/recuperar-senha.component';
 import { NovaSenhaComponent } from './externo/nova-senha/nova-senha.component';
 import { PerfilComponent } from './usuario/perfil/perfil.component';
+import { AliquotaComponent } from './aliquota/aliquota.component';
+import { CargaComponent } from './carga/carga.component';
+import { FreteComponent } from './frete/frete.component';
+import { MinutaCargaComponent } from './relatorios/minuta/minuta-carga.component';
 
 const routes: Routes = [  
   {
@@ -44,6 +48,26 @@ const routes: Routes = [
     data: {
       funcoes: [ADMINISTRADOR]
     }
+  },
+  {
+    path: 'aliquota',
+    component: AliquotaComponent,
+    canActivate: [ AuthGuard ],
+  },
+  {
+    path: 'carga',
+    component: CargaComponent,
+    canActivate: [ AuthGuard ],
+  },
+  {
+    path: 'frete/:numeroCarga/:idFilial',
+    component: FreteComponent,
+    canActivate: [ AuthGuard ],
+  },
+  {
+    path: 'minuta/:idFrete',
+    component: MinutaCargaComponent,
+    canActivate: [ AuthGuard ],
   },
   {
     path: 'usuario',

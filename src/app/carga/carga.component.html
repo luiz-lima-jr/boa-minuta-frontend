@@ -1,0 +1,98 @@
+<form  name="form" #formCargaFilterT="ngForm"  novalidate  [formGroup]="formFilter">
+    <mat-card class="margin-r-2">
+        <div style="display: flex; ">
+            <mat-card-header><h2>Cargas Liberadas</h2></mat-card-header>
+            <mat-checkbox formControlName="semPlaca">Sem Placa</mat-checkbox>
+            <mat-checkbox formControlName="comPlaca">Com Placa</mat-checkbox>
+            <mat-checkbox formControlName="faturadas">Faturadas</mat-checkbox>
+            <mat-form-field class="field-data margin-l-2" appearance="fill">
+                <mat-label>Inicio faturamento</mat-label>
+                <input matInput [matDatepicker]="pickerInicio" formControlName="dataInicioFaturamento">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerInicio">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #pickerInicio></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="field-data margin-l-2" appearance="fill" >
+                <mat-label>Fim Faturamento</mat-label>
+                <input matInput [matDatepicker]="pickerFim" formControlName="dataFimFaturamento">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerFim">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #pickerFim></mat-datepicker>
+            </mat-form-field>            
+            <mat-form-field appearance="fill" class="field-data margin-l-2">
+                <mat-label>Filial</mat-label>
+                <mat-select [compareWith]="compareFilial" formControlName="filiais" multiple>
+                    <mat-option [value]="undefined">TODAS</mat-option>
+                    <mat-option *ngFor="let filial of filiais" [value]="filial">{{filial.nome}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <hr><br>
+        <table mat-table [dataSource]="cargas" class="mat-elevation-z8">
+            <ng-container matColumnDef="numeroCarga">
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;"> Carga </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.numeroCarga}} </td>
+            </ng-container>
+            <ng-container matColumnDef="placa">
+                <th mat-header-cell *matHeaderCellDef style="width: 6%;"> Placa </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.placa}} </td>
+            </ng-container>
+            <ng-container matColumnDef="valorCarga">
+                <th mat-header-cell *matHeaderCellDef style="width: 7%;"> Valor Carga </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.valorCarga}} </td>
+            </ng-container>
+            <ng-container matColumnDef="resultado">
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;"> Resultado </th>
+                <td mat-cell *matCellDef="let carga">  <a href='{{getLink(carga)}}'>lançar</a> </td>
+            </ng-container>
+            <ng-container matColumnDef="responsavel">
+                <th mat-header-cell *matHeaderCellDef style="width: 10%;"> Responsavel </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.responsavelOperacional?.nome}} </td>
+            </ng-container>
+            <ng-container matColumnDef="faturado">
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;"> Faturado </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.faturado ? 'SIM' : '-'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="destino">
+                <th mat-header-cell *matHeaderCellDef style="width: 8%;"> Destino </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.destino?.nome}} </td>
+            </ng-container>
+            <ng-container matColumnDef="cliente">
+                <th mat-header-cell *matHeaderCellDef style="width: 8%;"> Cliente </th>
+                <td mat-cell *matCellDef="let carga"> {{getNomeCliente(carga.clientes)}} </td>
+            </ng-container>
+            <ng-container matColumnDef="volumes">
+                <th mat-header-cell *matHeaderCellDef style="width: 6%;"> Volumes </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.entregas}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dataLimiteCarregamento">
+                <th mat-header-cell *matHeaderCellDef style="width: 8%;"> Limite Carregam. </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.dataLimiteCarregamento | date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dataLiberacaoFaturamento">
+                <th mat-header-cell *matHeaderCellDef style="width: 8%;"> Data Lib. Fat. </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.dataLiberacaoFaturamento | date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dataImpressaoMinuta">
+                <th mat-header-cell *matHeaderCellDef style="width: 8%;"> Data Impr. Minuta </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.dataImpressaoMinuta | date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="paletizado">
+                <th mat-header-cell *matHeaderCellDef style="width: 6%;"> Paletizado </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.paletizado ? 'SIM' : ''}} </td>
+            </ng-container>
+            <ng-container matColumnDef="observacoes">
+                <th mat-header-cell *matHeaderCellDef style="width: 11%;"> Observações </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.observacoes}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </mat-card>
+</form>

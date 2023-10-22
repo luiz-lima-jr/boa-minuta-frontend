@@ -19,6 +19,14 @@ export class FilialService {
     return this.httpClient.get<Filial[]>(this.URI_AUTH);
   }
 
+  public getById(idFilial: number): Observable<Filial> {
+    return this.httpClient.get<Filial>(this.URI_AUTH+'/'+idFilial);
+  }
+
+  public getAllUsuario(): Observable<Filial[]> {
+    return this.httpClient.get<Filial[]>(this.URI_AUTH+'/usuario');
+  }
+
   public salvar(filial: Filial): Observable<any> {
     return this.httpClient.post(this.URI_AUTH, filial);
   }

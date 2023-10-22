@@ -11,9 +11,16 @@
                     Campo obrigatório
                 </mat-error>
             </mat-form-field>
-            <mat-form-field class="codigo-mili">
+            <mat-form-field class="codigo-mili margin-r-2">
                 <mat-label>Código Mili</mat-label>
                 <input matInput class="form-control" type="number" placeholder="5" formControlName="codigoMili" (ngModelChange)="miliAlterado($event)">
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="senha">
+                <mat-label>Senha</mat-label>
+                <input matInput class="form-control" placeholder="Senha" formControlName="senha">
                 <mat-error>
                     Campo obrigatório
                 </mat-error>

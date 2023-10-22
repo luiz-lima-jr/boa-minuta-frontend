@@ -10,6 +10,7 @@ import { UsuarioService } from '../services/usuario.service';
 import { FuncaoService } from '../services/funcao.service';
 import { Funcao } from '../models/funcao.model';
 import { Router } from '@angular/router';
+import { compareFilial, compareFuncoes } from '../util/compares';
 
 
 @Component({
@@ -94,11 +95,11 @@ export class UsuarioComponent implements OnInit {
   }
 
   compareFilial(f1: Filial, f2: Filial): boolean {
-    return f1 && f2 ? f1.id === f2.id : f1 === f2;
+    return compareFilial(f1, f2);
   }
 
   compareFuncoes(f1: Funcao, f2: Funcao): boolean {
-    return f1 && f2 ? f1.id === f2.id : f1 === f2;
+    return compareFuncoes(f1, f2);
   }
 
   reenviarSenha(usuario: Usuario){

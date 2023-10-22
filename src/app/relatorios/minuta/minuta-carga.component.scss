@@ -1,0 +1,107 @@
+.title {
+  width: 100%;
+  display: inline-flex;
+}
+
+h2 {
+  margin-top: 0.5em;
+  margin-right: 1em;
+}
+
+mat-form-field{
+  margin-left: 1em;
+}
+
+.linha {
+  display: flex;
+  margin-top: 0.5em;
+}
+.linha-data{
+  display: flex;
+}
+
+.coluna-titulo-1{
+  margin-left: 2em;
+  width: 20em;
+}
+
+.coluna-titulo-2{
+  width: 20em;
+  margin-left: 5em;
+}
+
+.linha-desc {
+  display: flex;
+}
+
+.col-desc-1 {
+  width: 10em;
+}
+
+.col-desc-2 {
+  width: 5em;
+  text-align: end;
+}
+
+.col-desc-3{
+  width: 15em;
+  text-align: end;
+  
+}
+.col-desc-4{
+  width: 8em;
+  text-align: end;
+  
+}
+
+.col-desc-5{
+  text-align: end;
+  width: 15em;
+  
+}
+
+.col-desc-6{
+  text-align: end;
+  width: 5em;
+  
+}
+
+.tabelaPedido{
+  margin-top: 2em;
+}
+
+.fonte{
+  font-size: 1.2em;
+}
+
+.observacoes {
+  margin-top: 3em !important;
+}
+
+.descricao{
+  margin-top: 5em !important;
+}
+
+  
+.printer {
+  color: white;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.print-section {
+  min-width: 1200px;
+  height: 1754px;
+}
+
+.header-print { 
+  padding: 10px 0px;
+  height: 230px;
+  background: #f8f8f8;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+

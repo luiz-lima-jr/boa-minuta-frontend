@@ -40,24 +40,47 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       ]
     },
+    {
+      label: 'Aliquota',
+      action: 'aliquota',
+      funcoes: [],
+      icon: 'assignment',
+    },
+    {
+      label: 'Carga',
+      action: 'carga',
+      funcoes: [],
+      icon: 'assignment',
+    },{
+      label: 'Relatórios',
+      funcoes: [],
+      icon: 'assignment',
+      itens: [
+        {
+          label: 'Minuta',
+          action: 'minuta/:idFrete',
+          funcoes: [],
+          icon: 'assignment',
+        }
+      ]
+    }
   ]
 
   public exibirMenu = (funcoesMenu: string[]) : boolean => {    
-    return this.session?.funcoes?.filter(r => funcoesMenu.includes(r)).length > 0
+    return funcoesMenu.length === 0 || this.session?.funcoes?.filter(r => funcoesMenu.includes(r)).length > 0
   }
 
   public ngOnInit(): void {
     this._authService.isAuthenticated.pipe(
       takeUntil(this._destroySub$)
     ).subscribe((isAuthenticated: boolean) => this.isAuthenticated = isAuthenticated);
-    const profile = this._authService.getProfile()
+    const profile = this._authService.getSessionProfile()
     if(profile){
       this.session = profile;
     }
   }
 
   public ngOnDestroy(): void {
-    debugger
     this._destroySub$.next();
   }
 
@@ -71,12 +94,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   esconderModal(){    
-    console.log('esconderModal')
     this.showModalPerfil = false;
   }
 
   exibirModal(){
-    console.log('exibirModal')
     this.showModalPerfil = !this.showModalPerfil;
   }
 }

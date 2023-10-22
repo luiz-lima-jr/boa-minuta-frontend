@@ -1,0 +1,98 @@
+<br>
+<form class="form-filial" name="form" #formFilialT="ngForm"  novalidate  [formGroup]="formAliquota">
+    <mat-card class="card-cadastro margin-r-2">
+        <mat-card-header><h2>Cadastro de Aliquotas</h2></mat-card-header>
+        <hr class="primary-color"/>
+        <mat-card-content  style="margin: 0.8em 0.8em 0 0.8em">            
+            <mat-form-field appearance="fill" class="filiais margin-r-2">
+                <mat-label>Tipo Aliquota</mat-label>
+                <mat-select [compareWith]="compareTipoAliquota" formControlName="tipoAliquota">
+                  <mat-option *ngFor="let tipoAliquota of tipoAliquotas" [value]="tipoAliquota">{{tipoAliquota.tipo}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>             
+            <mat-form-field appearance="fill" class="filiais margin-r-2">
+                <mat-label>Origem</mat-label>
+                <mat-select [compareWith]="compareEstado" formControlName="estadoOrigem">
+                  <mat-option *ngFor="let estado of estados" [value]="estado">{{estado.sigla}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>       
+            <mat-form-field appearance="fill" class="filiais margin-r-2">
+                <mat-label>Destino</mat-label>
+                <mat-select [compareWith]="compareEstado" formControlName="estadoDestino">
+                  <mat-option *ngFor="let estado of estados" [value]="estado">{{estado.sigla}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="filiais margin-r-2">
+                <mat-label>Filial</mat-label>
+                <mat-select [compareWith]="compareFilial" formControlName="filial">
+                  <mat-option *ngFor="let filial of filiais" [value]="filial">{{filial.nome}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="filiais margin-r-2">
+                <mat-label>% Aliquota </mat-label>
+                <input matInput class="form-control" type="number" placeholder="15" formControlName="aliquota">
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-footer style="margin: 0.8em 0.8em 1.5em 0.8em">
+            <button class="button-cadastro" mat-flat-button color="primary" (click)="salvarAliquota(formFilialT)"> Salvar</button>
+            <button class="margin-l-4 button-secundary button-cadastro" mat-flat-button (click)="resetForm(formFilialT)"> Limpar</button>
+            <button class="margin-l-4 button-secundary button-cadastro" mat-flat-button (click)="voltar()"> Voltar</button>
+        </mat-card-footer>
+    </mat-card>
+</form>
+<br><br>
+<form class="form-filial">
+    <mat-card class="margin-r-2">
+        <mat-card-header><h2>Aliquotas Cadastradas</h2></mat-card-header>
+        <hr><br>
+        <table mat-table [dataSource]="aliquotas" class="mat-elevation-z8">
+            <ng-container matColumnDef="tipoAliquota">
+                <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                <td mat-cell *matCellDef="let aliquota"> {{aliquota.tipoAliquota.tipo}} </td>
+              </ng-container>
+              <ng-container matColumnDef="origemDestino">
+                  <th mat-header-cell *matHeaderCellDef> Origem / Destino </th>
+                  <td mat-cell *matCellDef="let aliquota"> {{aliquota.estadoOrigem.sigla}} - {{aliquota.estadoDestino.sigla}}</td>
+                </ng-container>
+                <ng-container matColumnDef="filial">
+                    <th mat-header-cell *matHeaderCellDef> Filial </th>
+                    <td mat-cell *matCellDef="let aliquota"> {{aliquota.filial.nome}} </td>
+                </ng-container>                
+                <ng-container matColumnDef="aliquota">
+                    <th mat-header-cell *matHeaderCellDef> Aliquota </th>
+                    <td mat-cell *matCellDef="let aliquota"> {{aliquota.aliquota}} </td>
+                  </ng-container>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="acao">
+                <th mat-header-cell *matHeaderCellDef > Ações </th>
+                <td mat-cell *matCellDef="let filial">  
+                    <button mat-icon-button class="icon-acao-tabela" title="Editar Aliquota" (click)="editarAliquota(filial)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button class="icon-acao-tabela" title="Excluir Aliquota" (click)="excluir(filial)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </mat-card>
+</form>

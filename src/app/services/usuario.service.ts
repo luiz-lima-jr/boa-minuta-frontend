@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Usuario } from '../models/usuario-cadastro.model';
 import { AlterarSenha } from '../models/alterar-senha.model';
 
@@ -47,5 +47,10 @@ export class UsuarioService {
   alterarSenha(alterar: AlterarSenha) : Observable<any> {
     let url = this.URI_AUTH + '/alterar-senha';
     return this.httpClient.put(url, alterar);
+  }
+
+  getByNome(nome: string): Observable<Usuario[]> {
+    const params = new HttpParams().set('nome', nome);
+    return this.httpClient.get<Usuario[]>(this.URI_AUTH+"/buscar-por-nome", {params: params});
   }
 }

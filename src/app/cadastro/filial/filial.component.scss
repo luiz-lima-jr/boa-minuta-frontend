@@ -1,0 +1,70 @@
+.form-filial {
+  @media (max-width: 1000px) {
+    width: 95%;
+  }
+  @media (min-width: 1001px) {
+    max-width: 60%;
+  }
+  @media (min-width: 1601px) {
+    max-width: 80%;
+  }
+  margin-left: 2%;
+}
+
+.div-botao-enviar {
+  align-self: center;
+}
+
+.botao-enviar {
+  float: right;
+}
+
+.title {
+  width: 100%;
+  display: inline-flex;
+}
+
+h2 mat-icon {
+  margin-right: 1%;
+  line-height: 1.2;
+}
+
+.title-cadastradas {
+  display: flex;
+}
+
+.botao-cadastrar{
+  float: right;
+  width: 15% !important;
+}
+
+.tabela-filiais {
+  margin-bottom: 2em;
+}
+.mat-mdc-card-content{
+  padding: 0;
+}
+.codigo-mili {
+  @media (max-width: 1000px) {    
+    width: 40% !important;
+  }
+  @media (min-width: 1001px) {    
+    width: 20% !important;
+  }
+}
+
+.senha {
+  @media (max-width: 1000px) {    
+    width: 40% !important;
+  }
+  @media (min-width: 1001px) {    
+    width: 20% !important;
+  }
+}
+
+.mat-mdc-table{
+  @media (max-width: 1000px) {    
+    display: inline-table !important;
+  }
+  
+}

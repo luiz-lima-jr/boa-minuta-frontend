@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Filial } from '../models/filial.model';
-import { FilialService } from '../services/filial.service';
-import { ConfirmService } from '../services/confirm.service';
+import { Filial } from '../../models/filial.model';
+import { FilialService } from '../../services/filial.service';
+import { ConfirmService } from '../../services/confirm.service';
 import { Observable } from 'rxjs';
-import { AlertService } from '../services/alert.service';
+import { AlertService } from '../../services/alert.service';
 import { Router } from '@angular/router';
 
 
@@ -43,7 +43,8 @@ export class FilialComponent implements OnInit {
     this.formFilial = this.formBuilder.group({
       id: [''],
       nome: ['', Validators.required],
-      codigoMili: ['', Validators.required]
+      codigoMili: ['', Validators.required],
+      senha: ['', Validators.required]
     })
   }
 

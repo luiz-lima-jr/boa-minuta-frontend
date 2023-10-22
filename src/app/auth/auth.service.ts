@@ -39,7 +39,7 @@ export class AuthService implements OnDestroy {
   private createSession(transaction: AuthToken): void {
     this.authSub.next(true);
     this.cookieService.set('sessionToken', transaction.sessionToken);
-    localStorage.setItem('sessionProfile', JSON.stringify(transaction.sessionProfile));
+    this.cookieService.set('sessionProfile', JSON.stringify(transaction.sessionProfile));
   }
   
   private async existsCookieSession() : Promise<boolean>{
@@ -64,14 +64,14 @@ export class AuthService implements OnDestroy {
     this.isAuthenticated.subscribe(exists => exists ? true: this._router.navigateByUrl('/login'));
   }
 
-  getProfile() : SessionProfile | undefined {
-    const sessionStorage = localStorage.getItem('sessionProfile')
+  getSessionProfile() : SessionProfile | undefined {
+    const sessionStorage = this.cookieService.get('sessionProfile')
     return sessionStorage && sessionStorage !== "undefined" ? JSON.parse(sessionStorage) : undefined
   }
 
   removeSession(){
-    this.cookieService.delete('sessionToken');
-    this.cookieService.delete('sessionProfile');
+    this.cookieService.delete('sessionToken', '/');
+    this.cookieService.delete('sessionProfile', '/');
     this.authSub.next(false);
     this.authSub.complete();
   }

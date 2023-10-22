@@ -1,0 +1,18 @@
+<table mat-table [dataSource]="minuta.clientes" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef> Cliente </th>
+        <td mat-cell *matCellDef="let cliente"> {{cliente.nome}} </td>
+    </ng-container>
+    <ng-container matColumnDef="endereco">
+        <th mat-header-cell *matHeaderCellDef> Endereço </th>
+        <td mat-cell *matCellDef="let cliente"> {{cliente.endereco}}</td>
+    </ng-container> 
+    <ng-container matColumnDef="cidade">
+        <th mat-header-cell *matHeaderCellDef> Cidade </th>
+        <td mat-cell *matCellDef="let cliente"> {{cliente.cidade}}</td>
+    </ng-container> 
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsClientes"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsClientes;"></tr>
+</table>

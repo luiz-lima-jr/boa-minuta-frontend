@@ -3,7 +3,7 @@ import { Router, CanActivate, UrlTree, ActivatedRouteSnapshot } from '@angular/r
 import { first, map, Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { AlertService } from '../services/alert.service';
-import { possuiFuncaoAcesso } from '../util/helper';
+import { possuiFuncaoAcesso } from '../util/funcao-helper';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
       .pipe(
         map((isAuthenticated: boolean) => {          
           const funcoes = route.data['funcoes'];
-          const profile = this.authSession.getProfile();
+          const profile = this.authSession.getSessionProfile();
           if(!isAuthenticated){
             return this._router.parseUrl('/login');
           }
@@ -39,6 +39,4 @@ export class AuthGuard implements CanActivate {
         first()
       );
   }
-
-
 }

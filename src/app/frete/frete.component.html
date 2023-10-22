@@ -1,0 +1,265 @@
+<form  style="margin-left: 1em;" name="form" #formCargaFilterT="ngForm"  novalidate  [formGroup]="formFrete">
+    <br>
+    <mat-card class="margin-r-2">
+        <div style="display: flex;">
+            <mat-card-header>
+                <span style="align-self: center; margin-right: 3em;"><b>Carga n°: {{numeroCarga}}</b></span>
+                <span style="align-self: center; margin-right: 3em;">Filial: {{filial?.nome}}</span>
+                <mat-checkbox class="faturadoLabel" formControlName="faturado">Faturado{{getResponsavelFaturamento()}}</mat-checkbox>
+            </mat-card-header>
+        </div>
+        <hr><br>
+        <div class="campos-formulario">
+            <mat-form-field class="margin-r-1 col-20">
+                <mat-label>Responsável Operacional</mat-label>
+                <input type="text" matInput formControlName="responsavelOperacional" [matAutocomplete]="autoResponsavel">
+                <mat-autocomplete #autoResponsavel="matAutocomplete" [displayWith]="displayNomeUsuario">
+                    <mat-option *ngFor="let usuario of usuarioObserver | async" [value]="usuario">
+                        {{usuario.nome}}
+                    </mat-option>
+                </mat-autocomplete>                
+            </mat-form-field>  
+            <mat-form-field class="margin-r-1 col-9">
+                <mat-label>m³</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="m³" formControlName="m3" readonly>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>  
+            <mat-form-field class="margin-r-1 col-15">
+                <mat-label>Entrega(s)</mat-label>
+                <input type="number" matInput class="form-control" placeholder="Entregas" formControlName="entregas" readonly>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-25">
+                <mat-label>Complemento</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Complemento" formControlName="complemento" readonly>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>   
+            <mat-form-field class="field-data margin-r-1" appearance="fill" >
+                <mat-label>Data Saída</mat-label>
+                <input matInput [matDatepicker]="pickerFim" formControlName="dataSaida" readonly>
+                <mat-datepicker #pickerFim readonly></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-30">
+                <mat-label>Origem</mat-label>
+                <input type="text" matInput class="form-control" placeholder="Origem" formControlName="municipioOrigem" [matAutocomplete]="autoOrigem" readonly>
+                <mat-autocomplete #autoOrigem="matAutocomplete" [displayWith]="displayMunicipioOrigem"></mat-autocomplete>   
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field> 
+            <mat-form-field class="margin-r-1 col-30">
+                <mat-label>Destino</mat-label>
+                <input type="text" matInput class="form-control" placeholder="Destino" formControlName="municipioDestino" [matAutocomplete]="autoDestino" readonly>
+                <mat-autocomplete #autoDestino="matAutocomplete" [displayWith]="displayMunicipio"></mat-autocomplete>   
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field> 
+        </div>
+    </mat-card>
+    <br>
+    <form  name="form" #formCaminhaoT="ngForm"  novalidate  [formGroup]="formCaminhao">
+        <mat-card>
+            <div style="display: flex; ">
+                <mat-card-header><h3>Transportador</h3></mat-card-header>
+            </div>
+            <hr><br>
+            <div class="campos-formulario">
+                <mat-form-field class="margin-r-1 col-10">
+                    <mat-label>Placa</mat-label>
+                    <input type="text" maxlength="8" matInput formControlName="placa" [matAutocomplete]="autoPlaca">
+                    <mat-autocomplete #autoPlaca="matAutocomplete">
+                        <mat-option *ngFor="let caminhao of caminhoesObserver | async" [value]="caminhao">
+                            {{caminhao.placa}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-20">
+                    <mat-label>Transportador</mat-label>
+                    <input type="text" matInput formControlName="transportador" [matAutocomplete]="autoTransportador">
+                    <mat-autocomplete #autoTransportador="matAutocomplete" [displayWith]="displayNome">
+                        <mat-option *ngFor="let pessoa of pessoasTransportadorObserver | async" [value]="pessoa">
+                            {{pessoa.nome}}
+                        </mat-option>
+                    </mat-autocomplete>                 
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-20">
+                    <mat-label>Motorista</mat-label>
+                    <input type="text" matInput formControlName="motorista" [matAutocomplete]="autoMotorista">
+                    <mat-autocomplete #autoMotorista="matAutocomplete" [displayWith]="displayNome"  (optionSelected)="motoristaChange($event)">
+                        <mat-option *ngFor="let pessoa of pessoasMotorstaObserver | async" [value]="pessoa">
+                            {{pessoa.nome}}
+                        </mat-option>
+                    </mat-autocomplete>                    
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-30">
+                    <mat-label>Experiência com a BOM Transporte</mat-label>
+                    <mat-select [compareWith]="compareExperienciaBom" formControlName="experiencia">
+                        <mat-option *ngFor="let experiencia of experienciaList" [value]="experiencia">{{experienciaBomEnumMapping[experiencia]}}</mat-option>
+                    </mat-select>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </mat-card>
+    </form>
+    <br>
+    <mat-card class="margin-r-2">
+        <div style="display: flex; ">
+            <mat-card-header><h3>Memória de Cálculo</h3></mat-card-header>
+        </div>
+        <hr><br>
+        <div class="campos-formulario">            
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>Valor da Carga</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Valor da Carga" formControlName="valorCarga" readonly >
+            </mat-form-field>       
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>Valor Pedágio</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Pedagio" formControlName="pedagio" required>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>Complemento</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Complemento" formControlName="complementoCalculo"  required>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>Descontos</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Descontos" formControlName="descontos"  required>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>Frete</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Frete" formControlName="frete" readonly>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>FOB/CIF</mat-label>
+                <mat-select [compareWith]="compareFobCif" formControlName="fobCif" required>
+                    <mat-option *ngFor="let fobCif of fobCifsList" [value]="fobCif">{{fobCif}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>Pagam. Pedagio</mat-label>
+                <mat-select [compareWith]="comparePagamentoPedagio" formControlName="pagamentoPedagio" required>
+                    <mat-option *ngFor="let pagamentoPedagio of pagamentoPedagioList" [value]="pagamentoPedagio">{{pagamentoPedagio}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>NFSe</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="NFSe" formControlName="nfse" required>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>Frete Pago</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Frete Pago" formControlName="fretePago"  required>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>ISS</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="ISS" formControlName="iss" readonly>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>PIS/COFINS</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="PIS/COFINS" formControlName="pisCofins" readonly>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>ICMS</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="ICMS" formControlName="icms" readonly>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>Custos</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Custos" formControlName="custos" readonly>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>IR/CS</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="IR/CS" formControlName="irCs" readonly>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>Saldo</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Saldo" formControlName="saldo" readonly>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>Margem %</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Margem %" formControlName="margem" readonly>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-13">
+                <mat-label>Markup %</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Markup %" formControlName="markup" readonly>
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="margin-r-1 col-55">
+                <mat-label>Observações</mat-label>
+                <input matInput class="form-control" placeholder="Observações" formControlName="observacoes" >
+                <mat-error>
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+        </div>
+        
+        <mat-card-footer style="margin: 0.8em 0.8em 1.5em 0.8em">
+            <button class="button-cadastro margin-r-4" mat-flat-button color="primary" *ngIf="showSalvar()" (click)="salvar()"> Salvar</button>
+            <button class="button-secundary button-cadastro margin-r-4" *ngIf="showLimpar()" mat-flat-button (click)="resetForm(formCargaFilterT, formCaminhaoT)"> Limpar</button>
+            <button class="button-secundary button-cadastro margin-r-4" mat-flat-button (click)="voltar()"> Voltar</button>
+            <button class="button-secundary button-cadastro" *ngIf="formFrete.controls['id'].value" mat-flat-button (click)="imprimir()">Imprimir</button>
+        </mat-card-footer>
+    </mat-card>
+</form>

@@ -1,0 +1,83 @@
+.title {
+  width: 100%;
+  display: inline-flex;
+}
+
+h3 {
+  margin-block-start: 0em !important;
+  margin-block-end: 0em !important;
+}
+
+.mat-mdc-card-header{
+  padding: 10px 16px 0;
+}
+
+::ng-deep .mat-mdc-checkbox label {
+  font-size: 1.3em !important;
+  @media (max-width: 1600px) {
+    font-size: 1em !important;
+  }
+}
+
+.field-data{
+  margin-top: 1em;
+  @media (max-width: 1600px) {
+    width: 15%;
+  }
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  //display: none;
+}
+
+.campos-formulario {
+  margin-left: 1em; margin-bottom: 1em;
+}
+
+mat-form-field{
+  margin-bottom: 1em;
+}
+
+::ng-deep .mat-mdc-checkbox label{
+  font-size: 1.2em !important ;
+}
+
+
+::ng-deep .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control[disabled]:checked~.mdc-checkbox__background{
+  background-color: #2ec74f !important;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #ffffff !important;
+ // color: #000000 !important;
+}
+
+//bordar bottom input enabled
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+  border-bottom-color: #343434 !important;
+}
+
+//valor input enabled
+::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: #343434;
+}
+
+//bordar bottom input disabled
+::ng-deep .mdc-text-field--disabled .mdc-line-ripple::before {
+  border-bottom-color: #aeaeae !important;
+}
+
+//titulo input disabled
+::ng-deep .mdc-text-field--disabled .mdc-floating-label {
+  color: #959494 !important;
+}
+//valor input disabled
+::ng-deep .mdc-text-field--disabled .mdc-text-field__input {
+  color: #959494 !important;
+}
+//valor select disabled
+::ng-deep .mat-mdc-select-disabled .mat-mdc-select-value{
+  color: #959494 !important;
+
+}
+

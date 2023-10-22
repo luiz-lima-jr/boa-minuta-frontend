@@ -3,20 +3,12 @@
     width: 95%;
   }
   @media (min-width: 1001px) {
-    max-width: 60%;
+    max-width: 100%;
   }
   @media (min-width: 1601px) {
-    max-width: 40%;
+    max-width: 80%;
   }
   margin-left: 2%;
-}
-
-.div-botao-enviar {
-  align-self: center;
-}
-
-.botao-enviar {
-  float: right;
 }
 
 .title {
@@ -29,20 +21,6 @@ h2 mat-icon {
   line-height: 1.2;
 }
 
-h2 {
-  margin-block-start: 1%;
-  margin-block-end: 1%;
-}
-
-.title-cadastradas {
-  display: flex;
-}
-
-.botao-cadastrar{
-  float: right;
-  width: 15% !important;
-}
-
 .button-cadastro {  
   @media (max-width: 1000px) {    
     width: 30% !important;
@@ -53,19 +31,8 @@ h2 {
   align-self: center;
 }
 
-.tabela-filiais {
-  margin-bottom: 2em;
-}
 .mat-mdc-card-content{
   padding: 0;
-}
-.codigo-mili {
-  @media (max-width: 1000px) {    
-    width: 45% !important;
-  }
-  @media (min-width: 1001px) {    
-    width: 25% !important;
-  }
 }
 
 .mat-mdc-table{
