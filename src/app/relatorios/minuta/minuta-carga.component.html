@@ -1,4 +1,4 @@
-<mat-card id="print-section" class="margin-r-2 header-print" *ngIf="minuta">
+<mat-card id="print-section" class="margin-r-2" *ngIf="minuta">
     <div style="display: flex; "> 
     </div>
     <hr><br>
@@ -17,66 +17,45 @@
     
     <app-pedido-minuta-carga class="tabelaPedido"></app-pedido-minuta-carga>
 
-    <div class="linha descricao">     
-        <div class="margin-l-1 fonte linha-desc">
-            <div class="col-desc-1"> <b>Peso Bruto: </b> </div>
-            <div class="col-desc-2">{{minuta.pesoBruto | number : '1.2-2'}}</div>
-        </div>
-        <div class="margin-l-1 fonte  linha-desc">
-            <div class="col-desc-3"> <b>Total Volumes Carga: </b> </div>
-            <div class="col-desc-4">  {{minuta.totalVolumes}}</div>
-        </div>
-        <div class="margin-l-1 fonte linha-desc">
-            <div class="col-desc-5"> <b>Volumes Total Caminhão: </b></div>
-            <div class="col-desc-6"> {{minuta.volumeTotalCaminhao | number : '1.2-2'}} m3 </div>
-        </div>
+    <div>     
+        <section class="grid-desc grid-template-rows-1">
+            <div class="item col-desc-1"> <b>Peso Bruto: </b> </div>
+            <div class="item col-desc-2">{{minuta.pesoBruto | number : '1.2-2'}}</div>
+            <div class="item col-desc-3"> <b>Total Volumes Carga: </b> </div>
+            <div class="item col-desc-4">  {{minuta.totalVolumes}}</div>
+            <div class="item col-desc-5"> <b>Volumes Total Caminhão: </b></div>
+            <div class="item col-desc-6"> {{minuta.volumeTotalCaminhao | number : '1.2-2'}} m3 </div>
+        </section>
+        <section class="grid-desc grid-template-rows-1">
+            <div class="item col-desc-1"><b>Valor Total: </b></div>
+            <div class="item col-desc-2"> {{minuta.valorTotal | currency}}</div>
+            <div></div>
+            <div></div>
+            <div class="item col-desc-5"> <b>Vol Total da Carga: </b></div>
+            <div class="item col-desc-6"> {{minuta.volumeTotalCarga | number : '1.2-2'}} m3</div>
+        </section>
+        <section class="grid-desc grid-template-rows-1">
+            <div class="item col-desc-1"> <b>Data Fatura: </b></div>
+            <div class="item col-desc-2"> {{minuta.dataFatura | date: 'dd/MM/yyyy'}}</div>
+            <div class="item col-desc-3"> <b>Cidades: </b></div>
+            <div class="item col-desc-4"> {{minuta.cidades}}</div>
+        </section>
+        <section class="grid-desc grid-template-rows-1">
+            <div class="item col-desc-1"><b>ICMS Frete: </b></div>
+            <div class="item col-desc-2"> {{minuta.icmsFrete | currency}}</div>
+            <div class="item col-desc-3"> <b>Taxa Entrega: </b></div>
+            <div class="item col-desc-4"> {{minuta.taxaEntrega | currency}}</div>
+            <div class="item frete"> <b>Frete: </b></div>
+            <div class="item frete col-desc-6"> {{minuta.valorFrete | currency}}</div>
+        </section>
+        <section class="grid-desc grid-template-rows-1">
+            <div class="item col-desc-1"> <b>Pedagio: </b></div>
+            <div class="item col-desc-2"> {{minuta.pedagio | currency}}</div>
+        </section>
     </div>
-    <div class="linha">     
-        <div class="margin-l-1 fonte linha-desc">
-            <div class="col-desc-1"><b>Valor Total: </b></div>
-            <div class="col-desc-2"> {{minuta.valorTotal | currency}}</div>
-        </div>
-        <div class="margin-l-1 fonte linha-desc">
-            <div class="col-desc-3"></div>
-            <div class="col-desc-4"></div>
-        </div>
-        <div class="margin-l-1 fonte linha-desc">
-            <div class="col-desc-5"> <b>Vol Total da Carga: </b></div>
-            <div class="col-desc-6"> {{minuta.volumeTotalCarga | number : '1.2-2'}} m3</div>
-        </div>
-    </div>
-    <div class="linha">     
-        <div class="margin-l-1 fonte  linha-desc">
-            <div class="col-desc-1"> <b>Data Fatura: </b></div>
-            <div class="col-desc-2"> {{minuta.dataFatura | date: 'dd/MM/yyyy'}}</div>
-        </div>
-        <div class="margin-l-1 fonte  linha-desc">
-            <div class="col-desc-3"> <b>Cidades: </b></div>
-            <div class="col-desc-4"> {{minuta.cidades}}</div>
-        </div>
-    </div>
-    <div class="linha">     
-        <div class="margin-l-1 fonte linha-desc">
-            <div class="col-desc-1"><b>ICMS Frete: </b></div>
-            <div class="col-desc-2"> {{minuta.icmsFrete | currency}}</div>
-        </div>
-        <div class="margin-l-1 fonte linha-desc">
-            <div class="col-desc-3"> <b>Taxa Entrega: </b></div>
-            <div class="col-desc-4"> {{minuta.taxaEntrega | currency}}</div>
-        </div>
-    </div>
-    <div class="linha">     
-        <div class="margin-l-1 fonte linha-desc">
-            <div class="col-desc-1"> <b>Frete: </b></div>
-            <div class="col-desc-2"> {{minuta.valorFrete | currency}}</div>
-        </div>
-        <div class="margin-l-1 fonte linha-desc">
-            <div class="col-desc-3"> <b>Pedagio: </b></div>
-            <div class="col-desc-4"> {{minuta.pedagio | currency}}</div>
-        </div>
-    </div>
+
     <div class="linha observacoes">     
-        <div class="margin-l-1 fonte linha-desc"><b>Observações de Entrega: </b>{{minuta.observacoes}}</div>
+        <div class="margin-l-1 fonte2 linha-desc"><b>Observações de Entrega: </b>{{minuta.observacoes}}</div>
     </div>
 
     <app-clientes-minuta-carga></app-clientes-minuta-carga>

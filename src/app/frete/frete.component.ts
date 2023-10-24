@@ -77,7 +77,7 @@ export class FreteComponent implements OnInit {
 
   initFreteForm(){
     this.formFrete = this.formBuilder.group({
-      id: [],
+      id: [null],
       numeroCarga: ['', Validators.required],
       faturado: [null],
       filial: [null],
@@ -89,6 +89,7 @@ export class FreteComponent implements OnInit {
       municipioOrigem: [{value: null, disabled: true}],
       municipioDestino: [{value: null, disabled: true}],
       dataSaida: [{value: null, disabled: true}],
+      dataLiberacaoFaturamento: [{value: null, disabled: true}],
       valorCarga: [{value: null, disabled: true}, Validators.required],
       pedagio: [null],
       complementoCalculo: [null],
@@ -140,6 +141,7 @@ export class FreteComponent implements OnInit {
   }
 
   showSalvar(){
+    debugger
     const regraFaturista = this.isFaturista() && this.formFrete.controls['id'].value && !this.isFaturado;
     const regraFaturado = this.isFaturado && this.isAdm();
     const regraDemais = !this.isFaturado && !this.isFaturista();

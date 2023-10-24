@@ -35,17 +35,14 @@ mat-form-field{
 }
 
 .col-desc-1 {
-  width: 10em;
 }
 
 .col-desc-2 {
-  width: 5em;
-  text-align: end;
+  margin-right: 6em !important;
 }
 
 .col-desc-3{
   width: 15em;
-  text-align: end;
   
 }
 .col-desc-4{
@@ -62,16 +59,20 @@ mat-form-field{
 
 .col-desc-6{
   text-align: end;
-  width: 5em;
+  width: 7em;
   
 }
 
 .tabelaPedido{
   margin-top: 2em;
+  margin-bottom: 3em;
 }
 
 .fonte{
   font-size: 1.2em;
+}
+.fonte2{
+  font-size: 1.6em;
 }
 
 .observacoes {
@@ -105,3 +106,21 @@ mat-form-field{
   print-color-adjust: exact;
 }
 
+.frete {
+  font-size: 1.6em !important;
+}
+
+.grid-desc {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.grid-template-rows-1 {
+	grid-template-rows: 50px 10px -1px 15px;
+}
+
+.item {
+	margin: 5px;
+	font-size: 1.2em;
+  text-align: end !important;
+}

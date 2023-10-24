@@ -18,7 +18,7 @@ export class CargaComponent implements OnInit {
 
   formFilter: FormGroup;
   displayedColumns: string[] = ['numeroCarga', 'placa', 'valorCarga','resultado', 'responsavel', 
-    'faturado', 'destino', 'cliente', 'volumes', 'dataLimiteCarregamento', 'dataLiberacaoFaturamento', 
+    'faturado', 'municipioDestino', 'cliente', 'volumes', 'dataLimiteCarregamento', 'dataLiberacaoFaturamento', 
     'dataImpressaoMinuta', 'paletizado', 'observacoes'];
   cargas: Carga[] = [];
   filiais: Filial[] = [];
