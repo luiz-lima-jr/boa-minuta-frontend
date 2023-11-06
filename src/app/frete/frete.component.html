@@ -10,7 +10,7 @@
         </div>
         <hr><br>
         <div class="campos-formulario">
-            <mat-form-field class="margin-r-1 col-20">
+            <mat-form-field class="margin-r-1 col-15">
                 <mat-label>Responsável Operacional</mat-label>
                 <input type="text" matInput formControlName="responsavelOperacional" [matAutocomplete]="autoResponsavel">
                 <mat-autocomplete #autoResponsavel="matAutocomplete" [displayWith]="displayNomeUsuario">
@@ -19,21 +19,21 @@
                     </mat-option>
                 </mat-autocomplete>                
             </mat-form-field>  
-            <mat-form-field class="margin-r-1 col-9">
+            <mat-form-field class="margin-r-1 col-5">
                 <mat-label>m³</mat-label>
                 <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="m³" formControlName="m3" readonly>
                 <mat-error>
                     Campo obrigatório
                 </mat-error>
             </mat-form-field>  
-            <mat-form-field class="margin-r-1 col-15">
+            <mat-form-field class="margin-r-1 col-6">
                 <mat-label>Entrega(s)</mat-label>
                 <input type="number" matInput class="form-control" placeholder="Entregas" formControlName="entregas" readonly>
                 <mat-error>
                     Campo obrigatório
                 </mat-error>
             </mat-form-field>
-            <mat-form-field class="margin-r-1 col-25">
+            <mat-form-field class="margin-r-1 col-15">
                 <mat-label>Complemento</mat-label>
                 <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Complemento" formControlName="complemento" readonly>
                 <mat-error>
@@ -45,7 +45,7 @@
                 <input matInput [matDatepicker]="pickerFim" formControlName="dataSaida" readonly>
                 <mat-datepicker #pickerFim readonly></mat-datepicker>
             </mat-form-field>
-            <mat-form-field class="margin-r-1 col-30">
+            <mat-form-field class="margin-r-1 col-15">
                 <mat-label>Origem</mat-label>
                 <input type="text" matInput class="form-control" placeholder="Origem" formControlName="municipioOrigem" [matAutocomplete]="autoOrigem" readonly>
                 <mat-autocomplete #autoOrigem="matAutocomplete" [displayWith]="displayMunicipioOrigem"></mat-autocomplete>   
@@ -53,7 +53,7 @@
                     Campo obrigatório
                 </mat-error>
             </mat-form-field> 
-            <mat-form-field class="margin-r-1 col-30">
+            <mat-form-field class="margin-r-1 col-15">
                 <mat-label>Destino</mat-label>
                 <input type="text" matInput class="form-control" placeholder="Destino" formControlName="municipioDestino" [matAutocomplete]="autoDestino" readonly>
                 <mat-autocomplete #autoDestino="matAutocomplete" [displayWith]="displayMunicipio"></mat-autocomplete>   
@@ -107,7 +107,7 @@
                         Campo obrigatório
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="margin-r-1 col-30">
+                <mat-form-field class="margin-r-1 col-20">
                     <mat-label>Experiência com a BOM Transporte</mat-label>
                     <mat-select [compareWith]="compareExperienciaBom" formControlName="experiencia">
                         <mat-option *ngFor="let experiencia of experienciaList" [value]="experiencia">{{experienciaBomEnumMapping[experiencia]}}</mat-option>
@@ -125,134 +125,140 @@
             <mat-card-header><h3>Memória de Cálculo</h3></mat-card-header>
         </div>
         <hr><br>
-        <div class="campos-formulario">            
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>Valor da Carga</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Valor da Carga" formControlName="valorCarga" readonly >
-            </mat-form-field>       
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>Valor Pedágio</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Pedagio" formControlName="pedagio" required>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>Complemento</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Complemento" formControlName="complementoCalculo"  required>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>Descontos</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Descontos" formControlName="descontos"  required>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>Frete</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Frete" formControlName="frete" readonly>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>FOB/CIF</mat-label>
-                <mat-select [compareWith]="compareFobCif" formControlName="fobCif" required>
-                    <mat-option *ngFor="let fobCif of fobCifsList" [value]="fobCif">{{fobCif}}</mat-option>
-                </mat-select>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>Pagam. Pedagio</mat-label>
-                <mat-select [compareWith]="comparePagamentoPedagio" formControlName="pagamentoPedagio" required>
-                    <mat-option *ngFor="let pagamentoPedagio of pagamentoPedagioList" [value]="pagamentoPedagio">{{pagamentoPedagio}}</mat-option>
-                </mat-select>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>NFSe</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="NFSe" formControlName="nfse" required>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>Frete Pago</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Frete Pago" formControlName="fretePago"  required>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>ISS</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="ISS" formControlName="iss" readonly>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>PIS/COFINS</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="PIS/COFINS" formControlName="pisCofins" readonly>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>ICMS</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="ICMS" formControlName="icms" readonly>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>Custos</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Custos" formControlName="custos" readonly>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>IR/CS</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="IR/CS" formControlName="irCs" readonly>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>Saldo</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Saldo" formControlName="saldo" readonly>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>Margem %</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Margem %" formControlName="margem" readonly>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-13">
-                <mat-label>Markup %</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Markup %" formControlName="markup" readonly>
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="margin-r-1 col-55">
-                <mat-label>Observações</mat-label>
-                <input matInput class="form-control" placeholder="Observações" formControlName="observacoes" >
-                <mat-error>
-                    Campo obrigatório
-                </mat-error>
-            </mat-form-field>
+        <div class="campos-formulario">
+            <div>    
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>Valor da Carga</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Valor da Carga" formControlName="valorCarga" readonly >
+                </mat-form-field>       
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>Valor Pedágio</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Pedagio" formControlName="pedagio" required>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>Complemento</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Complemento" formControlName="complementoCalculo"  required>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>Descontos</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Descontos" formControlName="descontos"  required>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>Frete</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Frete" formControlName="frete" readonly>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>FOB/CIF</mat-label>
+                    <mat-select [compareWith]="compareFobCif" formControlName="fobCif" required>
+                        <mat-option *ngFor="let fobCif of fobCifsList" [value]="fobCif">{{fobCif}}</mat-option>
+                    </mat-select>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-10">
+                    <mat-label>Pagam. Pedagio</mat-label>
+                    <mat-select [compareWith]="comparePagamentoPedagio" formControlName="pagamentoPedagio" required>
+                        <mat-option *ngFor="let pagamentoPedagio of pagamentoPedagioList" [value]="pagamentoPedagio">{{pagamentoPedagio}}</mat-option>
+                    </mat-select>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>NFSe</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="NFSe" formControlName="nfse" required>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+            </div>   
+            <div>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>Frete Pago</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Frete Pago" formControlName="fretePago"  required>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>ISS</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="ISS" formControlName="iss" readonly>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>PIS/COFINS</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="PIS/COFINS" formControlName="pisCofins" readonly>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>ICMS</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="ICMS" formControlName="icms" readonly>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>Custos</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Custos" formControlName="custos" readonly>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>IR/CS</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="IR/CS" formControlName="irCs" readonly>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-10">
+                    <mat-label>Saldo</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Saldo" formControlName="saldo" readonly>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+            </div>     
+            <div>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>Margem %</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Margem %" formControlName="margem" readonly>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-8">
+                    <mat-label>Markup %</mat-label>
+                    <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Markup %" formControlName="markup" readonly>
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="margin-r-1 col-26">
+                    <mat-label>Observações</mat-label>
+                    <input matInput class="form-control" placeholder="Observações" formControlName="observacoes" >
+                    <mat-error>
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+            </div>
         </div>
         
         <mat-card-footer style="margin: 0.8em 0.8em 1.5em 0.8em">

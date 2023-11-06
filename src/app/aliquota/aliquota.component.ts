@@ -96,12 +96,15 @@ export class AliquotaComponent implements OnInit {
   salvarAliquota(ngForm: any){
     if(this.formAliquota.valid) {
       let aliquota = this.formAliquota.getRawValue(); 
-      this.aliquotaService.salvar(aliquota).subscribe(
-        () => {
+      this.aliquotaService.salvar(aliquota).subscribe({
+        next: () => {
           this.buscarAliquotas();
           this.resetForm(ngForm)
-        } 
-      );
+        }, 
+        error: error => {
+          this.alertService.error(error.error.detail) 
+        }
+    });
     }
   }
 

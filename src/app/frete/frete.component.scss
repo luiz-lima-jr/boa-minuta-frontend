@@ -21,6 +21,7 @@ h3 {
 
 .field-data{
   margin-top: 1em;
+  width: 10%;
   @media (max-width: 1600px) {
     width: 15%;
   }
@@ -32,10 +33,6 @@ h3 {
 
 .campos-formulario {
   margin-left: 1em; margin-bottom: 1em;
-}
-
-mat-form-field{
-  margin-bottom: 1em;
 }
 
 ::ng-deep .mat-mdc-checkbox label{

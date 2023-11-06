@@ -38,7 +38,7 @@ export class FreteComponent implements OnInit {
   //experienciaList: ExperienciaBomEnum[] = [ExperienciaBomEnum.NOVO_PARA_CARREGAMENTO, ExperienciaBomEnum.CARREGA_SEMPRE, ExperienciaBomEnum.RETORNANDO];
   experienciaList = Object.values(ExperienciaBomEnum);
   fobCifsList: FobCifEnum[] = Object.values(FobCifEnum);
-  pagamentoPedagioList: PagamentoPedagioEnum[] = [PagamentoPedagioEnum.TAG, PagamentoPedagioEnum.CARTAO];
+  pagamentoPedagioList: PagamentoPedagioEnum[] = [PagamentoPedagioEnum.TAG, PagamentoPedagioEnum.CARTAO, PagamentoPedagioEnum.OUTRO];
   caminhoesObserver: Observable<Caminhao[]>;
   caminhoesList: Caminhao[];
   pessoasTransportadorObserver: Observable<PessoaTransporte[]>;
@@ -141,7 +141,6 @@ export class FreteComponent implements OnInit {
   }
 
   showSalvar(){
-    debugger
     const regraFaturista = this.isFaturista() && this.formFrete.controls['id'].value && !this.isFaturado;
     const regraFaturado = this.isFaturado && this.isAdm();
     const regraDemais = !this.isFaturado && !this.isFaturista();
