@@ -336,6 +336,15 @@ export class FreteComponent implements OnInit {
     this.formFrete.controls['pisCofins'].setValue((complementoCalculo + valorCarga) * aliquotaPisCofins);    
   }
 
+  calcularCustos(){
+    const valorCarga = this.formFrete.controls['valorCarga'].value;
+    const complementoCalculo = this.formFrete.controls['complementoCalculo'].value;
+    const aliquotaCustos = this.formFrete.controls['aliquotaCustos'].value / 100;
+
+    const custos = (valorCarga + complementoCalculo) * aliquotaCustos;
+    this.formFrete.controls['custos'].setValue(custos);
+  }
+
   calcularIcms(){
     const valorCarga = this.formFrete.controls['valorCarga'].value;
     const nfse = this.formFrete.controls['nfse'].value;
@@ -345,15 +354,6 @@ export class FreteComponent implements OnInit {
 
     const icms = (valorCarga - nfse - iss + complementoCalculo) * aliquotaIcms;
     this.formFrete.controls['icms'].setValue(icms);
-  }
-
-  calcularCustos(){
-    const valorCarga = this.formFrete.controls['valorCarga'].value;
-    const complementoCalculo = this.formFrete.controls['complementoCalculo'].value;
-    const aliquotaCustos = this.formFrete.controls['aliquotaCustos'].value / 100;
-
-    const custos = (valorCarga + complementoCalculo) * aliquotaCustos;
-    this.formFrete.controls['custos'].setValue(custos);
   }
 
   calcularIrcs(){

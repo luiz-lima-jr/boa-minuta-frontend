@@ -28,11 +28,6 @@ export class CargaService {
     return this.httpClient.get<Carga>(this.URI_AUTH+"/detalhe-carga", {params: httParams});
   }
 
-  public getMinuta(idFrete: number): Observable<MinutaCarga> {
-
-    return this.httpClient.get<MinutaCarga>(this.URI_AUTH+"/minuta/"+idFrete);
-  }
-
   public salvar(frete: Frete) {
     return this.httpClient.post(this.URI_AUTH, frete);
   }

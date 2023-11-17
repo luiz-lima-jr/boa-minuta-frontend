@@ -1,5 +1,5 @@
 import { Location } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MinutaCarga } from "src/app/models/minuta-carga.model";
@@ -13,7 +13,7 @@ import { CargaService } from "src/app/services/carga.service";
 })
 export class PedidoMinutaCargaComponent implements OnInit {  
 
-  minuta: MinutaCarga;
+  @Input() minuta: MinutaCarga;
   idFrete: number;
   displayedColumnsPedidos: string[] = ['descricaoPedido', 'volume', 'qtd','frete', 'valorTotal', 'pesoBruto'];
 
@@ -21,14 +21,6 @@ export class PedidoMinutaCargaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => { 
-      this.idFrete = params['idFrete'];
-    })
-    this.buscarMinuta();
-  }
-
-  buscarMinuta(){
-    this.cargaService.getMinuta(this.idFrete).subscribe(resp => this.minuta = resp);
   }
 
   voltar(){

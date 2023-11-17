@@ -1,10 +1,8 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { MinutaCarga } from "src/app/models/minuta-carga.model";
-import { AlertService } from "src/app/services/alert.service";
-import { CargaService } from "src/app/services/carga.service";
+import { MinutaService } from "src/app/services/relatorio/minuta.service";
 
 
 @Component({
@@ -18,7 +16,7 @@ export class MinutaCargaComponent implements OnInit {
   idFrete: number;
   displayedColumnsPedidos: string[] = ['descricaoPedido', 'volume', 'qtd','frete', 'valorTotal', 'pesoBruto'];
 
-  constructor(private activatedRoute: ActivatedRoute,  private location: Location, private cargaService: CargaService, private alertService: AlertService) {
+  constructor(private activatedRoute: ActivatedRoute,  private location: Location, private cargaService: MinutaService ) {
   }
 
   ngOnInit(): void {

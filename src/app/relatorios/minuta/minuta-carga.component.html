@@ -15,7 +15,7 @@
         <div class="margin-l-1 coluna-titulo-1 fonte"><b>Motorista: </b>{{minuta.motorista}}</div>
     </div>
     
-    <app-pedido-minuta-carga class="tabelaPedido"></app-pedido-minuta-carga>
+    <app-pedido-minuta-carga [minuta]="minuta" class="tabelaPedido"></app-pedido-minuta-carga>
 
     <div>     
         <section class="grid-desc grid-template-rows-1">
@@ -58,7 +58,7 @@
         <div class="margin-l-1 fonte2 linha-desc"><b>Observações de Entrega: </b>{{minuta.observacoes}}</div>
     </div>
 
-    <app-clientes-minuta-carga></app-clientes-minuta-carga>
+    <app-clientes-minuta-carga [minuta]="minuta"></app-clientes-minuta-carga>
   
     <mat-card-footer style="margin: 0.8em 0.8em 1.5em 0.8em">
         <button class="button-secundary button-cadastro margin-r-4" mat-flat-button (click)="voltar()"> Voltar</button>
