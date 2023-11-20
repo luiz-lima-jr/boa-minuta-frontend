@@ -206,7 +206,9 @@ export class FreteComponent implements OnInit {
     const pedagio = this.formFrete.controls['pedagio'].value;
     const complementoCalculo = this.formFrete.controls['complementoCalculo'].value;
     this.formFrete.controls['frete'].setValue(valorCarga + complementoCalculo - pedagio);
+    this.calcularMarkup();
   }
+
   calcularCampos(){
     this.calcularPisCofins();
     this.calcularIcms();
@@ -241,6 +243,7 @@ export class FreteComponent implements OnInit {
     this.complementoCalculoChange();
     this.setValorFreteChange();
     this.fretePagoChange();
+    this.pedagioChange();
   }
 
   initTransportadorObserver() {
@@ -327,6 +330,7 @@ export class FreteComponent implements OnInit {
     const valorNfse = this.formFrete.controls['nfse'].value;
     const valorIss = this.formFrete.controls['aliquotaIss'].value / 100;
     this.formFrete.controls['iss'].setValue(valorNfse * valorIss);
+    this.calcularIcms();
   }
 
   calcularPisCofins(){
@@ -334,6 +338,7 @@ export class FreteComponent implements OnInit {
     const valorCarga = this.formFrete.controls['valorCarga'].value ;
     const complementoCalculo = this.formFrete.controls['complementoCalculo'].value ;
     this.formFrete.controls['pisCofins'].setValue((complementoCalculo + valorCarga) * aliquotaPisCofins);    
+    this.calcularSaldo();
   }
 
   calcularCustos(){
@@ -343,6 +348,7 @@ export class FreteComponent implements OnInit {
 
     const custos = (valorCarga + complementoCalculo) * aliquotaCustos;
     this.formFrete.controls['custos'].setValue(custos);
+    this.calcularSaldo();
   }
 
   calcularIcms(){
@@ -354,6 +360,7 @@ export class FreteComponent implements OnInit {
 
     const icms = (valorCarga - nfse - iss + complementoCalculo) * aliquotaIcms;
     this.formFrete.controls['icms'].setValue(icms);
+    this.calcularSaldo();
   }
 
   calcularIrcs(){
@@ -362,6 +369,7 @@ export class FreteComponent implements OnInit {
     const aliquotaIrcs = this.formFrete.controls['aliquotaIrcs'].value / 100;
     const irCs = (valorCarga + complementoCalculo) * aliquotaIrcs;
     this.formFrete.controls['irCs'].setValue(irCs);
+    this.calcularSaldo();
   }
 
   calcularSaldo(){
@@ -375,6 +383,7 @@ export class FreteComponent implements OnInit {
     const irCs = this.formFrete.controls['irCs'].value;
     const saldo = valorCarga + complementoCalculo - fretePago + pedagio + pisCofins + icms + custos + irCs;
     this.formFrete.controls['saldo'].setValue(saldo);
+    this.calcularMargem();
   }
 
   calcularMargem() {
