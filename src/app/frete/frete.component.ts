@@ -373,7 +373,7 @@ export class FreteComponent implements OnInit {
     const icms = this.formFrete.controls['icms'].value;
     const custos = this.formFrete.controls['custos'].value;
     const irCs = this.formFrete.controls['irCs'].value;
-    const saldo = valorCarga + complementoCalculo - (fretePago + pedagio + pisCofins + icms + custos + irCs);
+    const saldo = valorCarga + complementoCalculo - fretePago + pedagio + pisCofins + icms + custos + irCs;
     this.formFrete.controls['saldo'].setValue(saldo);
   }
 
@@ -383,7 +383,7 @@ export class FreteComponent implements OnInit {
     const complementoCalculo = this.formFrete.controls['complementoCalculo'].value;
     const pisCofins = this.formFrete.controls['pisCofins'].value;
     const icms = this.formFrete.controls['icms'].value;
-    const margem = saldo / (valorCarga + complementoCalculo - pisCofins - icms);
+    const margem = saldo / (valorCarga + complementoCalculo - pisCofins - icms) * 100;
     this.formFrete.controls['margem'].setValue(margem);
   }
 
@@ -439,6 +439,7 @@ export class FreteComponent implements OnInit {
         this.isFaturado = result.faturado;
         this.formFrete.patchValue(result);
         this.validarDesabilitarCampos();
+        this.calcularCampos();
       },
       error: error => this.alertService.error(error.error.detail)
     })
