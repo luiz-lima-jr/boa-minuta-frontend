@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@angular/core';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { AuthService } from 'src/app/auth/auth.service';
 const STRING_NO_LOADING = 'noloading';
@@ -10,7 +9,6 @@ const STRING_NO_LOADING = 'noloading';
 @Injectable()
 export class GiftHttpInterceptor implements HttpInterceptor {
   constructor(@Inject('BASE_API_URL') private baseUrl: string, 
-              private cookieService: CookieService,
               private _authService: AuthService,
               private loadingService: LoadingService) {}
 
@@ -49,7 +47,7 @@ export class GiftHttpInterceptor implements HttpInterceptor {
   }
 
   private setToken(req: HttpRequest<any>) : HttpHeaders{
-    return req.headers.set('Authorization', 'Bearer ' + this.cookieService.get('sessionToken'));
+    return req.headers.set('Authorization', 'Bearer ' + localStorage.getItem('sessionToken'));
   }
 
   private handleError = (errorResponse: HttpErrorResponse) => {

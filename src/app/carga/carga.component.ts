@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { Carga } from '../models/carga.model';
 import { CargaService } from '../services/carga.service';
 import { compareFilial } from '../util/compares';
-import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({

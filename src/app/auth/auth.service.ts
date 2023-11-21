@@ -1,7 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { map, Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { AuthToken } from './auth-token.model';
 import { SessionProfile } from '../models/session-profile.model';
@@ -15,7 +14,7 @@ export class AuthService implements OnDestroy {
   private authSub: BehaviorSubject<boolean>;
   private pathsExterno = ['/recuperar-senha', '/nova-senha']
 
-  constructor(private _router: Router, private httpClient: HttpClient, private cookieService: CookieService) {
+  constructor(private _router: Router, private httpClient: HttpClient) {
     this.authSub = new BehaviorSubject<boolean>(false);
   }
 
@@ -38,12 +37,12 @@ export class AuthService implements OnDestroy {
 
   private createSession(transaction: AuthToken): void {
     this.authSub.next(true);
-    this.cookieService.set('sessionToken', transaction.sessionToken);
-    this.cookieService.set('sessionProfile', JSON.stringify(transaction.sessionProfile));
+    localStorage.setItem('sessionToken', transaction.sessionToken);
+    localStorage.setItem('sessionProfile', JSON.stringify(transaction.sessionProfile));
   }
   
   private async existsCookieSession() : Promise<boolean>{
-    return this.cookieService.check('sessionToken');
+    return localStorage.getItem('sessionToken') !== null;
 }
 
   get isAuthenticated(): Observable<boolean> {
@@ -65,13 +64,13 @@ export class AuthService implements OnDestroy {
   }
 
   getSessionProfile() : SessionProfile | undefined {
-    const sessionStorage = this.cookieService.get('sessionProfile')
+    const sessionStorage = localStorage.getItem('sessionProfile')
     return sessionStorage && sessionStorage !== "undefined" ? JSON.parse(sessionStorage) : undefined
   }
 
   removeSession(){
-    this.cookieService.delete('sessionToken', '/');
-    this.cookieService.delete('sessionProfile', '/');
+    localStorage.removeItem('sessionToken');
+    localStorage.removeItem('sessionProfile');
     this.authSub.next(false);
     this.authSub.complete();
   }
