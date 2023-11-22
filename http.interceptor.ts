@@ -63,7 +63,7 @@ export class GiftHttpInterceptor implements HttpInterceptor {
         }
         return throwError(errorResponse);
       }
-      if ( this._authService.isAuthenticatedValue() && errorResponse.status === 401) {
+      if ( this._authService.isAuthenticatedValue() && (errorResponse.status === 403 || errorResponse.status === 401)) {
         this.loadingService.show()
         this._authService.removeSession()
         window.location.reload();

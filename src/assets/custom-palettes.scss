@@ -1,4 +1,4 @@
-$dark-primary-text: rgba(rgb(243, 0, 0), 0.87);
+$dark-primary-text: rgba(rgb(1, 103, 151), 0.87);
 $light-primary-text: white;
 
 $wfs-blue-palette: (
@@ -11,7 +11,7 @@ $wfs-blue-palette: (
   600: #486d90,
   700: #3f6285,
   800: #36587b,
-  900: #be353f,
+  900: #005683,
   A100: #add1ff,
   A200: #2ec74f,
   A400: #4798ff,
@@ -25,8 +25,6 @@ $wfs-blue-palette: (
     500: $light-primary-text,
     600: $light-primary-text,
     700: $light-primary-text,
-    800: $light-primary-text,
-    900: $light-primary-text,
     A100: $dark-primary-text,
     A200: $dark-primary-text,
     A400: $dark-primary-text,

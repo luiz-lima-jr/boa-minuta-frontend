@@ -1,3 +1,6 @@
+@import '../assets/colors.scss';
+
+
 .toolbar-item-spacer {
     flex: 1 1 auto;
 }
@@ -28,7 +31,7 @@ mat-toolbar {
     @media (min-width: 1601px) {
         height: 7%;
     }
-    background-color: white;
+    background-color: white !important;
     border-bottom-style: groove;
     justify-content: center;
 }
@@ -77,7 +80,7 @@ mat-toolbar {
 }
 
 .botao-login-toolbar {
-    color: rgb(132, 25, 28);
+   color: $primary-color !important;
 }
 
 .mat-expansion-panel-header:not([aria-disabled=true]) {
@@ -89,7 +92,7 @@ mat-toolbar {
 }
 
 .background-login {
-    background-image: url('file:/src/assets/img/caminhao.png');
+    background-image: url('file:/src/assets/img/caminhaoAzul.jpg');
     background-position: 20% 70%;
     background-repeat: no-repeat;
     background-attachment: fixed;

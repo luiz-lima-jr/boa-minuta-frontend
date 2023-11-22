@@ -61,6 +61,12 @@ export class AppComponent implements OnInit, OnDestroy {
           action: 'minuta/:idFrete',
           funcoes: [],
           icon: 'assignment',
+        },
+        {
+          label: 'Margem Operacional',
+          action: 'margem-operacional',
+          funcoes: ['ADMINISTRADOR'],
+          icon: 'assignment',
         }
       ]
     }
@@ -99,6 +105,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   exibirModal(){
     this.showModalPerfil = !this.showModalPerfil;
+  }
+
+  closeMenu(sidenav: any){
+    if(sidenav._opened) {
+      sidenav.toggle();
+    }
   }
 }
 

@@ -1,7 +1,9 @@
 <mat-toolbar *ngIf="isAuthenticated" fxLayout="row">
   <ng-container >
-    <div class="div-logo">
-      <img class="logo" src="../assets/img/logo.jpg"/>
+    <div class="div-logo" (click)="closeMenu(sidenav)">
+      <a  routerLink="/">
+        <img class="logo" src="../assets/img/logo.jpg"/>
+      </a>
     </div>
     <button class="divMenu" mat-icon-button (click)="sidenav.toggle()" matTooltip="Menu">
         <mat-icon>menu</mat-icon>
@@ -13,13 +15,13 @@
   </ng-container>
 </mat-toolbar>
 
-<div class="corpo-modal" (click)="esconderModal()" *ngIf="showModalPerfil">
+<div class="corpo-modal" (click)="esconderModal(); closeMenu(sidenav)" *ngIf="showModalPerfil">
   <mat-nav-list>
     <mat-list-item routerLink="perfil">
-      <mat-icon class="icon-vermelho icon-menu">person</mat-icon><span>Meu Perfil</span>
+      <mat-icon class="icon-primary-color icon-menu">person</mat-icon><span>Meu Perfil</span>
     </mat-list-item>
     <mat-list-item (click)="logout()">
-      <mat-icon class="icon-vermelho icon-menu" >exit_to_app</mat-icon><span>Sair</span>
+      <mat-icon class="icon-primary-color icon-menu" >exit_to_app</mat-icon><span>Sair</span>
     </mat-list-item>
   </mat-nav-list>
 </div>
@@ -29,7 +31,7 @@
     <mat-nav-list>
       <ng-container *ngFor="let menu of menus">
         <mat-list-item *ngIf="!menu.itens && exibirMenu(menu.funcoes)" (click)="sidenav.toggle()" routerLink="{{menu.action}}">
-          <mat-icon class="icon-vermelho icon-menu">{{menu.icon}}</mat-icon><span>{{menu.label}}</span>
+          <mat-icon class="icon-primary-color icon-menu">{{menu.icon}}</mat-icon><span>{{menu.label}}</span>
         </mat-list-item>
         <mat-expansion-panel *ngIf="menu.itens && exibirMenu(menu.funcoes)" [class.mat-elevation-z0]="true">
           <mat-expansion-panel-header>
@@ -37,7 +39,7 @@
           </mat-expansion-panel-header>
           <mat-nav-list *ngFor="let item of menu.itens">
             <a mat-list-item (click)="sidenav.toggle()" routerLink="{{item.action}}">
-              <mat-icon class="icon-vermelho icon-menu">{{item.icon}}</mat-icon><span>{{item.label}}</span>
+              <mat-icon class="icon-primary-color icon-menu">{{item.icon}}</mat-icon><span>{{item.label}}</span>
             </a>
           </mat-nav-list>
         </mat-expansion-panel>
