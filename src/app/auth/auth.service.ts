@@ -21,6 +21,8 @@ export class AuthService implements OnDestroy {
   ngOnDestroy(): void {
     this.removeSession()
   }
+
+  
   public login(email: string, senha: string): Observable<void> {
     return this.httpClient.post<AuthToken>(this.URI_AUTH, {email, senha})
     .pipe(

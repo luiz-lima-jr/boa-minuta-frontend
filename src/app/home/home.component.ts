@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from '../services/usuario.service';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private usuarioService: UsuarioService, private loading: LoadingService) { }
 
   ngOnInit(): void {
+    this.loading.blockShow();
+    this.usuarioService.validarSessao().subscribe({
+      complete: () => this.loading.blockShow()
+    });
   }
 
 }

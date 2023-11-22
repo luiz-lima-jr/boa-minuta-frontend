@@ -4,12 +4,14 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor
 import { Observable, throwError } from 'rxjs';
 import { LoadingService } from 'src/app/services/loading.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { AlertService } from 'src/app/services/alert.service';
 const STRING_NO_LOADING = 'noloading';
 
 @Injectable()
 export class GiftHttpInterceptor implements HttpInterceptor {
   constructor(@Inject('BASE_API_URL') private baseUrl: string, 
               private _authService: AuthService,
+              private messages: AlertService,
               private loadingService: LoadingService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -66,7 +68,8 @@ export class GiftHttpInterceptor implements HttpInterceptor {
       if ( this._authService.isAuthenticatedValue() && (errorResponse.status === 403 || errorResponse.status === 401)) {
         this.loadingService.show()
         this._authService.removeSession()
-        window.location.reload();
+        this.messages.warning("Sessão expirada");
+        //window.location.reload();
       }
 
       if (errorResponse.status === 400) {

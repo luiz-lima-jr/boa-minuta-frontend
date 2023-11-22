@@ -15,6 +15,10 @@ export class UsuarioService {
   constructor(private httpClient: HttpClient) {
   }
 
+  validarSessao(){
+    return this.httpClient.get<any>(this.URI_AUTH);
+  }
+
   getAll(): Observable<Usuario[]> {
     return this.httpClient.get<Usuario[]>(this.URI_AUTH);
   }
