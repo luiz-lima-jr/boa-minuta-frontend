@@ -116,13 +116,9 @@ export class FreteComponent implements OnInit {
     });
   }
 
-  isFaturista(){
-    return isFaturista(this.session);
-  }
+  isFaturista = () => isFaturista(this.session);
 
-  isAdm(){
-    return isAdm(this.session);
-  }
+  isAdm = () => isAdm(this.session);
 
   validarDesabilitarCampos() {
     if(this.isAdm()){
@@ -147,9 +143,7 @@ export class FreteComponent implements OnInit {
     return regraFaturista || regraFaturado || regraDemais;
   }
 
-  showLimpar(){
-    return (!this.isFaturista() && !this.isFaturado) || this.isAdm();
-  }
+  showLimpar = () => (!this.isFaturista() && !this.isFaturado) || this.isAdm();
 
   salvar() {
     this.formCaminhao.markAllAsTouched();
@@ -318,13 +312,9 @@ export class FreteComponent implements OnInit {
   }
 
 
-  complementoCalculoChange(){
-    this.formFrete.controls['complementoCalculo'].valueChanges.subscribe(() => this.calcularCampos());
-  }
+  complementoCalculoChange = () => this.formFrete.controls['complementoCalculo'].valueChanges.subscribe(() => this.calcularCampos());
 
-  fretePagoChange(){
-    this.formFrete.controls['fretePago'].valueChanges.subscribe(() => this.calcularCampos());
-  }
+  fretePagoChange = () =>  this.formFrete.controls['fretePago'].valueChanges.subscribe(() => this.calcularCampos());
 
   calcularIss(){
     const valorNfse = this.formFrete.controls['nfse'].value;
@@ -404,21 +394,13 @@ export class FreteComponent implements OnInit {
     this.formFrete.controls['markup'].setValue(markup);
   }
   
-  displayNome(pessoa: PessoaTransporte): string {
-    return pessoa && pessoa.nome ? pessoa.nome : '';
-  }
+  displayNome = (pessoa: PessoaTransporte): string => pessoa && pessoa.nome ? pessoa.nome : '';
 
-  displayMunicipio(municipio: Municipio): string {
-    return municipio ? `${municipio.estado.sigla} - ${municipio.nome}` : '';
-  }
+  displayMunicipio = (municipio: Municipio): string => municipio ? `${municipio.estado.sigla} - ${municipio.nome}` : '';
 
-  displayMunicipioOrigem(municipio: Filial): string {
-    return municipio ? `${municipio.nome}` : '';
-  }
+  displayMunicipioOrigem = (municipio: Filial): string => municipio ? `${municipio.nome}` : '';
 
-  displayNomeUsuario(usuario: Usuario): string {
-    return usuario && usuario.nome ? usuario.nome : '';
-  }
+  displayNomeUsuario =(usuario: Usuario): string => usuario && usuario.nome ? usuario.nome : '';
 
   resetForm(ngFormFrete: any, ngFormCaminhao: any){
     ngFormFrete.resetForm();
@@ -426,17 +408,11 @@ export class FreteComponent implements OnInit {
     ngFormFrete.markAsUntouched();
   }
 
-  compareExperienciaBom(f1: ExperienciaBomEnum, f2: ExperienciaBomEnum){
-    return compareExperienciaBom(f1, f2)
-  }
+  compareExperienciaBom = (f1: ExperienciaBomEnum, f2: ExperienciaBomEnum) => compareExperienciaBom(f1, f2)
 
-  compareFobCif(f1: FobCifEnum, f2: FobCifEnum){
-    return compareFobCif(f1, f2)
-  }
+  compareFobCif = (f1: FobCifEnum, f2: FobCifEnum) => compareFobCif(f1, f2);
 
-  comparePagamentoPedagio(f1: PagamentoPedagioEnum, f2: PagamentoPedagioEnum){
-    return comparePagamentoPedagio(f1, f2)
-  }
+  comparePagamentoPedagio = (f1: PagamentoPedagioEnum, f2: PagamentoPedagioEnum) => comparePagamentoPedagio(f1, f2);
 
   getDetalheCarga(){
     this.cargaService.getReceberDetalheCarga(this.numeroCarga, this.idFilial).subscribe({
@@ -477,12 +453,8 @@ export class FreteComponent implements OnInit {
     return responsavel ? ': ' + responsavel.nome : '';
   }
 
-  voltar(){
-    this.router.navigateByUrl('/carga');
-  }  
+  voltar = () => this.router.navigateByUrl('/carga');
 
-  imprimir(){
-    this.router.navigateByUrl('/minuta/'+this.formFrete.controls['id'].value);
-  }  
+  imprimir = () => this.router.navigateByUrl('/minuta/'+this.formFrete.controls['id'].value);
   
 }

@@ -26,13 +26,9 @@ export class FilialComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    this.iniciarFiliais();
-  }
+  ngOnInit = () => this.iniciarFiliais();
 
-  buscarFiliais(){
-    this.filialService.getAll().subscribe(f => this.filiais = f);
-  }
+  buscarFiliais = () => this.filialService.getAll().subscribe(f => this.filiais = f);
 
   iniciarFiliais(){
     this.initFormFilliais();
@@ -53,9 +49,7 @@ export class FilialComponent implements OnInit {
     ngForm.markAsUntouched();
   }
 
-  editarFilial(filial: Filial){
-    this.formFilial.patchValue(filial);
-  }
+  editarFilial = (filial: Filial) =>  this.formFilial.patchValue(filial);
 
   salvarFilial(ngForm: any){
     if(this.formFilial.valid) {
@@ -85,7 +79,6 @@ export class FilialComponent implements OnInit {
     }
   }
 
-  voltar(){
-    this.router.navigateByUrl('/inicio');
-  }
+  voltar = () => this.router.navigateByUrl('/inicio');
+  
 }

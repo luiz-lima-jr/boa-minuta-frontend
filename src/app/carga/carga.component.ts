@@ -45,10 +45,7 @@ export class CargaComponent implements OnInit {
     this.initFiltroCookie();
   }
 
-  buscarFiliais(){
-    this.filialService.getAllUsuario().subscribe(f => this.filiais = f);
-  }
-
+  buscarFiliais = () =>  this.filialService.getAllUsuario().subscribe(f => this.filiais = f);
 
   initFiltroCookie(){
     const filtroCookieText = localStorage.getItem('filtroCarga');
@@ -72,18 +69,14 @@ export class CargaComponent implements OnInit {
     })
   }
 
-  compareFilial(f1: Filial, f2: Filial): boolean {
-    return compareFilial(f1, f2);
-  }
+  compareFilial = (f1: Filial, f2: Filial) => compareFilial(f1, f2);
 
   resetForm(ngForm: any){
     ngForm.resetForm();
     ngForm.markAsUntouched();
   }
 
-  getLink(carga: Carga){
-    return `frete/${carga.numeroCarga}/${carga.filial.id}`
-  }
+  getLink = (carga: Carga): string =>`frete/${carga.numeroCarga}/${carga.filial.id}`;
 
   getNomeCliente(clientes: any[]){
     if(clientes)
@@ -92,7 +85,6 @@ export class CargaComponent implements OnInit {
       return ''
   }
 
-  voltar(){
-    this.router.navigateByUrl('/inicio');
-  }
+  voltar = () => this.router.navigateByUrl('/inicio');
+  
 }

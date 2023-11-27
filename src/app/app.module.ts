@@ -52,6 +52,9 @@ import localePt from '@angular/common/locales/pt';
 import { PedidoMinutaCargaComponent } from './relatorios/minuta/pedidos/pedido-minuta-carga.component';
 import { ClientesMinutaCargaComponent } from './relatorios/minuta/clientes/clientes-minuta-carga.component';
 import { NgxPrintModule } from 'ngx-print';
+import { MargemOperacionalComponent } from './relatorios/margem-operacional/margem-operacional.component';
+import { MatSortModule } from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 registerLocaleData(localePt);
 
@@ -73,7 +76,8 @@ registerLocaleData(localePt);
     FreteComponent,
     MinutaCargaComponent,
     PedidoMinutaCargaComponent,
-    ClientesMinutaCargaComponent
+    ClientesMinutaCargaComponent,
+    MargemOperacionalComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +110,9 @@ registerLocaleData(localePt);
     MatNativeDateModule,
     NgxMaskDirective, 
     NgxPrintModule,
-    NgxMaskPipe
+    NgxMaskPipe,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     HttpClient,

@@ -15,9 +15,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
       @Inject(MAT_DIALOG_DATA) public data: OptionsModalConfirmar,
     ) {}
   
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
+    onNoClick = () =>  this.dialogRef.close();
+  
   }
   
   export class OptionsModalConfirmar {

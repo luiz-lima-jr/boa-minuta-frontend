@@ -48,9 +48,7 @@ export class PerfilComponent implements OnInit {
     })
   }
 
-  voltar(){
-    this.router.navigateByUrl('/inicio');
-  }
+  voltar = () =>  this.router.navigateByUrl('/inicio');
 
   salvar(){
     if(this.formUsuario.valid) {

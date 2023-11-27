@@ -15,33 +15,19 @@ export class UsuarioService {
   constructor(private httpClient: HttpClient) {
   }
 
-  validarSessao(){
-    return this.httpClient.get<any>(this.URI_AUTH);
-  }
+  validarSessao = () => this.httpClient.get<any>(this.URI_AUTH);
 
-  getAll(): Observable<Usuario[]> {
-    return this.httpClient.get<Usuario[]>(this.URI_AUTH);
-  }
+  getAll = (): Observable<Usuario[]> => this.httpClient.get<Usuario[]>(this.URI_AUTH);
 
-  salvar(usuario: Usuario): Observable<any> {
-    return this.httpClient.post(this.URI_AUTH, usuario);
-  }
+  salvar = (usuario: Usuario): Observable<any>  => this.httpClient.post(this.URI_AUTH, usuario);
 
-  alterar(usuario: Usuario): Observable<any> {
-    return this.httpClient.put(this.URI_AUTH, usuario);
-  }
+  alterar = (usuario: Usuario): Observable<any> => this.httpClient.put(this.URI_AUTH, usuario);
 
-  excluir(idUsuario: number): Observable<any> {
-    return this.httpClient.delete(`${this.URI_AUTH}/${idUsuario}`);
-  }
+  excluir = (idUsuario: number): Observable<any> => this.httpClient.delete(`${this.URI_AUTH}/${idUsuario}`);
 
-  getDadosSessao(){
-    return this.httpClient.get(`${this.URI_AUTH}/dados-pessoais`);
-  }
+  getDadosSessao = () => this.httpClient.get(`${this.URI_AUTH}/dados-pessoais`);
 
-  alterarDadosPessoais(dados: Usuario){
-    return this.httpClient.put(`${this.URI_AUTH}/alterar-dados-pessoais`, dados);
-  }
+  alterarDadosPessoais = (dados: Usuario) =>  this.httpClient.put(`${this.URI_AUTH}/alterar-dados-pessoais`, dados);
 
   enviarLinkSenha(idUsuario: number) : Observable<any> {
     let url = this.URI_AUTH + `/enviar-link-senha/${idUsuario}`;

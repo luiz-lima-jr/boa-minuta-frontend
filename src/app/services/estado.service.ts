@@ -14,7 +14,6 @@ export class EstadoService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public getAll(): Observable<Estado[]> {
-    return this.httpClient.get<Estado[]>(this.URI_AUTH);
-  }
+  public getAll = (): Observable<Estado[]>  =>  this.httpClient.get<Estado[]>(this.URI_AUTH);
+  
 }

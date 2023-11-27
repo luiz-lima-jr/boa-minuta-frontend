@@ -27,11 +27,8 @@ export class AliquotaService {
     return this.httpClient.get<Aliquota>(this.URI_AUTH+'/buscar-aliquota', {params: params});
   }
 
-  public salvar(aliquota: Aliquota): Observable<any> {
-    return this.httpClient.post(this.URI_AUTH, aliquota);
-  }
+  public salvar = (aliquota: Aliquota): Observable<any> => this.httpClient.post(this.URI_AUTH, aliquota);
 
-  public excluir(idAliquota: number): Observable<any> {
-    return this.httpClient.delete(`${this.URI_AUTH}/${idAliquota}`);
-  }
+  public excluir = (idAliquota: number): Observable<any> => this.httpClient.delete(`${this.URI_AUTH}/${idAliquota}`);
+  
 }

@@ -18,9 +18,7 @@ export class AuthService implements OnDestroy {
     this.authSub = new BehaviorSubject<boolean>(false);
   }
 
-  ngOnDestroy(): void {
-    this.removeSession()
-  }
+  ngOnDestroy = () => this.removeSession();
 
   
   public login(email: string, senha: string): Observable<void> {
@@ -43,9 +41,7 @@ export class AuthService implements OnDestroy {
     localStorage.setItem('sessionProfile', JSON.stringify(transaction.sessionProfile));
   }
   
-  private async existsCookieSession() : Promise<boolean>{
-    return localStorage.getItem('sessionToken') !== null;
-}
+  private existsCookieSession = async () : Promise<boolean> =>  localStorage.getItem('sessionToken') !== null;
 
   get isAuthenticated(): Observable<boolean> {
     this.existsCookieSession().then(exists => this.authSub.next(exists));
