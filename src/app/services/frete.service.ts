@@ -10,9 +10,9 @@ import { MinutaCarga } from '../models/minuta-carga.model';
 @Injectable({
   providedIn: 'root'
 })
-export class CargaService {
+export class FreteService {
 
-  private URI_AUTH = 'carga'
+  private URI_AUTH = 'frete'
   
 
   constructor(private httpClient: HttpClient) {
@@ -22,10 +22,10 @@ export class CargaService {
     return this.httpClient.post<Carga[]>(this.URI_AUTH+"/cargas-disponiveis", filtro);
   }
 
-  public getReceberDetalheCarga(nroCarga: number, idFilial: number): Observable<Carga> {
+  public getReceberDetalheCarga(nroCarga: number, idFilial: number): Observable<Frete> {
     var httParams = new HttpParams().set('nroCarga', nroCarga).set('idFilial', idFilial);
 
-    return this.httpClient.get<Carga>(this.URI_AUTH+"/detalhe-carga", {params: httParams});
+    return this.httpClient.get<Frete>(this.URI_AUTH+"/detalhe-carga", {params: httParams});
   }
 
   public salvar(frete: Frete) {

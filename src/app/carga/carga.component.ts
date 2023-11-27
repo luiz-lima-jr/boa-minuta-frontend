@@ -4,7 +4,7 @@ import { Filial } from '../models/filial.model';
 import { FilialService } from '../services/filial.service';
 import { Router } from '@angular/router';
 import { Carga } from '../models/carga.model';
-import { CargaService } from '../services/carga.service';
+import { FreteService } from '../services/frete.service';
 import { compareFilial } from '../util/compares';
 
 
@@ -16,7 +16,7 @@ import { compareFilial } from '../util/compares';
 export class CargaComponent implements OnInit {
 
   formFilter: FormGroup;
-  displayedColumns: string[] = ['numeroCarga', 'placa', 'valorCarga','resultado', 'responsavel', 
+  displayedColumns: string[] = ['numeroCarga', 'filial', 'placa', 'valorCarga','resultado', 'responsavel', 
     'faturado', 'municipioDestino', 'cliente', 'volumes', 'dataLimiteCarregamento', 'dataLiberacaoFaturamento', 
     'dataImpressaoMinuta', 'paletizado', 'observacoes'];
   cargas: Carga[] = [];
@@ -24,7 +24,7 @@ export class CargaComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder, private filialService: FilialService,
-            private router: Router, private cargaService: CargaService) {
+            private router: Router, private cargaService: FreteService) {
   }
 
   ngOnInit(): void {

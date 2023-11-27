@@ -10,7 +10,7 @@ import { CaminhaoService } from '../services/caminhao.service';
 import { LoadingService } from '../services/loading.service';
 import { PessoaTransporte } from '../models/pessoa-transporte.model';
 import { PessoaTransporteService } from '../services/pessoa-transporte.service';
-import { CargaService } from '../services/carga.service';
+import { FreteService } from '../services/frete.service';
 import { Usuario } from '../models/usuario-cadastro.model';
 import { UsuarioService } from '../services/usuario.service';
 import { Filial } from '../models/filial.model';
@@ -52,7 +52,7 @@ export class FreteComponent implements OnInit {
   isFaturado: boolean;
 
   constructor(private alertService: AlertService,  private authService: AuthService, private formBuilder: FormBuilder, private caminhaoService: CaminhaoService, 
-            private cargaService: CargaService, private pessoaTransporteService: PessoaTransporteService,
+            private cargaService: FreteService, private pessoaTransporteService: PessoaTransporteService,
             private activatedRoute: ActivatedRoute, private usuarioService: UsuarioService, 
             private router: Router, private loadingService: LoadingService, private filialService: FilialService) {
   }
@@ -483,6 +483,6 @@ export class FreteComponent implements OnInit {
 
   imprimir(){
     this.router.navigateByUrl('/minuta/'+this.formFrete.controls['id'].value);
-  }  
+  }
   
 }

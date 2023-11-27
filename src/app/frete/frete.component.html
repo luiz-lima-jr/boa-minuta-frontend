@@ -129,32 +129,32 @@
             <div>    
                 <mat-form-field class="margin-r-1 col-10">
                     <mat-label>Valor da Carga</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," class="form-control" placeholder="Valor da Carga" formControlName="valorCarga" readonly >
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," class="form-control" placeholder="Valor da Carga" formControlName="valorCarga" readonly >
                 </mat-form-field>       
                 <mat-form-field class="margin-r-1 col-9">
                     <mat-label>Valor Pedágio</mat-label>
-                    <input type="text" matInput min="0" mask="separator.2" thousandSeparator="."  decimalMarker="," class="form-control" placeholder="Pedagio" formControlName="pedagio" required>
+                    <input type="text" matInput addZeroDefault min="0" mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder="Pedagio" formControlName="pedagio" required>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="margin-r-1 col-9">
                     <mat-label>Complemento</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," class="form-control" placeholder="Complemento" formControlName="complementoCalculo"  required>
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," class="form-control" placeholder="Complemento" formControlName="complementoCalculo"  required>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="margin-r-1 col-9">
                     <mat-label>Descontos</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," class="form-control" placeholder="Descontos" formControlName="descontos"  required>
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," class="form-control" placeholder="Descontos" formControlName="descontos"  required>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="margin-r-1 col-9">
                     <mat-label>Frete</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Frete" formControlName="frete" readonly>
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Frete" formControlName="frete" readonly>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
@@ -179,7 +179,7 @@
                 </mat-form-field>
                 <mat-form-field class="margin-r-1 col-9">
                     <mat-label>NFSe</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="NFSe" formControlName="nfse" required>
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="NFSe" formControlName="nfse" required>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
@@ -188,49 +188,49 @@
             <div>
                 <mat-form-field class="margin-r-1 col-10">
                     <mat-label>Frete Pago</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Frete Pago" formControlName="fretePago"  required>
+                    <input type="text" matInput addZeroDefault mask="separator.2"  thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Frete Pago" formControlName="fretePago"  required>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="margin-r-1 col-9">
                     <mat-label>ISS</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="ISS" formControlName="iss" readonly>
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="ISS" formControlName="iss" readonly>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="margin-r-1 col-9">
                     <mat-label>PIS/COFINS</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="PIS/COFINS" formControlName="pisCofins" readonly>
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="PIS/COFINS" formControlName="pisCofins" readonly>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="margin-r-1 col-9">
                     <mat-label>ICMS</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="ICMS" formControlName="icms" readonly>
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="ICMS" formControlName="icms" readonly>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="margin-r-1 col-9">
                     <mat-label>Custos</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Custos" formControlName="custos" readonly>
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Custos" formControlName="custos" readonly>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="margin-r-1 col-9">
                     <mat-label>IR/CS</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="IR/CS" formControlName="irCs" readonly>
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="IR/CS" formControlName="irCs" readonly>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="margin-r-1 col-13">
                     <mat-label>Saldo</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Saldo" formControlName="saldo" readonly>
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Saldo" formControlName="saldo" readonly>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
@@ -239,14 +239,14 @@
             <div>
                 <mat-form-field class="margin-r-1 col-9">
                     <mat-label>Margem %</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Margem %" formControlName="margem" readonly>
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Margem %" formControlName="margem" readonly>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="margin-r-1 col-9">
                     <mat-label>Markup %</mat-label>
-                    <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Markup %" formControlName="markup" readonly>
+                    <input type="text" matInput addZeroDefault mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Markup %" formControlName="markup" readonly>
                     <mat-error>
                         Campo obrigatório
                     </mat-error>

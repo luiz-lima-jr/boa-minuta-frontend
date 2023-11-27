@@ -52,6 +52,7 @@ import localePt from '@angular/common/locales/pt';
 import { PedidoMinutaCargaComponent } from './relatorios/minuta/pedidos/pedido-minuta-carga.component';
 import { ClientesMinutaCargaComponent } from './relatorios/minuta/clientes/clientes-minuta-carga.component';
 import { NgxPrintModule } from 'ngx-print';
+import { DecimalZeroDefaultDirective } from './directives/decimal-zero-default';
 
 registerLocaleData(localePt);
 
@@ -73,7 +74,8 @@ registerLocaleData(localePt);
     FreteComponent,
     MinutaCargaComponent,
     PedidoMinutaCargaComponent,
-    ClientesMinutaCargaComponent
+    ClientesMinutaCargaComponent,
+    DecimalZeroDefaultDirective
   ],
   imports: [
     BrowserModule,

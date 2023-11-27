@@ -38,6 +38,10 @@
                 <th mat-header-cell *matHeaderCellDef style="width: 5%;"> Carga </th>
                 <td mat-cell *matCellDef="let carga"> {{carga.numeroCarga}} </td>
             </ng-container>
+            <ng-container matColumnDef="filial">
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;"> Filial </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.filial.codigoMili}} - {{carga.filial.nome}} </td>
+            </ng-container>
             <ng-container matColumnDef="placa">
                 <th mat-header-cell *matHeaderCellDef style="width: 6%;"> Placa </th>
                 <td mat-cell *matCellDef="let carga"> {{carga.placa}} </td>
