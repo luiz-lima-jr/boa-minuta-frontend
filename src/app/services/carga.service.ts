@@ -18,7 +18,9 @@ export class CargaService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public getCargasDisponiveis = (filtro: CargaFilter): Observable<Carga[]> =>  this.httpClient.post<Carga[]>(this.URI_AUTH+"/cargas-disponiveis", filtro);
+  public getCargasDisponiveis(filtro: CargaFilter): Observable<Carga[]> {
+    return this.httpClient.post<Carga[]>(this.URI_AUTH+"/cargas-disponiveis", filtro);
+  }
 
   public getReceberDetalheCarga(nroCarga: number, idFilial: number): Observable<Carga> {
     var httParams = new HttpParams().set('nroCarga', nroCarga).set('idFilial', idFilial);
@@ -26,6 +28,8 @@ export class CargaService {
     return this.httpClient.get<Carga>(this.URI_AUTH+"/detalhe-carga", {params: httParams});
   }
 
-  public salvar = (frete: Frete) => this.httpClient.post(this.URI_AUTH, frete);
+  public salvar(frete: Frete) {
+    return this.httpClient.post(this.URI_AUTH, frete);
+  }
 
 }

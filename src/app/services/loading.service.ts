@@ -10,15 +10,24 @@ import { Observable, Subject } from "rxjs";
   
     constructor() {}
   
-    blockShow = () => this.isBlockShow = true;
+    blockShow(){
+      this.isBlockShow = true;
+    }
     
-    unblockShow = () =>  this.isBlockShow = false;
+    unblockShow(){
+      this.isBlockShow = false;
+    }
 
-    show = ()  =>  this.estado.next(true && !this.isBlockShow);
+    show() {
+      this.estado.next(true && !this.isBlockShow);
+    }
   
-    hide = () => this.estado.next(false);
+    hide() {
+      this.estado.next(false);
+    }
   
-    getEstado = (): Observable<boolean> => this.estado.asObservable();
-  
+    getEstado(): Observable<boolean> {
+      return this.estado.asObservable();
+    }
   }
   

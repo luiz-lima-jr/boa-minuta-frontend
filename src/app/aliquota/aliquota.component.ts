@@ -44,13 +44,19 @@ export class AliquotaComponent implements OnInit {
     this.buscarFiliais();
   }
 
-  buscarAliquotas = () => this.aliquotaService.getAll().subscribe(f => this.aliquotas = f);
+  buscarAliquotas(){
+    this.aliquotaService.getAll().subscribe(f => this.aliquotas = f);
+  }
+  buscarEstados(){
+    this.estadoService.getAll().subscribe(f => this.estados = f);
+  }
+  buscarTipoAliquotas(){
+    this.tipoAliquotaService.getAll().subscribe(f => this.tipoAliquotas = f);
+  }
   
-  buscarEstados = () =>  this.estadoService.getAll().subscribe(f => this.estados = f);
-  
-  buscarTipoAliquotas = () => this.tipoAliquotaService.getAll().subscribe(f => this.tipoAliquotas = f);
-  
-  buscarFiliais = () => this.filialService.getAll().subscribe(f => this.filiais = f);
+  buscarFiliais(){
+    this.filialService.getAll().subscribe(f => this.filiais = f);
+  }
 
   iniciarAliquotas(){
     this.initFormFilliais();
@@ -73,13 +79,19 @@ export class AliquotaComponent implements OnInit {
     ngForm.markAsUntouched();
   }
 
-  compareTipoAliquota = (f1: TipoAliquota, f2: TipoAliquota): boolean => compareTipoAliquota(f1, f2);
-  
-  compareEstado = (f1: Estado, f2: Estado): boolean => compareEstado(f1, f2);
-  
-  compareFilial = (f1: Filial, f2: Filial): boolean => compareFilial(f1, f2);
+  compareTipoAliquota(f1: TipoAliquota, f2: TipoAliquota): boolean {
+    return compareTipoAliquota(f1, f2);
+  }
+  compareEstado(f1: Estado, f2: Estado): boolean {
+    return compareEstado(f1, f2);
+  }
+  compareFilial(f1: Filial, f2: Filial): boolean {
+    return compareFilial(f1, f2);
+  }
 
-  editarAliquota = (aliquota: Aliquota) => this.formAliquota.patchValue(aliquota);
+  editarAliquota(aliquota: Aliquota){
+    this.formAliquota.patchValue(aliquota);
+  }
 
   salvarAliquota(ngForm: any){
     if(this.formAliquota.valid) {
@@ -112,6 +124,7 @@ export class AliquotaComponent implements OnInit {
     }
   }
 
-  voltar = () => this.router.navigateByUrl('/inicio');
-
+  voltar(){
+    this.router.navigateByUrl('/inicio');
+  }
 }

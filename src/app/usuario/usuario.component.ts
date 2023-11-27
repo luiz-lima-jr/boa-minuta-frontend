@@ -39,11 +39,17 @@ export class UsuarioComponent implements OnInit {
     this.buscarFuncoes();
   }
 
-  buscarFiliais = () => this.filialService.getAll().subscribe(f => this.filiais = f);
+  buscarFiliais(){
+    this.filialService.getAll().subscribe(f => this.filiais = f);
+  }
 
-  buscarFuncoes = () => this.funcaoService.getAll().subscribe(f => this.funcoes = f);
+  buscarFuncoes(){
+    this.funcaoService.getAll().subscribe(f => this.funcoes = f);
+  }
 
-  buscarUsuarios = () => this.usuarioService.getAll().subscribe(f => this.usuarios = f);
+  buscarUsuarios(){
+    this.usuarioService.getAll().subscribe(f => this.usuarios = f);
+  }
 
   iniciarUsuarios() {
     this.initFormUsuarios();
@@ -73,7 +79,9 @@ export class UsuarioComponent implements OnInit {
     })
   }
 
-  voltar = () => this.router.navigateByUrl('/inicio');
+  voltar(){
+    this.router.navigateByUrl('/inicio');
+  }
 
   resetForm(ngForm: any){
     ngForm.resetForm()
@@ -86,9 +94,13 @@ export class UsuarioComponent implements OnInit {
     this.formUsuario.patchValue(usuario);
   }
 
-  compareFilial = (f1: Filial, f2: Filial): boolean => compareFilial(f1, f2);
+  compareFilial(f1: Filial, f2: Filial): boolean {
+    return compareFilial(f1, f2);
+  }
 
-  compareFuncoes = (f1: Funcao, f2: Funcao): boolean => compareFuncoes(f1, f2);
+  compareFuncoes(f1: Funcao, f2: Funcao): boolean {
+    return compareFuncoes(f1, f2);
+  }
 
   reenviarSenha(usuario: Usuario){
     this.confirmService.confirmar("Reenviar a senha do usuário " + usuario.nome + "?", 
@@ -137,9 +149,13 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
-  getFiliaisLabel = (usuario: Usuario) => usuario.filiais.map(f => ' ' + f.nome);
+  getFiliaisLabel(usuario: Usuario) {
+    return usuario.filiais.map(f => ' ' + f.nome);
+  }
 
-  getFuncoesLabel = (usuario: Usuario) => usuario.funcoes.map(f => ' ' + f.descricao);
+  getFuncoesLabel(usuario: Usuario) {
+    return usuario.funcoes.map(f => ' ' + f.descricao);
+  }
 
   excluir(usuario: Usuario){
     this.confirmService.confirmar("Excluir o usuário " + usuario.nome + "?", 

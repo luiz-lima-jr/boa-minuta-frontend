@@ -86,8 +86,9 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy = () => this._destroySub$.next();
-  
+  public ngOnDestroy(): void {
+    this._destroySub$.next();
+  }
 
   public logout(): void {
     this._authService.logout().subscribe(
@@ -98,9 +99,13 @@ export class AppComponent implements OnInit, OnDestroy {
     );
   }
 
-  esconderModal = () => this.showModalPerfil = false;
+  esconderModal(){    
+    this.showModalPerfil = false;
+  }
 
-  exibirModal = () =>  this.showModalPerfil = !this.showModalPerfil;
+  exibirModal(){
+    this.showModalPerfil = !this.showModalPerfil;
+  }
 
   closeMenu(sidenav: any){
     if(sidenav._opened) {

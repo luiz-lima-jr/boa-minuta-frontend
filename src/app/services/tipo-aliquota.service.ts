@@ -14,6 +14,7 @@ export class TipoAliquotaService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public getAll = (): Observable<TipoAliquota[]> => this.httpClient.get<TipoAliquota[]>(this.URI_AUTH);
-
+  public getAll(): Observable<TipoAliquota[]> {
+    return this.httpClient.get<TipoAliquota[]>(this.URI_AUTH);
+  }
 }

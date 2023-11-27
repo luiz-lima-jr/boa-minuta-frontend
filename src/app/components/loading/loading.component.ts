@@ -11,6 +11,7 @@ export class LoadingComponent  {
   visible = false;
   constructor(private loadingService: LoadingService) {}
 
-  ngOnInit = () => this.loadingService.getEstado().subscribe((estado) => (this.visible = estado));
-  
+  ngOnInit(): void {
+    this.loadingService.getEstado().subscribe((estado) => (this.visible = estado));
+  }
 }

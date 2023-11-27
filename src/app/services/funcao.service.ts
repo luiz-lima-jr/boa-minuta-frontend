@@ -14,6 +14,7 @@ export class FuncaoService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public getAll = (): Observable<Funcao[]> => this.httpClient.get<Funcao[]>(this.URI_AUTH);
-  
+  public getAll(): Observable<Funcao[]> {
+    return this.httpClient.get<Funcao[]>(this.URI_AUTH);
+  }
 }

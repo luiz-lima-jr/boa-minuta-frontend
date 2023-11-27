@@ -19,6 +19,7 @@ export class CaminhaoService {
     return this.httpClient.get<Caminhao[]>(this.URI_AUTH, {params: params});
   }
 
-  public salvar = (caminhao: Caminhao): Observable<any> => this.httpClient.post(this.URI_AUTH, caminhao);
-  
+  public salvar(caminhao: Caminhao): Observable<any> {
+    return this.httpClient.post(this.URI_AUTH, caminhao);
+  }
 }

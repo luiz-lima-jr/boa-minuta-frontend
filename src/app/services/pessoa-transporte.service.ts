@@ -20,5 +20,7 @@ export class PessoaTransporteService {
     return this.httpClient.get<PessoaTransporte[]>(this.URI_AUTH, {params: params});
   }
 
-  public salvar= (pessoaTransporte: PessoaTransporte): Observable<any> => this.httpClient.post(this.URI_AUTH, pessoaTransporte);
+  public salvar(pessoaTransporte: PessoaTransporte): Observable<any> {
+    return this.httpClient.post(this.URI_AUTH, pessoaTransporte);
+  }
 }

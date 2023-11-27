@@ -32,7 +32,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     ).subscribe( _ => this._router.navigateByUrl(this.returnUrl));
   }
 
-  public ngOnDestroy = () => this._destroySub$.next();
+  public ngOnDestroy(): void {
+    this._destroySub$.next();
+  }
 
   public onSubmit(): void {
     if(this.username && this.password) {

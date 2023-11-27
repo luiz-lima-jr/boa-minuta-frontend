@@ -15,15 +15,23 @@ export class FilialService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public getAll = (): Observable<Filial[]> => this.httpClient.get<Filial[]>(this.URI_AUTH);
-  
+  public getAll(): Observable<Filial[]> {
+    return this.httpClient.get<Filial[]>(this.URI_AUTH);
+  }
 
-  public getById = (idFilial: number): Observable<Filial> => this.httpClient.get<Filial>(this.URI_AUTH+'/'+idFilial);
+  public getById(idFilial: number): Observable<Filial> {
+    return this.httpClient.get<Filial>(this.URI_AUTH+'/'+idFilial);
+  }
 
-  public getAllUsuario = (): Observable<Filial[]> => this.httpClient.get<Filial[]>(this.URI_AUTH+'/usuario');
+  public getAllUsuario(): Observable<Filial[]> {
+    return this.httpClient.get<Filial[]>(this.URI_AUTH+'/usuario');
+  }
 
-  public salvar = (filial: Filial): Observable<any> =>  this.httpClient.post(this.URI_AUTH, filial);
+  public salvar(filial: Filial): Observable<any> {
+    return this.httpClient.post(this.URI_AUTH, filial);
+  }
 
-  public excluir = (idFilial: number): Observable<any> => this.httpClient.delete(`${this.URI_AUTH}/${idFilial}`);
-
+  public excluir(idFilial: number): Observable<any> {
+    return this.httpClient.delete(`${this.URI_AUTH}/${idFilial}`);
+  }
 }

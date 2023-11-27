@@ -27,6 +27,7 @@ export class ConfirmService {
         this.subject.next({ mensagem: message, acao: acao });
     }
 
-    getMessage = (): Observable<any> => this.subject.asObservable();
-    
+    getMessage(): Observable<any> {
+        return this.subject.asObservable();
+    }
 }
