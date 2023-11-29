@@ -16,7 +16,7 @@ export class UsuarioService {
   }
 
   validarSessao(){
-    return this.httpClient.get<any>(this.URI_AUTH);
+    return this.httpClient.get<any>(this.URI_AUTH + '/validar-sessao');
   }
 
   getAll(): Observable<Usuario[]> {
