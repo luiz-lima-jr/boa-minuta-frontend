@@ -35,7 +35,7 @@ export class DecimalZeroDefaultDirective {
         const valueElement = this.nativeElement.value;
         const split = valueElement.split(',');
         if(!valueElement.includes(',')){
-            this.nativeElement.value = valueElement + ',00';
+            this.nativeElement.value = valueElement === '' ? '' :  valueElement + ',00';
         } else if(split.length == 2){
             this.nativeElement.value = split[0] +',' + rigthPad(split[1], 2);
         }
