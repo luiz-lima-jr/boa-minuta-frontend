@@ -15,7 +15,7 @@ export class DecimalZeroDefaultDirective {
         
        setTimeout(() => {
             const valueElement = isThis.nativeElement.value;
-            if(!isThis.focus && !value.toString().includes('.') && value !== Infinity && value !== 0){
+            if(!isThis.focus && !value?.toString().includes('.') && !valueElement.includes(',')  && value !== Infinity && value !== 0 && value !== null){
                 isThis.nativeElement.value = valueElement + ',00';
             }
 
@@ -23,7 +23,7 @@ export class DecimalZeroDefaultDirective {
             if(isThis.focus && split.length == 2){
                 isThis.nativeElement.value = split[0] +',' + (split[1] || '');
             }
-            if(isThis.nativeElement.attributes.formcontrolname.nodeValue === 'pedagio'){
+            if(isThis.nativeElement.attributes.formcontrolname.nodeValue === 'nfse'){
                 debugger
             }
        }, 100)
