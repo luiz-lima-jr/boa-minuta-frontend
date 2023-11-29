@@ -37,7 +37,7 @@
           <mat-expansion-panel-header>
             <mat-icon class="icon-branco icon-menu">{{menu.icon}}</mat-icon> {{menu.label}}
           </mat-expansion-panel-header>
-          <mat-nav-list *ngFor="let item of menu.itens">
+          <mat-nav-list class="item-menu" *ngFor="let item of menu.itens">
             <a mat-list-item (click)="sidenav.toggle()" routerLink="{{item.action}}">
               <mat-icon class="icon-primary-color icon-menu">{{item.icon}}</mat-icon><span>{{item.label}}</span>
             </a>

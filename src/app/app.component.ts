@@ -37,14 +37,14 @@ export class AppComponent implements OnInit, OnDestroy {
           action: 'usuario',
           icon: 'person',
           funcoes: [ADMINISTRADOR]
-        }
+        },
+        {
+          label: 'Aliquota',
+          action: 'aliquota',
+          funcoes: [],
+          icon: 'assignment',
+        },
       ]
-    },
-    {
-      label: 'Aliquota',
-      action: 'aliquota',
-      funcoes: [],
-      icon: 'assignment',
     },
     {
       label: 'Carga',

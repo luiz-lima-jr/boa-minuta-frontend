@@ -92,6 +92,10 @@ export class CargaComponent implements OnInit {
       return ''
   }
 
+  abreviarNomeFilial(nome: string){
+    return nome.length > 10 ? nome.substring(0, 10) : nome;
+  }
+
   voltar(){
     this.router.navigateByUrl('/inicio');
   }

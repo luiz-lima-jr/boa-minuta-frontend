@@ -142,3 +142,24 @@ mat-expansion-panel {
 ::ng-deep .mat-drawer-shown{
     z-index: 9999 !important;
   }
+
+::ng-deep .mat-expansion-panel-body {
+    padding: 0 0.5em !important;
+}
+$menu-padding-left: 5px;
+::ng-deep  .mat-expansion-panel-header.mat-expanded{
+    padding-left: $menu-padding-left !important;
+}
+
+::ng-deep .mat-expansion-panel-header {
+    padding-left: $menu-padding-left !important;
+}
+
+::ng-deep .mat-expansion-panel-content{
+    border-style: solid;
+    border-width: thin;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-color: $primary-color;
+}
