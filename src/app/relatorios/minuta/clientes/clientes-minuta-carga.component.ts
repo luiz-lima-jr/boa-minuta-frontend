@@ -1,9 +1,7 @@
 import { Location } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MinutaCarga } from "src/app/models/minuta-carga.model";
-import { FreteService } from "src/app/services/frete.service";
 
 
 @Component({

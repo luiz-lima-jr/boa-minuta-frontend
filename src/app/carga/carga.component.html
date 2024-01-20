@@ -24,8 +24,7 @@
             <mat-form-field appearance="fill" class="field-data margin-l-2">
                 <mat-label>Filial</mat-label>
                 <mat-select [compareWith]="compareFilial" formControlName="filiais" multiple>
-                    <mat-option [value]="undefined">TODAS</mat-option>
-                    <mat-option *ngFor="let filial of filiais" [value]="filial">{{filial.nome}}</mat-option>
+                    <mat-option *ngFor="let filial of filiais" (click)="checkAllFiliais(filial)" [value]="filial">{{filial.nome}}</mat-option>
                 </mat-select>
                 <mat-error>
                     Campo obrigatório

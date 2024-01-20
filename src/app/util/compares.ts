@@ -3,6 +3,7 @@ import { Filial } from "../models/filial.model";
 import { ExperienciaBomEnum, FobCifEnum, PagamentoPedagioEnum } from "../models/frete.model";
 import { Funcao } from "../models/funcao.model";
 import { TipoAliquota } from "../models/tipo-aliquota.model";
+import { Usuario } from "../models/usuario-cadastro.model";
 
 export const compareTipoAliquota = (f1: TipoAliquota, f2: TipoAliquota): boolean => {
     return f1 && f2 ? f1.id === f2.id : f1 === f2;
@@ -29,5 +30,8 @@ export const   compareFobCif = (f1: FobCifEnum, f2: FobCifEnum): boolean => {
 }
 
 export const   comparePagamentoPedagio = (f1: PagamentoPedagioEnum, f2: PagamentoPedagioEnum): boolean => {
+  return f1 === f2;
+}
+export const   compareUsuario = (f1: Usuario, f2: Usuario): boolean => {
   return f1 === f2;
 }

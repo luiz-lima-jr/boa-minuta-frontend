@@ -1,6 +1,6 @@
 export class Filial {
     id: number;
     nome: string;
-    codigoMili: string;
-    senha: string;
+    codigoMili?: string;
+    senha?: string;
 }

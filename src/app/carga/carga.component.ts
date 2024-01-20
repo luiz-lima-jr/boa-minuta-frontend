@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Carga } from '../models/carga.model';
 import { FreteService } from '../services/frete.service';
 import { compareFilial } from '../util/compares';
+import { CargaFilter } from '../models/carga-filter.model';
 
 
 @Component({
@@ -39,37 +40,79 @@ export class CargaComponent implements OnInit {
       faturadas: [undefined],
       dataInicioFaturamento: [undefined],
       dataFimFaturamento: [undefined],
-      filiais: [undefined]
+      filiais: [undefined],
+      todasFiliais: [false]
     });
     this.formFilter.valueChanges.subscribe(res => this.filtrarCargas(res));
     this.initFiltroCookie();
   }
 
   buscarFiliais(){
-    this.filialService.getAllUsuario().subscribe(f => this.filiais = f);
+    this.filiais.push({ id: 0, nome: 'TODAS'});
+    this.filialService.getAllUsuario().subscribe(f => this.filiais = this.filiais.concat(f));
   }
 
 
   initFiltroCookie(){
     const filtroCookieText = localStorage.getItem('filtroCarga');
-    //const filtroCookieText = this.cookieService.get('filtroCarga');
     if(filtroCookieText){
       const filtroCookie = JSON.parse(filtroCookieText);
       this.formFilter.patchValue(filtroCookie);
     } else {      
-      this.filtrarCargas({});
+      this.filtrarCargas(new CargaFilter());
     }
   }
 
-  filtrarCargas(filtro: any) {
-    localStorage.setItem('filtroCarga', JSON.stringify(this.formFilter.getRawValue()));
+  checkAllFiliais(filial: Filial){
+    const filter = this.formFilter.getRawValue() as CargaFilter;
+    const todas = filter.todasFiliais;
+    let list = new Array();
+    if(filial.id === 0){
+      if(todas) list = [];
+      else this.filiais.forEach(f => list.push(f));
+      filter.todasFiliais =! todas;
+    } else if(filter.filiais.length === this.filiais.length - 1 && filter.filiais.find(f => f.id === 0) === undefined){
+      filter.todasFiliais = true;
+      this.filiais.forEach(f => list.push(f));      
+    } else {
+      filter.todasFiliais = false;
+      list = filter.filiais.filter(f => f.id !== 0);
+    }
+    filter.filiais = list;
+    this.setLocalStorageFilter(filter);
+    this.formFilter.patchValue(filter);
+  }
+
+  filtrarCargas(filtro: CargaFilter) {
+    if(!this.filtroFilialIgualStorage(filtro)){
+      return;
+    }
+    if(filtro.filiais.length === 0){
+      this.cargas = [];
+      return;
+    }
+    this.setLocalStorageFilter(filtro);
     this.cargaService.getCargasDisponiveis(filtro).subscribe({
       next: resp =>{
         this.cargas = resp;
       }, 
-      error: error => {        
+      error: error => {
       } 
     })
+  }
+
+  private filtroFilialIgualStorage(filtro: CargaFilter){
+    const filtroCookie = this.getFiltroStorage();
+    return filtroCookie === null ? false : filtroCookie.filiais.length === filtro.filiais.length;
+  }
+
+  getFiltroStorage(){
+    const filtroStorageText = localStorage.getItem('filtroCarga');
+    return filtroStorageText === null ? null : JSON.parse(filtroStorageText) as CargaFilter;
+  }
+
+  private setLocalStorageFilter(value: CargaFilter){
+    localStorage.setItem('filtroCarga', JSON.stringify(value));
   }
 
   compareFilial(f1: Filial, f2: Filial): boolean {
@@ -98,5 +141,9 @@ export class CargaComponent implements OnInit {
 
   voltar(){
     this.router.navigateByUrl('/inicio');
+  }
+
+  getFilialEmpty(){
+    return new Filial();
   }
 }

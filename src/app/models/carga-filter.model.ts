@@ -6,5 +6,6 @@ export class CargaFilter {
     faturadas: boolean;
     dataInicioFaturamento: Date;
     dataFimFaturamento: Date;
-    filial: Filial[];
+    filiais: Filial[];
+    todasFiliais: boolean;
 }

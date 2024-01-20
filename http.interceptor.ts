@@ -14,9 +14,12 @@ export class GiftHttpInterceptor implements HttpInterceptor {
               private messages: AlertService,
               private loadingService: LoadingService) {}
 
+  requests = new Array<String>();
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this._authService.validateSession();
     if (req.url.indexOf(STRING_NO_LOADING) === -1) {
+      this.requests.push(req.url);
       this.loadingService.show();
     }
     //let ok: string;
@@ -41,7 +44,8 @@ export class GiftHttpInterceptor implements HttpInterceptor {
       // Log when response observable either completes or errors
       finalize(() => {
         // this.loadingService.hide();
-        if (req.url.indexOf(STRING_NO_LOADING) === -1) {
+        this.requests = this.requests.filter(r => r !== req.url)
+        if (this.requests.length === 0 && req.url.indexOf(STRING_NO_LOADING) === -1) {
           this.loadingService.hide();
         }
       })
@@ -65,8 +69,8 @@ export class GiftHttpInterceptor implements HttpInterceptor {
         }
         return throwError(errorResponse);
       }
-      if ( this._authService.isAuthenticatedValue() && (errorResponse.status === 403)) {
-        this.loadingService.show()
+      // 401 redireciona usuario para login quando o token tiver expirado
+      if ( this._authService.isAuthenticatedValue() && (errorResponse.status === 403 || errorResponse.status === 401)) {        this.loadingService.show()
         this._authService.removeSession()
         this.messages.warning("Sessão expirada");
         //window.location.reload();
