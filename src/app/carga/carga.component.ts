@@ -62,26 +62,24 @@ export class CargaComponent implements OnInit {
       this.filtrarCargas(new CargaFilter());
     }
   }
-
+  
   checkAllFiliais(filial: Filial){
     const filter = this.formFilter.getRawValue() as CargaFilter;
-    const todas = filter.todasFiliais;
-    let list = new Array();
+    const filial0 = filter.filiais.find(f => f.id === 0);
+    const todasSelecionadas = filter.filiais.length === this.filiais.length - 1 && filial0 === undefined && filial.id !== 0;
+    let list = new Array(); 
+
     if(filial.id === 0){
-      if(todas) list = [];
-      else this.filiais.forEach(f => list.push(f));
-      filter.todasFiliais =! todas;
-    } else if(filter.filiais.length === this.filiais.length - 1 && filter.filiais.find(f => f.id === 0) === undefined){
-      filter.todasFiliais = true;
-      this.filiais.forEach(f => list.push(f));      
+      list = filial0 ? list.concat(this.filiais) : [];
     } else {
-      filter.todasFiliais = false;
-      list = filter.filiais.filter(f => f.id !== 0);
+      list = todasSelecionadas ? list.concat(this.filiais) : filter.filiais.filter(f => f.id !== 0);
     }
+    
     filter.filiais = list;
     this.setLocalStorageFilter(filter);
     this.formFilter.patchValue(filter);
   }
+
 
   filtrarCargas(filtro: CargaFilter) {
     if(!this.filtroFilialIgualStorage(filtro)){
