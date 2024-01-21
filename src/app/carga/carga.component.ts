@@ -7,6 +7,7 @@ import { Carga } from '../models/carga.model';
 import { FreteService } from '../services/frete.service';
 import { compareFilial } from '../util/compares';
 import { CargaFilter } from '../models/carga-filter.model';
+import { CheckAllFiliais } from '../util/select';
 
 
 @Component({
@@ -65,21 +66,10 @@ export class CargaComponent implements OnInit {
   
   checkAllFiliais(filial: Filial){
     const filter = this.formFilter.getRawValue() as CargaFilter;
-    const filial0 = filter.filiais.find(f => f.id === 0);
-    const todasSelecionadas = filter.filiais.length === this.filiais.length - 1 && filial0 === undefined && filial.id !== 0;
-    let list = new Array(); 
-
-    if(filial.id === 0){
-      list = filial0 ? list.concat(this.filiais) : [];
-    } else {
-      list = todasSelecionadas ? list.concat(this.filiais) : filter.filiais.filter(f => f.id !== 0);
-    }
-    
-    filter.filiais = list;
+    filter.filiais = CheckAllFiliais(filial, this.filiais, this.formFilter);
     this.setLocalStorageFilter(filter);
     this.formFilter.patchValue(filter);
   }
-
 
   filtrarCargas(filtro: CargaFilter) {
     if(!this.filtroFilialIgualStorage(filtro)){
