@@ -2,7 +2,7 @@ version:  "3.7"
 
 services:
   frontend:
-    image: boa-minuta-frontend
+    image: boa-minuta-homologacao
     restart: always
-    container_name: boa-minuta-frontend
+    container_name: boa-minuta-frontend-homologacao
     network_mode: host
