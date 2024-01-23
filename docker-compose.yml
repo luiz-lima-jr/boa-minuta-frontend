@@ -3,7 +3,7 @@ version:  "3.7"
 services:
   frontend:
     image: boa-minuta-frontend-homologacao
-    restart: no
+    restart: always
     container_name: boa-minuta-frontend-homologacao
     ports:
       - "4200:4200"
