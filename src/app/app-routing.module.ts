@@ -14,6 +14,7 @@ import { CargaComponent } from './carga/carga.component';
 import { FreteComponent } from './frete/frete.component';
 import { MinutaCargaComponent } from './relatorios/minuta/minuta-carga.component';
 import { MargemOperacionalComponent } from './relatorios/margem-operacional/margem-operacional.component';
+import { IndicadorDesempenhoFretesComponent } from './relatorios/indicador-desempenho-fretes/indicador-desempenho-fretes.component';
 
 const routes: Routes = [  
   {
@@ -81,6 +82,11 @@ const routes: Routes = [
   {
     path: 'margem-operacional',
     component: MargemOperacionalComponent,
+    canActivate: [ AuthGuard ],
+  },
+  {
+    path: 'indicador-desempenho-frete',
+    component: IndicadorDesempenhoFretesComponent,
     canActivate: [ AuthGuard ],
   },
 ];

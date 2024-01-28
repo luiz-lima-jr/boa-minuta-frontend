@@ -1,5 +1,5 @@
-import { Cliente } from "./cliente.model";
-import { Pedido } from "./pedido.model";
+import { Cliente } from "../cliente.model";
+import { Pedido } from "../pedido.model";
 
 export class MinutaCarga {
     

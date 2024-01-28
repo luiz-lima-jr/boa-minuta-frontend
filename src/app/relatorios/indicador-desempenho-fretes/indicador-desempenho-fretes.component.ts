@@ -1,5 +1,5 @@
 import { Location } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Frete } from "src/app/models/frete.model";
@@ -7,27 +7,26 @@ import { AlertService } from "src/app/services/alert.service";
 import { FilialService } from "src/app/services/filial.service";
 import { MargemOperacionalService } from "src/app/services/relatorio/margem-operacional.service";
 import { BaseRelatorioComponent } from "../base-relatorio.component";
+import { IndicadorDesempenhoFreteService } from "src/app/services/relatorio/indicador-desempenho-frete.service";
+
 
 @Component({
-  selector: 'app-margem-operacional',
-  templateUrl: './margem-operacional.component.html',
-  styleUrls: ['./margem-operacional.component.scss']
+  selector: 'app-indicador-desempenho-fretes',
+  templateUrl: './indicador-desempenho-fretes.component.html',
+  styleUrls: ['./indicador-desempenho-fretes.component.scss']
 })
-export class MargemOperacionalComponent extends BaseRelatorioComponent implements OnInit {  
+export class IndicadorDesempenhoFretesComponent extends BaseRelatorioComponent implements OnInit {  
 
-  displayedColumns: string[] = ['numeroCarga', 'responsavel', 'origem','destino', 'frete', 
-    'fretePago', 'custos', 'saldo', 'margem', 'markup'];
-    tableFooterColumns: string[] = ['total', 'frete']// 'totalFretePago', 'totalCustos', 'totalSaldo'];
+  displayedColumns: string[] = ['responsavel', 'cargas','m3', 'fretes',  'complemento', 'fretePago',  'somaImpostos', 'pedagio']
 
   constructor(activatedRoute: ActivatedRoute,  location: Location, 
-              filialService: FilialService, formBuilder: FormBuilder, 
-              private margemService: MargemOperacionalService, alertService: AlertService) {
-    super(activatedRoute, location, filialService, formBuilder, margemService, alertService);
+             filialService: FilialService, formBuilder: FormBuilder, alertService: AlertService, 
+              private indicadorService: IndicadorDesempenhoFreteService) {
+    super(activatedRoute, location, filialService, formBuilder, indicadorService, alertService);
   }
 
   override ngOnInit(): void {    
     super.ngOnInit();
-    super.ngOnInit()
     this.initFilterForm();
     this.pesquisar();
   }
@@ -41,11 +40,6 @@ export class MargemOperacionalComponent extends BaseRelatorioComponent implement
       filiais: [undefined]
     });
     this.formFilter.valueChanges.subscribe(res => this.pesquisar());
-  }
-
-  destacarLabelMargem(frete: Frete){
-    const filtro = this.formFilter.controls['margemDesejada'].value;
-    return filtro && filtro >= frete.margem;
   }
 
 }

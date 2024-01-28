@@ -5,10 +5,10 @@ import { BaseRelatorioService } from './base-relatorio-service.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MargemOperacionalService extends BaseRelatorioService {
+export class IndicadorDesempenhoFreteService extends BaseRelatorioService {
 
   constructor(httpClient: HttpClient) {
-    super('margem-operacional', httpClient)
+    super('indicador-desempenho-frete', httpClient)
   }
 
 }

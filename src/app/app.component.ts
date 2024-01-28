@@ -67,6 +67,12 @@ export class AppComponent implements OnInit, OnDestroy {
           action: 'margem-operacional',
           funcoes: ['ADMINISTRADOR'],
           icon: 'assignment',
+        },
+        {
+          label: 'Indicador Desempenho',
+          action: 'indicador-desempenho-frete',
+          funcoes: ['ADMINISTRADOR'],
+          icon: 'assignment',
         }
       ]
     }

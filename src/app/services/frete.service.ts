@@ -5,7 +5,7 @@ import { Estado } from '../models/estado.model';
 import { Carga } from '../models/carga.model';
 import { CargaFilter } from '../models/carga-filter.model';
 import { Frete } from '../models/frete.model';
-import { MinutaCarga } from '../models/minuta-carga.model';
+import { MinutaCarga } from '../models/relatorio/minuta-carga.model';
 
 @Injectable({
   providedIn: 'root'

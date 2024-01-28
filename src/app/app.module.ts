@@ -55,6 +55,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { DecimalZeroDefaultDirective } from './directives/decimal-zero-default';
 import { MargemOperacionalComponent } from './relatorios/margem-operacional/margem-operacional.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { IndicadorDesempenhoFretesComponent } from './relatorios/indicador-desempenho-fretes/indicador-desempenho-fretes.component';
 
 registerLocaleData(localePt);
 
@@ -78,7 +79,8 @@ registerLocaleData(localePt);
     PedidoMinutaCargaComponent,
     ClientesMinutaCargaComponent,
     DecimalZeroDefaultDirective,
-    MargemOperacionalComponent
+    MargemOperacionalComponent,
+    IndicadorDesempenhoFretesComponent
   ],
   imports: [
     BrowserModule,

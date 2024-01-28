@@ -1,7 +1,7 @@
 import { Location } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MinutaCarga } from "src/app/models/minuta-carga.model";
+import { MinutaCarga } from "src/app/models/relatorio/minuta-carga.model";
 
 
 @Component({
