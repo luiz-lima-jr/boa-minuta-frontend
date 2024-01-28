@@ -53,6 +53,8 @@ import { PedidoMinutaCargaComponent } from './relatorios/minuta/pedidos/pedido-m
 import { ClientesMinutaCargaComponent } from './relatorios/minuta/clientes/clientes-minuta-carga.component';
 import { NgxPrintModule } from 'ngx-print';
 import { DecimalZeroDefaultDirective } from './directives/decimal-zero-default';
+import { MargemOperacionalComponent } from './relatorios/margem-operacional/margem-operacional.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 registerLocaleData(localePt);
 
@@ -75,7 +77,8 @@ registerLocaleData(localePt);
     MinutaCargaComponent,
     PedidoMinutaCargaComponent,
     ClientesMinutaCargaComponent,
-    DecimalZeroDefaultDirective
+    DecimalZeroDefaultDirective,
+    MargemOperacionalComponent
   ],
   imports: [
     BrowserModule,
@@ -108,7 +111,8 @@ registerLocaleData(localePt);
     MatNativeDateModule,
     NgxMaskDirective, 
     NgxPrintModule,
-    NgxMaskPipe
+    NgxMaskPipe,
+    MatPaginatorModule
   ],
   providers: [
     HttpClient,

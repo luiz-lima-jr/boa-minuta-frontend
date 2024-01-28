@@ -13,6 +13,7 @@ import { AliquotaComponent } from './aliquota/aliquota.component';
 import { CargaComponent } from './carga/carga.component';
 import { FreteComponent } from './frete/frete.component';
 import { MinutaCargaComponent } from './relatorios/minuta/minuta-carga.component';
+import { MargemOperacionalComponent } from './relatorios/margem-operacional/margem-operacional.component';
 
 const routes: Routes = [  
   {
@@ -65,17 +66,22 @@ const routes: Routes = [
     canActivate: [ AuthGuard ],
   },
   {
-    path: 'minuta/:idFrete',
-    component: MinutaCargaComponent,
-    canActivate: [ AuthGuard ],
-  },
-  {
     path: 'usuario',
     component: UsuarioComponent,
     canActivate: [ AuthGuard ],
     data: {
       funcoes: [ADMINISTRADOR]
     }
+  },
+  {
+    path: 'minuta/:idFrete',
+    component: MinutaCargaComponent,
+    canActivate: [ AuthGuard ],
+  },
+  {
+    path: 'margem-operacional',
+    component: MargemOperacionalComponent,
+    canActivate: [ AuthGuard ],
   },
 ];
 

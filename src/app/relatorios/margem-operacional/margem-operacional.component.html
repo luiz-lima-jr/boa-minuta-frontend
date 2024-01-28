@@ -1,0 +1,97 @@
+<form  name="form" #formCargaFilterT="ngForm"  novalidate  [formGroup]="formFilter">
+    <mat-card class="margin-r-2">
+        <div style="display: flex; ">
+            <mat-card-header><h2 style="width: 10em;">Margem Operacional</h2></mat-card-header>          
+            <mat-form-field appearance="fill" class="field-data">
+                <mat-label>Filial</mat-label>
+                <mat-select [compareWith]="compareFilial" formControlName="filiais" multiple>
+                    <mat-option *ngFor="let filial of filiais" (click)="checkAllFiliais(filial)" [value]="filial">{{filial.nome}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-14 field-data margin-l-1" appearance="fill">
+                <mat-label>Inicio fat.</mat-label>
+                <input matInput [matDatepicker]="pickerInicio" formControlName="dataInicioFaturamento">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerInicio">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #pickerInicio></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-14 field-data margin-l-1" appearance="fill" >
+                <mat-label>Fim Fat.</mat-label>
+                <input matInput [matDatepicker]="pickerFim" formControlName="dataFimFaturamento">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerFim">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #pickerFim></mat-datepicker>
+            </mat-form-field>     
+            <mat-form-field appearance="fill" class="field-data margin-l-1">
+                <mat-label>Responsável</mat-label>
+                <mat-select [compareWith]="compareUsuario" formControlName="responsaveis" multiple>
+                    <mat-option *ngFor="let usuario of responsaveis" (click)="checkAllUsuario(usuario)" [value]="usuario">{{usuario.nome}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="field-data margin-l-1">
+                <mat-label> % Margem desejada</mat-label>
+                <input type="text" matInput mask="separator.2" thousandSeparator="." decimalMarker="," class="form-control" placeholder=" % Margem Desejada" formControlName="margemDesejada" >
+            </mat-form-field>
+        </div>
+        <hr><br>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="numeroCarga">
+                <th mat-header-cell *matHeaderCellDef style="width: 5%;"> Carga </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.numeroCarga}} </td>
+            </ng-container>
+            <ng-container matColumnDef="responsavel">
+                <th mat-header-cell *matHeaderCellDef style="width: 10%;"> Responsável </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.responsavelOperacional?.nome}} </td>
+            </ng-container>
+            <ng-container matColumnDef="origem">
+                <th mat-header-cell *matHeaderCellDef style="width: 8%;"> Origem </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.municipioDestino?.nome}} </td>
+            </ng-container>
+            <ng-container matColumnDef="destino">
+                <th mat-header-cell *matHeaderCellDef style="width: 8%;"> Destino </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.municipioDestino?.nome}} </td>
+            </ng-container>
+            <ng-container matColumnDef="frete">
+                <th mat-header-cell *matHeaderCellDef style="width: 7%;"> Frete </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.frete | currency}} </td>
+            </ng-container>
+            <ng-container matColumnDef="fretePago">
+                <th mat-header-cell *matHeaderCellDef style="width: 7%;"> Frete Pago </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.fretePago | currency}} </td>
+            </ng-container>
+            <ng-container matColumnDef="custos">
+                <th mat-header-cell *matHeaderCellDef style="width: 7%;"> Custos </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.custos | currency}} </td>
+            </ng-container>
+            <ng-container matColumnDef="saldo">
+                <th mat-header-cell *matHeaderCellDef style="width: 7%;"> Saldo </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.saldo | currency}} </td>
+            </ng-container>
+            <ng-container matColumnDef="margem">
+                <th mat-header-cell *matHeaderCellDef style="width: 7%;"> % Margem </th>
+                <td mat-cell *matCellDef="let carga"> 
+                    <span *ngIf="destacarLabelMargem(carga)" style="color: red; text-decoration: underline;"> <b>{{carga.margem | number : '1.2-2'}} </b></span>
+                    <span *ngIf="!destacarLabelMargem(carga)"> {{carga.margem | number : '1.2-2'}} </span>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="markup">
+                <th mat-header-cell *matHeaderCellDef style="width: 7%;"> % Markup </th>
+                <td mat-cell *matCellDef="let carga"> {{carga.markup | number : '1.2-2'}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div style="display: inline-flex; text-align: right;">
+            <div style="width: 41.5%;">TOTAL: </div>
+            <div class="row-total">{{margemOperacional?.totalFrete | currency}} </div>
+            <div class="row-total">{{margemOperacional?.totalFretePago | currency}}  </div>
+            <div class="row-total">{{margemOperacional?.totalCustos | currency}}  </div>
+            <div class="row-total">{{margemOperacional?.totalSaldo | currency}}  </div>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"  showFirstLastButtons [pageSize]="10">TOTAL: </mat-paginator>
+
+    </mat-card>
+</form>
