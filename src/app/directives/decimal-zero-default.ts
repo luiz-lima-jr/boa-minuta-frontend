@@ -24,7 +24,6 @@ export class DecimalZeroDefaultDirective {
                 isThis.nativeElement.value = split[0] +',' + (split[1] || '');
             }
             if(isThis.nativeElement.attributes.formcontrolname.nodeValue === 'nfse'){
-                debugger
             }
        }, 100)
     }

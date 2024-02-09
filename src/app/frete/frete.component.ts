@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FilialService } from '../services/filial.service';
 import { Observable, map, startWith } from 'rxjs';
@@ -27,7 +27,9 @@ import { Municipio } from '../models/municipio.model';
   templateUrl: './frete.component.html',
   styleUrls: ['./frete.component.scss']
 })
-export class FreteComponent implements OnInit {
+export class FreteComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('inputMotorista') inputMotorista : any;
 
   formFrete: FormGroup;
   formCaminhao: FormGroup;
@@ -51,6 +53,8 @@ export class FreteComponent implements OnInit {
   session = new SessionProfile();
   isFaturado: boolean;
 
+
+
   constructor(private alertService: AlertService,  private authService: AuthService, private formBuilder: FormBuilder, private caminhaoService: CaminhaoService, 
             private cargaService: FreteService, private pessoaTransporteService: PessoaTransporteService,
             private activatedRoute: ActivatedRoute, private usuarioService: UsuarioService, 
@@ -73,6 +77,10 @@ export class FreteComponent implements OnInit {
     if(session){
       this.session = session;
     }
+
+  }
+  ngAfterViewInit(): void {
+    this.incluirCheckboxMotorista();
   }
 
   initFreteForm(){
@@ -170,16 +178,18 @@ export class FreteComponent implements OnInit {
   }
 
   montarCaminhao(frete: Frete){    
+    debugger
     const caminhaoForm = this.formCaminhao.getRawValue();
     const caminhao = new Caminhao();
     caminhao.id = caminhaoForm.id;
+    caminhao.copiarTransportador = caminhaoForm.copiarTransportador;
 
     if(caminhaoForm.placa) {
       caminhao.placa = caminhaoForm.placa; 
     }
     if(typeof(caminhaoForm.motorista) === 'string') {
       caminhao.motorista = new PessoaTransporte();
-      caminhao.motorista.nome =  caminhaoForm.motorista;
+      caminhao.motorista.nome =  caminhaoForm.motorista.toUpperCase();
       caminhao.motorista.experiencia = caminhaoForm.experiencia;
     } else {
       caminhao.motorista = caminhaoForm.motorista;
@@ -187,10 +197,10 @@ export class FreteComponent implements OnInit {
     
     if(typeof(caminhaoForm.transportador) === 'string') {
       caminhao.transportador = new PessoaTransporte();
-      caminhao.transportador.nome =  caminhaoForm.transportador;
+      caminhao.transportador.nome =  caminhaoForm.transportador.toUpperCase();
     } else {
       caminhao.transportador = caminhaoForm.transportador;
-    }    
+    }
     caminhao.dataAlteracao = caminhaoForm.dataAlteracao;
     frete.caminhao = caminhao;
   }
@@ -227,6 +237,7 @@ export class FreteComponent implements OnInit {
       transportador: ['', Validators.required],
       motorista: ['', Validators.required],
       experiencia: ['', Validators.required],
+      copiarTransportador: [false],
       dataAlteracao: [''],
       enabled: []
     });
@@ -274,7 +285,10 @@ export class FreteComponent implements OnInit {
 
   initMotoristaObserver(){
     this.formCaminhao.controls['motorista'].valueChanges.subscribe(
-      value => {
+      value => {        
+        if(this.isCopiarTransportador()) {
+          return;
+        }
         this.loadingService.blockShow();
         if(value.nome){
           this.pessoasMotorstaObserver = this.pessoaTransporteService.getByNome(value.nome.toUpperCase());
@@ -284,10 +298,27 @@ export class FreteComponent implements OnInit {
       }
     );
   }
+  
+  changeTransportadorText(evento: any){   
+    debugger
+    const valor = evento.srcElement.value;
+    if(this.isCopiarTransportador() && typeof(valor) === 'string') {
+      this.formCaminhao.controls['motorista'].setValue(valor);
+      this.addInputValueMotorista(valor);
+    }
+  }
+
 
   motoristaChange(event: any){
     const experiencia = event.option.value.experiencia;
     this.formCaminhao.controls['experiencia'].setValue(experiencia);
+  }
+ 
+  transportadorChange(){    
+    if(this.isCopiarTransportador()) {
+      this.formCaminhao.controls['motorista'].setValue(this.formCaminhao.controls['transportador'].value);
+      return;
+    }
   }
 
   initPlacaChanges() {
@@ -316,6 +347,8 @@ export class FreteComponent implements OnInit {
       this.calcularSaldo();
     });
   }
+  
+
 
 
   complementoCalculoChange(){
@@ -472,6 +505,36 @@ export class FreteComponent implements OnInit {
     }
   }
 
+  incluirCheckboxMotorista(){
+    const elements = document.getElementsByClassName('mat-mdc-form-field-subscript-wrapper')
+    let elemento = undefined;
+    for(let i = 0; i < elements.length; i++){
+      const parent = elements[i].parentElement;
+      if(parent?.id === 'formMotorista'){
+        elemento =  parent;
+        break;
+      }
+    }
+    if(elemento){
+      const matCheckbox =  document.createElement('mat-checkbox')
+      const check = document.createElement('input')
+      check.type='checkbox'
+      check.id = 'idInputCopiarDeTransportador'
+      check.addEventListener('click', () => {
+        this.copiarDoTransportadorClick()
+      })
+
+      const label = document.createElement('label') 
+      label.setAttribute('for', 'idInputCopiarDeTransportador')
+      label.textContent='Copiar do transportador'
+
+      matCheckbox.setAttribute('formControlName', 'copiarTransportador')
+      matCheckbox.appendChild(check);
+      matCheckbox.appendChild(label);
+      elemento.appendChild(matCheckbox);
+    }
+  }
+
   getResponsavelFaturamento(){
     const responsavel =  this.formFrete.controls['responsavelFaturamento'].value;
     return responsavel ? ': ' + responsavel.nome : '';
@@ -485,4 +548,39 @@ export class FreteComponent implements OnInit {
     this.router.navigateByUrl('/minuta/'+this.formFrete.controls['id'].value);
   }
   
+  copiarDoTransportadorClick(){
+    const controlMotorista = this.formCaminhao.controls['motorista'];
+    const copiarTransportador = this.formCaminhao.controls['copiarTransportador'];
+    const experiencia = this.formCaminhao.controls['experiencia'];
+    const valor = !this.isCopiarTransportador();
+    copiarTransportador.setValue(valor);
+
+    if(valor) {
+      const transportador = JSON.parse(JSON.stringify(this.formCaminhao.controls['transportador'].value));
+      controlMotorista.setValue(transportador);
+      controlMotorista.disable();
+      const isString = typeof(controlMotorista.value) === 'string';
+      if(experiencia && !isString ){
+        controlMotorista.value.experiencia = experiencia.value;
+      } 
+      if(isString) {
+        this.addInputValueMotorista(controlMotorista.value);
+      }
+
+    } else {
+      controlMotorista.setValue(null);
+      controlMotorista.enable();
+    }
+  }
+
+  addInputValueMotorista(valor: string){
+    setTimeout(() => {
+      this.inputMotorista.nativeElement.value = valor;
+    }, 5);
+  }
+
+  isCopiarTransportador(){
+    return this.formCaminhao.controls['copiarTransportador'].value;
+  }
+
 }

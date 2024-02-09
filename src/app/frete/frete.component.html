@@ -85,8 +85,8 @@
                 </mat-form-field>
                 <mat-form-field class="margin-r-1 col-20">
                     <mat-label>Transportador</mat-label>
-                    <input type="text" matInput formControlName="transportador" [matAutocomplete]="autoTransportador">
-                    <mat-autocomplete #autoTransportador="matAutocomplete" [displayWith]="displayNome">
+                    <input type="text" matInput formControlName="transportador" [matAutocomplete]="autoTransportador" (blur)="changeTransportadorText($event)">
+                    <mat-autocomplete #autoTransportador="matAutocomplete" [displayWith]="displayNome" (optionSelected)="transportadorChange()">
                         <mat-option *ngFor="let pessoa of pessoasTransportadorObserver | async" [value]="pessoa">
                             {{pessoa.nome}}
                         </mat-option>
@@ -95,14 +95,15 @@
                         Campo obrigatório
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="margin-r-1 col-20">
+                
+                <mat-form-field id="formMotorista" class="margin-r-1 col-20">
                     <mat-label>Motorista</mat-label>
-                    <input type="text" matInput formControlName="motorista" [matAutocomplete]="autoMotorista">
+                    <input #inputMotorista type="text" matInput formControlName="motorista" [matAutocomplete]="autoMotorista">
                     <mat-autocomplete #autoMotorista="matAutocomplete" [displayWith]="displayNome"  (optionSelected)="motoristaChange($event)">
                         <mat-option *ngFor="let pessoa of pessoasMotorstaObserver | async" [value]="pessoa">
                             {{pessoa.nome}}
                         </mat-option>
-                    </mat-autocomplete>                    
+                    </mat-autocomplete>       
                     <mat-error>
                         Campo obrigatório
                     </mat-error>
