@@ -1,11 +1,8 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Estado } from '../models/estado.model';
-import { Carga } from '../models/carga.model';
-import { CargaFilter } from '../models/carga-filter.model';
+import { FreteFilter } from '../models/carga-filter.model';
 import { Frete } from '../models/frete.model';
-import { MinutaCarga } from '../models/relatorio/minuta-carga.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +15,8 @@ export class FreteService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public getCargasDisponiveis(filtro: CargaFilter): Observable<Carga[]> {
-    return this.httpClient.post<Carga[]>(this.URI_AUTH+"/cargas-disponiveis", filtro);
+  public getCargasDisponiveis(filtro: FreteFilter): Observable<Frete[]> {
+    return this.httpClient.post<Frete[]>(this.URI_AUTH+"/cargas-disponiveis", filtro);
   }
 
   public getReceberDetalheCarga(nroCarga: number, idFilial: number): Observable<Frete> {

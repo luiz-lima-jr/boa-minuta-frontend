@@ -1,7 +1,7 @@
 import { Filial } from "./filial.model";
 import { Usuario } from "./usuario-cadastro.model";
 
-export class CargaFilter {
+export class FreteFilter {
     semPlaca: boolean;
     comPlaca: boolean;
     faturadas: boolean;

@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Filial } from '../models/filial.model';
 import { FilialService } from '../services/filial.service';
 import { Router } from '@angular/router';
-import { Carga } from '../models/carga.model';
 import { FreteService } from '../services/frete.service';
 import { compareFilial } from '../util/compares';
-import { CargaFilter } from '../models/carga-filter.model';
+import { FreteFilter as FreteFilter } from '../models/carga-filter.model';
 import { CheckAllFiliais } from '../util/select';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Frete } from '../models/frete.model';
 
 
 @Component({
@@ -17,16 +20,21 @@ import { CheckAllFiliais } from '../util/select';
 })
 export class CargaComponent implements OnInit {
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource: MatTableDataSource<Frete>;
+
+  resultsLength = 0
+
   formFilter: FormGroup;
   displayedColumns: string[] = ['numeroCarga', 'filial', 'placa', 'valorCarga','resultado', 'responsavel', 
     'faturado', 'municipioDestino', 'cliente', 'volumes', 'dataLimiteCarregamento', 'dataLiberacaoFaturamento', 
     'dataImpressaoMinuta', 'paletizado', 'observacoes'];
-  cargas: Carga[] = [];
   filiais: Filial[] = [];
 
 
   constructor(private formBuilder: FormBuilder, private filialService: FilialService,
-            private router: Router, private cargaService: FreteService) {
+            private router: Router, private freteService: FreteService) {
   }
 
   ngOnInit(): void {
@@ -55,52 +63,53 @@ export class CargaComponent implements OnInit {
 
 
   initFiltroCookie(){
-    const filtroCookieText = localStorage.getItem('filtroCarga');
+    const filtroCookieText = localStorage.getItem('filtroFrete');
     if(filtroCookieText){
       const filtroCookie = JSON.parse(filtroCookieText);
       this.formFilter.patchValue(filtroCookie);
     } else {      
-      this.filtrarCargas(new CargaFilter());
+      this.filtrarCargas(new FreteFilter());
     }
   }
   
   checkAllFiliais(filial: Filial){
-    const filter = this.formFilter.getRawValue() as CargaFilter;
+    const filter = this.formFilter.getRawValue() as FreteFilter;
     filter.filiais = CheckAllFiliais(filial, this.filiais, this.formFilter);
     this.setLocalStorageFilter(filter);
     this.formFilter.patchValue(filter);
   }
 
-  filtrarCargas(filtro: CargaFilter) {
+  filtrarCargas(filtro: FreteFilter) {
     if(!this.filtroFilialIgualStorage(filtro)){
       return;
     }
     if(filtro.filiais.length === 0){
-      this.cargas = [];
+      this.dataSource = new MatTableDataSource<Frete>([]);
       return;
     }
     this.setLocalStorageFilter(filtro);
-    this.cargaService.getCargasDisponiveis(filtro).subscribe({
+    this.freteService.getCargasDisponiveis(filtro).subscribe({
       next: resp =>{
-        this.cargas = resp;
+        this.dataSource = new MatTableDataSource<Frete>(resp);
+        this.dataSource.paginator = this.paginator;
       }, 
       error: error => {
       } 
     })
   }
 
-  private filtroFilialIgualStorage(filtro: CargaFilter){
+  private filtroFilialIgualStorage(filtro: FreteFilter){
     const filtroCookie = this.getFiltroStorage();
     return filtroCookie === null ? false : filtroCookie.filiais.length === filtro.filiais.length;
   }
 
   getFiltroStorage(){
-    const filtroStorageText = localStorage.getItem('filtroCarga');
-    return filtroStorageText === null ? null : JSON.parse(filtroStorageText) as CargaFilter;
+    const filtroStorageText = localStorage.getItem('filtroFrete');
+    return filtroStorageText === null ? null : JSON.parse(filtroStorageText) as FreteFilter;
   }
 
-  private setLocalStorageFilter(value: CargaFilter){
-    localStorage.setItem('filtroCarga', JSON.stringify(value));
+  private setLocalStorageFilter(value: FreteFilter){
+    localStorage.setItem('filtroFrete', JSON.stringify(value));
   }
 
   compareFilial(f1: Filial, f2: Filial): boolean {
@@ -112,8 +121,8 @@ export class CargaComponent implements OnInit {
     ngForm.markAsUntouched();
   }
 
-  getLink(carga: Carga){
-    return `frete/${carga.numeroCarga}/${carga.filial.id}`
+  getLink(frete: Frete){
+    return `frete/${frete.numeroCarga}/${frete.filial.id}`
   }
 
   getNomeCliente(clientes: any[]){

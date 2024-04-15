@@ -69,8 +69,14 @@ export class AppComponent implements OnInit, OnDestroy {
           icon: 'assignment',
         },
         {
-          label: 'Indicador Desempenho',
+          label: 'Desempenho Frete',
           action: 'indicador-desempenho-frete',
+          funcoes: ['ADMINISTRADOR'],
+          icon: 'assignment',
+        },
+        {
+          label: 'Markup',
+          action: 'indicador-desempenho-markup',
           funcoes: ['ADMINISTRADOR'],
           icon: 'assignment',
         }

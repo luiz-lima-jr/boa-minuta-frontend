@@ -7,7 +7,7 @@ import { AlertService } from "../services/alert.service";
 import { Filial } from "../models/filial.model";
 import { Usuario } from "../models/usuario-cadastro.model";
 import { CheckAllFiliais, CheckAllUsuario } from "../util/select";
-import { CargaFilter } from "../models/carga-filter.model";
+import { FreteFilter } from "../models/carga-filter.model";
 import { BaseRelatorioService } from "../services/relatorio/base-relatorio-service.service";
 import { compareFilial, compareUsuario } from "../util/compares";
 import { MatPaginator } from "@angular/material/paginator";
@@ -40,13 +40,13 @@ export abstract class BaseRelatorioComponent implements OnInit{
 
     
   checkAllFiliais(filial: Filial){
-    const filter = this.formFilter.getRawValue() as CargaFilter;
+    const filter = this.formFilter.getRawValue() as FreteFilter;
     filter.filiais = CheckAllFiliais(filial, this.filiais, this.formFilter);
     this.formFilter.patchValue(filter);
   }
 
   checkAllUsuario(usuario: Usuario){
-    const filter = this.formFilter.getRawValue() as CargaFilter;
+    const filter = this.formFilter.getRawValue() as FreteFilter;
     filter.responsaveis = CheckAllUsuario(usuario, this.responsaveis, this.formFilter, 'responsaveis');
     this.formFilter.patchValue(filter);
   }

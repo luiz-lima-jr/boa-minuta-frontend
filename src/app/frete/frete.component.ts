@@ -14,7 +14,6 @@ import { FreteService } from '../services/frete.service';
 import { Usuario } from '../models/usuario-cadastro.model';
 import { UsuarioService } from '../services/usuario.service';
 import { Filial } from '../models/filial.model';
-import { Carga } from '../models/carga.model';
 import { AlertService } from '../services/alert.service';
 import { AuthService } from '../auth/auth.service';
 import { SessionProfile } from '../models/session-profile.model';
@@ -487,7 +486,7 @@ export class FreteComponent implements OnInit, AfterViewInit {
     })
   }
 
-  setCaminhaoPlaca(frete: Carga){
+  setCaminhaoPlaca(frete: Frete){
     if(frete.caminhao){
       this.formCaminhao.patchValue(frete.caminhao);
       this.formCaminhao.controls['experiencia'].setValue(frete.caminhao.motorista?.experiencia);

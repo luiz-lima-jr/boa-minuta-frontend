@@ -98,6 +98,7 @@ export class AliquotaComponent implements OnInit {
       let aliquota = this.formAliquota.getRawValue(); 
       this.aliquotaService.salvar(aliquota).subscribe({
         next: () => {
+          this.alertService.success("Aliquota salva");
           this.buscarAliquotas();
           this.resetForm(ngForm)
         }, 

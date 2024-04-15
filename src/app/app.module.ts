@@ -56,6 +56,7 @@ import { DecimalZeroDefaultDirective } from './directives/decimal-zero-default';
 import { MargemOperacionalComponent } from './relatorios/margem-operacional/margem-operacional.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { IndicadorDesempenhoFretesComponent } from './relatorios/indicador-desempenho-fretes/indicador-desempenho-fretes.component';
+import { IndicadorDesempenhoMarkupComponent } from './relatorios/indicador-desempenho-markup/indicador-desempenho-markup.component';
 
 registerLocaleData(localePt);
 
@@ -80,7 +81,8 @@ registerLocaleData(localePt);
     ClientesMinutaCargaComponent,
     DecimalZeroDefaultDirective,
     MargemOperacionalComponent,
-    IndicadorDesempenhoFretesComponent
+    IndicadorDesempenhoFretesComponent,
+    IndicadorDesempenhoMarkupComponent
   ],
   imports: [
     BrowserModule,

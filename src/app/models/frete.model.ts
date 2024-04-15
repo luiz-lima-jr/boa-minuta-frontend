@@ -1,8 +1,25 @@
 import { Caminhao } from "./caminhao.model";
-import { Carga } from "./carga.model";
 import { Filial } from "./filial.model";
 
-export class Frete extends Carga {
+export class Frete {
+    dataSaida: Date;
+    numeroCarga: number;
+    placa: string;
+    valorCarga: number;
+    m3: number;
+    nfse: number;
+    filial: Filial;
+    responsavel: string;
+    faturado: boolean;
+    destino: string;
+    cliente: string;
+    caminhao: Caminhao;
+    volumes: number;
+    dataLimiteCarregamento: Date;
+    dataLiberacaoFaturamento: Date;
+    dataImpressaoMinuta: Date;
+    paletizado: boolean;
+    observacoes: string;
     origem: string;
     pedagio: number;
     complementoCalculo: number;
