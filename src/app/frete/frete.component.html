@@ -95,7 +95,7 @@
                         Obrigatório
                     </mat-error>
                 </mat-form-field>
-                
+                <input type="checkbox" id="idInputCopiarDeTransportador" (click)="copiarDoTransportadorClick()" formControlName="copiarTransportador">
                 <mat-form-field id="formMotorista" class="margin-r-1 col-20">
                     <mat-label>Motorista</mat-label>
                     <input #inputMotorista type="text" matInput formControlName="motorista" [matAutocomplete]="autoMotorista">

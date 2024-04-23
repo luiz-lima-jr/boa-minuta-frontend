@@ -70,9 +70,10 @@ export class GiftHttpInterceptor implements HttpInterceptor {
         return throwError(errorResponse);
       }
       // 401 redireciona usuario para login quando o token tiver expirado
-      if ( this._authService.isAuthenticatedValue() && (errorResponse.status === 403 || errorResponse.status === 401)) {        this.loadingService.show()
-        this._authService.removeSession()
-        this.messages.warning("Sessão expirada");
+      if ( this._authService.isAuthenticatedValue() && (errorResponse.status === 403 || errorResponse.status === 401)) {
+            this.loadingService.show()
+          this._authService.removeSession()
+          this.messages.warning("Sessão expirada");
         //window.location.reload();
       }
 

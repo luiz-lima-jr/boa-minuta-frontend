@@ -79,7 +79,10 @@ export class FreteComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    this.incluirCheckboxMotorista();
+    const motorista = this.formCaminhao.controls['motorista']
+    if(!motorista.value){
+      motorista.disable();
+    }
   }
 
   initFreteForm(){
@@ -504,36 +507,6 @@ export class FreteComponent implements OnInit, AfterViewInit {
     }
   }
 
-  incluirCheckboxMotorista(){
-    const elements = document.getElementsByClassName('mat-mdc-form-field-subscript-wrapper')
-    let elemento = undefined;
-    for(let i = 0; i < elements.length; i++){
-      const parent = elements[i].parentElement;
-      if(parent?.id === 'formMotorista'){
-        elemento =  parent;
-        break;
-      }
-    }
-    if(elemento){
-      const matCheckbox =  document.createElement('mat-checkbox')
-      const check = document.createElement('input')
-      check.type='checkbox'
-      check.id = 'idInputCopiarDeTransportador'
-      check.addEventListener('click', () => {
-        this.copiarDoTransportadorClick()
-      })
-
-      const label = document.createElement('label') 
-      label.setAttribute('for', 'idInputCopiarDeTransportador')
-      label.textContent='Copiar do transportador'
-
-      matCheckbox.setAttribute('formControlName', 'copiarTransportador')
-      matCheckbox.appendChild(check);
-      matCheckbox.appendChild(label);
-      elemento.appendChild(matCheckbox);
-    }
-  }
-
   getResponsavelFaturamento(){
     const responsavel =  this.formFrete.controls['responsavelFaturamento'].value;
     return responsavel ? ': ' + responsavel.nome : '';
@@ -555,6 +528,9 @@ export class FreteComponent implements OnInit, AfterViewInit {
     copiarTransportador.setValue(valor);
 
     if(valor) {
+      controlMotorista.setValue(null);
+      controlMotorista.enable();
+    } else {
       const transportador = JSON.parse(JSON.stringify(this.formCaminhao.controls['transportador'].value));
       controlMotorista.setValue(transportador);
       controlMotorista.disable();
@@ -565,10 +541,6 @@ export class FreteComponent implements OnInit, AfterViewInit {
       if(isString) {
         this.addInputValueMotorista(controlMotorista.value);
       }
-
-    } else {
-      controlMotorista.setValue(null);
-      controlMotorista.enable();
     }
   }
 
