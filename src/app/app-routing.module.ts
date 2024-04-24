@@ -10,7 +10,7 @@ import { RecuperarSenhaComponent } from './externo/recuperar-senha/recuperar-sen
 import { NovaSenhaComponent } from './externo/nova-senha/nova-senha.component';
 import { PerfilComponent } from './usuario/perfil/perfil.component';
 import { AliquotaComponent } from './aliquota/aliquota.component';
-import { CargaComponent } from './carga/carga.component';
+import { ListarFretesComponent } from './listar-fretes/listar-fretes.component';
 import { FreteComponent } from './frete/frete.component';
 import { MinutaCargaComponent } from './relatorios/minuta/minuta-carga.component';
 import { MargemOperacionalComponent } from './relatorios/margem-operacional/margem-operacional.component';
@@ -59,7 +59,7 @@ const routes: Routes = [
   },
   {
     path: 'carga',
-    component: CargaComponent,
+    component: ListarFretesComponent,
     canActivate: [ AuthGuard ],
   },
   {

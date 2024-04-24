@@ -14,11 +14,11 @@ import { Frete } from '../models/frete.model';
 
 
 @Component({
-  selector: 'app-carga',
-  templateUrl: './carga.component.html',
-  styleUrls: ['./carga.component.scss']
+  selector: 'app-listar-fretes',
+  templateUrl: './listar-fretes.component.html',
+  styleUrls: ['./listar-fretes.component.scss']
 })
-export class CargaComponent implements OnInit {
+export class ListarFretesComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

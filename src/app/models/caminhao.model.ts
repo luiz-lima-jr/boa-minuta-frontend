@@ -6,5 +6,5 @@ export class Caminhao {
     transportador: PessoaTransporte;
     motorista: PessoaTransporte;
     dataAlteracao: Date;
-    copiarTransportador: boolean;
+    habiliarCampoMotorista: boolean;
 }

@@ -42,7 +42,7 @@ import { RecuperarSenhaComponent } from './externo/recuperar-senha/recuperar-sen
 import { NovaSenhaComponent } from './externo/nova-senha/nova-senha.component';
 import { PerfilComponent } from './usuario/perfil/perfil.component';
 import { AliquotaComponent } from './aliquota/aliquota.component';
-import { CargaComponent } from './carga/carga.component';
+import { ListarFretesComponent } from './listar-fretes/listar-fretes.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { FreteComponent } from './frete/frete.component';
 
@@ -74,7 +74,7 @@ registerLocaleData(localePt);
     NovaSenhaComponent,
     PerfilComponent,
     AliquotaComponent,
-    CargaComponent,
+    ListarFretesComponent,
     FreteComponent,
     MinutaCargaComponent,
     PedidoMinutaCargaComponent,

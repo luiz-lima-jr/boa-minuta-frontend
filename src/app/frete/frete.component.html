@@ -95,7 +95,7 @@
                         Obrigatório
                     </mat-error>
                 </mat-form-field>
-                <input type="checkbox" id="idInputCopiarDeTransportador" (click)="copiarDoTransportadorClick()" formControlName="copiarTransportador">
+                <input type="checkbox" id="idInputCopiarDeTransportador" (click)="habilitarCampoMotoristaClick()" formControlName="habiliarCampoMotorista">
                 <mat-form-field id="formMotorista" class="margin-r-1 col-20">
                     <mat-label>Motorista</mat-label>
                     <input #inputMotorista type="text" matInput formControlName="motorista" [matAutocomplete]="autoMotorista">
@@ -266,7 +266,7 @@
             <button class="button-cadastro margin-r-4" mat-flat-button color="primary" *ngIf="showSalvar()" (click)="salvar()"> Salvar</button>
             <button class="button-secundary button-cadastro margin-r-4" *ngIf="showLimpar()" mat-flat-button (click)="resetForm(formCargaFilterT, formCaminhaoT)"> Limpar</button>
             <button class="button-secundary button-cadastro margin-r-4" mat-flat-button (click)="voltar()"> Voltar</button>
-            <button class="button-secundary button-cadastro" *ngIf="formFrete.controls['id'].value" mat-flat-button (click)="imprimir()">Imprimir</button>
-        </mat-card-footer>
+            <button class="button-secundary button-cadastro" *ngIf="formFrete.controls['freteCalculado'].value" mat-flat-button (click)="imprimir()">Imprimir</button>
+        </mat-card-footer> 
     </mat-card>
 </form>

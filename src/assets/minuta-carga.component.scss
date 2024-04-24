@@ -34,27 +34,33 @@ mat-form-field{
   display: flex;
 }
 
+.col-desc-1 {
+}
+
 .col-desc-2 {
   margin-right: 6em !important;
 }
 
 .col-desc-3{
   width: 15em;
+  
 }
-
 .col-desc-4{
-  width: 6em;
-  text-align: end; 
+  width: 8em;
+  text-align: end;
+  
 }
 
 .col-desc-5{
   text-align: end;
   width: 15em;
+  
 }
 
 .col-desc-6{
   text-align: end;
   width: 7em;
+  
 }
 
 .tabelaPedido{
@@ -65,7 +71,6 @@ mat-form-field{
 .fonte{
   font-size: 1.2em;
 }
-
 .fonte2{
   font-size: 1.6em;
 }
@@ -78,12 +83,36 @@ mat-form-field{
   margin-top: 5em !important;
 }
 
+  
+.printer {
+  color: white;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.print-section {
+  min-width: 1200px;
+  height: 1754px;
+}
+
+.header-print { 
+  padding: 10px 0px;
+  height: 230px;
+  background: #f8f8f8;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
 .frete {
   font-size: 1.6em !important;
 }
 
 .grid-desc {
-	display: grid !important;	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr !important;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .grid-template-rows-1 {
@@ -91,15 +120,7 @@ mat-form-field{
 }
 
 .item {
-	margin: 5px !important;
-	font-size: 1em !important;
+	margin: 5px;
+	font-size: 1.2em;
   text-align: end !important;
-}
-
-td {
-  background-color: #f1f1f1 !important;
-}
-
-.mdc-data-table__cell{
-  color: #7F7F7F;
 }

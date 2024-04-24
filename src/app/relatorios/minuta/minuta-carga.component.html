@@ -1,67 +1,72 @@
-<mat-card id="print-section" class="margin-r-2" *ngIf="minuta">
+
+<mat-card  class="margin-r-2" *ngIf="minuta">
     <div style="display: flex; "> 
     </div>
     <hr><br>
-    <div class="margin-l-1 fonte"><b>Minuta de Carga N°: </b>{{minuta.numeroCarga}}</div>
-    <div class="linha">        
-        <div class="margin-l-1 coluna-titulo-1 fonte"><b>Direto: </b>{{minuta.direto}}</div>
-        <div class="margin-l-1 coluna-titulo-2 fonte"><b>Redespacho: </b>{{minuta.redespacho}}</div>
-    </div>
-    <div class="linha">        
-        <div class="margin-l-1 coluna-titulo-1 fonte"><b>Placa: </b>{{minuta.placa}}</div>
-        <div class="margin-l-1 coluna-titulo-2 fonte"><b>Data Saída: </b>{{minuta.dataSaida  | date: 'dd/MM/yyyy'}}</div>
-    </div>
-    <div class="linha">        
-        <div class="margin-l-1 coluna-titulo-1 fonte"><b>Motorista: </b>{{minuta.motorista}}</div>
-    </div>
-    
-    <app-pedido-minuta-carga [minuta]="minuta" class="tabelaPedido"></app-pedido-minuta-carga>
+    <div id="print-section">
+        <div class="margin-l-1 fonte"><b>Minuta de Carga N°: </b>{{minuta.numeroCarga}}</div>
+        <div class="linha">        
+            <div class="margin-l-1 coluna-titulo-1 fonte"><b>Direto: </b>{{minuta.direto}}</div>
+            <div class="margin-l-1 coluna-titulo-2 fonte"><b>Redespacho: </b>{{minuta.redespacho}}</div>
+        </div>
+        <div class="linha">        
+            <div class="margin-l-1 coluna-titulo-1 fonte"><b>Placa: </b>{{minuta.placa}}</div>
+            <div class="margin-l-1 coluna-titulo-2 fonte"><b>Data Saída: </b>{{minuta.dataSaida  | date: 'dd/MM/yyyy'}}</div>
+        </div>
+        <div class="linha">        
+            <div class="margin-l-1 coluna-titulo-1 fonte"><b>Motorista: </b>{{minuta.motorista}}</div>
+        </div>
+        
+        <app-pedido-minuta-carga [minuta]="minuta" class="tabelaPedido"></app-pedido-minuta-carga>
 
-    <div>     
-        <section class="grid-desc grid-template-rows-1">
-            <div class="item col-desc-1"> <b>Peso Bruto: </b> </div>
-            <div class="item col-desc-2">{{minuta.pesoBruto | number : '1.2-2'}}</div>
-            <div class="item col-desc-3"> <b>Total Volumes Carga: </b> </div>
-            <div class="item col-desc-4">  {{minuta.totalVolumes}}</div>
-            <div class="item col-desc-5"> <b>Volumes Total Caminhão: </b></div>
-            <div class="item col-desc-6"> {{minuta.volumeTotalCaminhao | number : '1.2-2'}} m3 </div>
-        </section>
-        <section class="grid-desc grid-template-rows-1">
-            <div class="item col-desc-1"><b>Valor Total: </b></div>
-            <div class="item col-desc-2"> {{minuta.valorTotal | currency}}</div>
-            <div></div>
-            <div></div>
-            <div class="item col-desc-5"> <b>Vol Total da Carga: </b></div>
-            <div class="item col-desc-6"> {{minuta.volumeTotalCarga | number : '1.2-2'}} m3</div>
-        </section>
-        <section class="grid-desc grid-template-rows-1">
-            <div class="item col-desc-1"> <b>Data Fatura: </b></div>
-            <div class="item col-desc-2"> {{minuta.dataFatura | date: 'dd/MM/yyyy'}}</div>
-            <div class="item col-desc-3"> <b>Cidades: </b></div>
-            <div class="item col-desc-4"> {{minuta.cidades}}</div>
-        </section>
-        <section class="grid-desc grid-template-rows-1">
-            <div class="item col-desc-1"><b>ICMS Frete: </b></div>
-            <div class="item col-desc-2"> {{minuta.icmsFrete | currency}}</div>
-            <div class="item col-desc-3"> <b>Taxa Entrega: </b></div>
-            <div class="item col-desc-4"> {{minuta.taxaEntrega | currency}}</div>
-            <div class="item frete"> <b>Frete: </b></div>
-            <div class="item frete col-desc-6"> {{minuta.valorFrete | currency}}</div>
-        </section>
-        <section class="grid-desc grid-template-rows-1">
-            <div class="item col-desc-1"> <b>Pedagio: </b></div>
-            <div class="item col-desc-2"> {{minuta.pedagio | currency}}</div>
-        </section>
+        <div>     
+            <section class="grid-desc grid-template-rows-1">
+                <div class="item col-desc-1"><b>Peso Bruto: </b></div>
+                <div class="item col-desc-2"> {{minuta.pesoBruto | number : '1.2-2'}}</div>
+                <div class="item col-desc-3"> <b>Total Volumes Carga: </b></div>
+                <div class="item col-desc-4"> {{minuta.totalVolumes }}</div>
+                <div class="item frete"> <b>Vol Total Caminhão: </b></div>
+                <div class="item frete col-desc-6"> {{minuta.volumeTotalCaminhao | number : '1.2-2'}} m3 </div>
+            </section>
+            <section class="grid-desc grid-template-rows-1">
+                <div class="item col-desc-1"><b>Valor Total: </b></div>
+                <div class="item col-desc-2"> {{minuta.valorTotal | currency}}</div>
+                <div></div>
+                <div></div>
+                <div class="item col-desc-5"> <b>Vol Total da Carga: </b></div>
+                <div class="item col-desc-6"> {{minuta.volumeTotalCarga | number : '1.2-2'}} m3</div>
+            </section>
+            <section class="grid-desc grid-template-rows-1">
+                <div class="item col-desc-1"> <b>Data Fatura: </b></div>
+                <div class="item col-desc-2"> {{minuta.dataFatura | date: 'dd/MM/yyyy'}}</div>
+                <div class="item col-desc-3"> <b>Cidades: </b></div>
+                <div class="item col-desc-4"> {{minuta.cidades}}</div>
+            </section>
+            <section class="grid-desc grid-template-rows-1">
+                <div class="item col-desc-1"><b>ICMS Frete: </b></div>
+                <div class="item col-desc-2"> {{minuta.icmsFrete | currency}}</div>
+                <div class="item col-desc-3"> <b>Taxa Entrega: </b></div>
+                <div class="item col-desc-4"> {{minuta.taxaEntrega | currency}}</div>
+                <div class="item frete"> <b>Frete: </b></div>
+                <div class="item frete col-desc-6"> {{minuta.valorFrete | currency}}</div>
+            </section>
+            <section class="grid-desc grid-template-rows-1">
+                <div class="item col-desc-1"> <b>Pedagio: </b></div>
+                <div class="item col-desc-2"> {{minuta.pedagio | currency}}</div>
+                <div class="item col-desc-3"></div>
+                <div class="item col-desc-4"></div>
+            </section>
+        </div>
+
+        <div class="linha observacoes">     
+            <div class="margin-l-1 fonte2 linha-desc"><b>Observações de Entrega: </b>{{minuta.observacoes}}</div>
+        </div>
+
+        <app-clientes-minuta-carga [minuta]="minuta"></app-clientes-minuta-carga>
     </div>
 
-    <div class="linha observacoes">     
-        <div class="margin-l-1 fonte2 linha-desc"><b>Observações de Entrega: </b>{{minuta.observacoes}}</div>
-    </div>
-
-    <app-clientes-minuta-carga [minuta]="minuta"></app-clientes-minuta-carga>
-  
     <mat-card-footer style="margin: 0.8em 0.8em 1.5em 0.8em">
         <button class="button-secundary button-cadastro margin-r-4" mat-flat-button (click)="voltar()"> Voltar</button>
-        <button class="button-secundary button-cadastro margin-r-4" mat-flat-button printSectionId="print-section" ngxPrint> Imprimir </button>
+        <button class="button-secundary button-cadastro margin-r-4" mat-flat-button printSectionId="print-section" ngxPrint [useExistingCss]="true">Imprimir </button>
     </mat-card-footer>
 </mat-card>
