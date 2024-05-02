@@ -57,12 +57,6 @@ export class AppComponent implements OnInit, OnDestroy {
       icon: 'assignment',
       itens: [
         {
-          label: 'Minuta',
-          action: 'minuta/:idFrete',
-          funcoes: [],
-          icon: 'assignment',
-        },
-        {
           label: 'Margem Operacional',
           action: 'margem-operacional',
           funcoes: ['ADMINISTRADOR'],

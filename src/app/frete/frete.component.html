@@ -95,11 +95,11 @@
                         Obrigatório
                     </mat-error>
                 </mat-form-field>
-                <input type="checkbox" id="idInputCopiarDeTransportador" (click)="habilitarCampoMotoristaClick()" formControlName="habiliarCampoMotorista">
+                <input type="checkbox" id="idInputCopiarDeTransportador" (click)="habilitarCampoMotoristaClick()" formControlName="motoristaDiferente">
                 <mat-form-field id="formMotorista" class="margin-r-1 col-20">
                     <mat-label>Motorista</mat-label>
                     <input #inputMotorista type="text" matInput formControlName="motorista" [matAutocomplete]="autoMotorista">
-                    <mat-autocomplete #autoMotorista="matAutocomplete" [displayWith]="displayNome"  (optionSelected)="motoristaChange($event)">
+                    <mat-autocomplete #autoMotorista="matAutocomplete" [displayWith]="displayNomeMotorista"  (optionSelected)="motoristaChange($event)">
                         <mat-option *ngFor="let pessoa of pessoasMotorstaObserver | async" [value]="pessoa">
                             {{pessoa.nome}}
                         </mat-option>

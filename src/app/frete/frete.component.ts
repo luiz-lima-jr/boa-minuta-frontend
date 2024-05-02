@@ -19,6 +19,7 @@ import { AuthService } from '../auth/auth.service';
 import { SessionProfile } from '../models/session-profile.model';
 import { isAdm, isFaturista, isOperacional } from '../util/funcao-helper';
 import { Municipio } from '../models/municipio.model';
+import { Motorista } from '../models/motorista.model';
 
 
 @Component({
@@ -181,19 +182,20 @@ export class FreteComponent implements OnInit, AfterViewInit {
     }
   }
 
-  montarCaminhao(frete: Frete){    
-    debugger
+  montarCaminhao(frete: Frete){  
+    debugger 
     const caminhaoForm = this.formCaminhao.getRawValue();
     const caminhao = new Caminhao();
     caminhao.id = caminhaoForm.id;
-    caminhao.habiliarCampoMotorista = caminhaoForm.habiliarCampoMotorista;
+    caminhao.motoristaDiferente = caminhaoForm.motoristaDiferente;
 
     if(caminhaoForm.placa) {
       caminhao.placa = caminhaoForm.placa; 
     }
     if(typeof(caminhaoForm.motorista) === 'string') {
-      caminhao.motorista = new PessoaTransporte();
-      caminhao.motorista.nome =  caminhaoForm.motorista.toUpperCase();
+      caminhao.motorista = new Motorista();
+      caminhao.motorista.pessoaTransporte = new PessoaTransporte();
+      caminhao.motorista.pessoaTransporte.nome =  caminhaoForm.motorista.toUpperCase();
       caminhao.motorista.experiencia = caminhaoForm.experiencia;
     } else {
       caminhao.motorista = caminhaoForm.motorista;
@@ -241,7 +243,7 @@ export class FreteComponent implements OnInit, AfterViewInit {
       transportador: ['', Validators.required],
       motorista: ['', Validators.required],
       experiencia: ['', Validators.required],
-      habiliarCampoMotorista: [false],
+      motoristaDiferente: [false],
       dataAlteracao: [''],
       enabled: []
     });
@@ -289,13 +291,14 @@ export class FreteComponent implements OnInit, AfterViewInit {
 
   initMotoristaObserver(){
     this.formCaminhao.controls['motorista'].valueChanges.subscribe(
-      value => {        
-        if(this.isHabilitarCampoMotorista()) {
+      value => {     
+        if(this.isMotoristaDiferente()) {
           return;
         }
         this.loadingService.blockShow();
-        if(value.nome){
-          this.pessoasMotorstaObserver = this.pessoaTransporteService.getByNome(value.nome.toUpperCase());
+        debugger
+        if(value.pessoaTransporte && value.pessoaTransporte.nome){
+          this.pessoasMotorstaObserver = this.pessoaTransporteService.getByNome(value.pessoaTransporte.nome.toUpperCase());
         } else {          
           this.pessoasMotorstaObserver = this.pessoaTransporteService.getByNome(value.toUpperCase());
         }
@@ -305,7 +308,7 @@ export class FreteComponent implements OnInit, AfterViewInit {
   
   changeTransportadorText(evento: any){   
     const valor = evento.srcElement.value;
-    if(!this.isHabilitarCampoMotorista() && typeof(valor) === 'string') {
+    if(!this.isMotoristaDiferente() && typeof(valor) === 'string') {
       this.formCaminhao.controls['motorista'].setValue(valor);
       this.addInputValueMotorista(valor);
     }
@@ -313,12 +316,13 @@ export class FreteComponent implements OnInit, AfterViewInit {
 
 
   motoristaChange(event: any){
+    debugger
     const experiencia = event.option.value.experiencia;
     this.formCaminhao.controls['experiencia'].setValue(experiencia);
   }
  
   transportadorChange(){    
-    if(this.isHabilitarCampoMotorista()) {
+    if(this.isMotoristaDiferente()) {
       this.formCaminhao.controls['motorista'].setValue(this.formCaminhao.controls['transportador'].value);
       return;
     }
@@ -443,6 +447,9 @@ export class FreteComponent implements OnInit, AfterViewInit {
   displayNome(pessoa: PessoaTransporte): string {
     return pessoa && pessoa.nome ? pessoa.nome : '';
   }
+  displayNomeMotorista(motorista: Motorista): string {
+    return motorista && motorista.pessoaTransporte ? motorista.pessoaTransporte.nome : '';
+  }
 
   displayMunicipio(municipio: Municipio): string {
     return municipio ? `${municipio.estado.sigla} - ${municipio.nome}` : '';
@@ -523,9 +530,9 @@ export class FreteComponent implements OnInit, AfterViewInit {
   
   habilitarCampoMotoristaClick(){
     debugger
-    const habiliarCampoMotorista = this.formCaminhao.controls['habiliarCampoMotorista'];
-    const habilitar = !this.isHabilitarCampoMotorista();
-    habiliarCampoMotorista.setValue(habilitar);
+    const motoristaDiferente = this.formCaminhao.controls['motoristaDiferente'];
+    const habilitar = !this.isMotoristaDiferente();
+    motoristaDiferente.setValue(habilitar);
     this.copiarValorTransportador(habilitar);
   }
 
@@ -555,8 +562,8 @@ export class FreteComponent implements OnInit, AfterViewInit {
     }, 5);
   }
 
-  isHabilitarCampoMotorista(){
-    return this.formCaminhao.controls['habiliarCampoMotorista'].value;
+  isMotoristaDiferente(){
+    return this.formCaminhao.controls['motoristaDiferente'].value;
   }
 
 }
