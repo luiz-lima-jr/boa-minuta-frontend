@@ -10,4 +10,7 @@ export class FreteFilter {
     filiais: Filial[];
     responsaveis: Usuario[];
     todasFiliais: boolean;
+    numeroCarga?: Number;
+    pagina?: number;
+    qtdPagina?: number;
 }

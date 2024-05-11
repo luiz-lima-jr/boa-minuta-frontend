@@ -25,6 +25,7 @@ export class ListarFretesComponent implements OnInit {
   dataSource: MatTableDataSource<Frete>;
 
   resultsLength = 0
+  totalLength = 0;
 
   formFilter: FormGroup;
   displayedColumns: string[] = ['numeroCarga', 'filial', 'placa', 'valorCarga','resultado', 'responsavel', 
@@ -50,9 +51,13 @@ export class ListarFretesComponent implements OnInit {
       dataInicioFaturamento: [undefined],
       dataFimFaturamento: [undefined],
       filiais: [undefined],
-      todasFiliais: [false]
+      numeroCarga: [undefined],
+      todasFiliais: [false],
+      pagina: [undefined], 
+      qtdPagina: [undefined]
     });
     this.formFilter.valueChanges.subscribe(res => this.filtrarCargas(res));
+    this.formFilter.controls[""]
     this.initFiltroCookie();
   }
 
@@ -87,11 +92,12 @@ export class ListarFretesComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Frete>([]);
       return;
     }
-    this.setLocalStorageFilter(filtro);
     this.freteService.getCargasDisponiveis(filtro).subscribe({
       next: resp =>{
-        this.dataSource = new MatTableDataSource<Frete>(resp);
-        this.dataSource.paginator = this.paginator;
+        this.dataSource = new MatTableDataSource<Frete>(resp.fretes);
+      //  this.dataSource.paginator = this.paginator;
+        this.totalLength = resp.qtd;
+        this.setLocalStorageFilter(filtro);
       }, 
       error: error => {
       } 
@@ -109,6 +115,9 @@ export class ListarFretesComponent implements OnInit {
   }
 
   private setLocalStorageFilter(value: FreteFilter){
+    value.numeroCarga = undefined;
+    value.pagina = undefined;
+    
     localStorage.setItem('filtroFrete', JSON.stringify(value));
   }
 
@@ -134,6 +143,14 @@ export class ListarFretesComponent implements OnInit {
 
   abreviarNomeFilial(nome: string){
     return nome.length > 10 ? nome.substring(0, 10) : nome;
+  }
+
+  paginaAlterada(event: any){
+    debugger
+    this.formFilter.controls['pagina'].setValue(event.pageIndex);
+    this.formFilter.controls['qtdPagina'].setValue(event.pageSize);
+
+    this.filtrarCargas(this.formFilter.getRawValue());
   }
 
   voltar(){

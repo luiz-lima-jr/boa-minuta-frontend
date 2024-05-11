@@ -2,9 +2,15 @@
     <mat-card class="margin-r-2">
         <div style="display: flex; ">
             <mat-card-header><h2>Cargas Liberadas</h2></mat-card-header>
+        </div>
+        <div style="display: flex; ">
             <mat-checkbox formControlName="semPlaca">Sem Placa</mat-checkbox>
             <mat-checkbox formControlName="comPlaca">Com Placa</mat-checkbox>
-            <mat-checkbox formControlName="faturadas">Faturadas</mat-checkbox>
+            <mat-checkbox formControlName="faturadas">Faturadas</mat-checkbox>            
+            <mat-form-field class="margin-l-1 col-10">
+                <mat-label>Carga</mat-label>
+                <input matInput class="form-control" type="number" placeholder="15" formControlName="numeroCarga">
+            </mat-form-field>   
             <mat-form-field class="field-data margin-l-2" appearance="fill">
                 <mat-label>Inicio faturamento</mat-label>
                 <input matInput [matDatepicker]="pickerInicio" formControlName="dataInicioFaturamento">
@@ -97,6 +103,9 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]"  showFirstLastButtons [pageSize]="10"></mat-paginator>
+        <mat-paginator
+                [pageSizeOptions]="[10, 20, 50]" 
+                [length]="totalLength"
+                (page)="paginaAlterada($event)" showFirstLastButtons ></mat-paginator>
     </mat-card>
 </form>
