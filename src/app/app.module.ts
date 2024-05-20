@@ -58,6 +58,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { IndicadorDesempenhoFretesComponent } from './relatorios/indicador-desempenho-fretes/indicador-desempenho-fretes.component';
 import { IndicadorDesempenhoMarkupComponent } from './relatorios/indicador-desempenho-markup/indicador-desempenho-markup.component';
 
+import {MatSortModule} from '@angular/material/sort';
+
 registerLocaleData(localePt);
 
 @NgModule({
@@ -116,7 +118,8 @@ registerLocaleData(localePt);
     NgxMaskDirective, 
     NgxPrintModule,
     NgxMaskPipe,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     HttpClient,

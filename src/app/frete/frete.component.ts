@@ -352,6 +352,7 @@ export class FreteComponent implements OnInit, AfterViewInit {
     this.formFrete.controls['pedagio'].valueChanges.subscribe(() => {
       this.calcularValorFrete();
       this.calcularSaldo();
+      this.calcularIcms();
     });
   }
   
@@ -379,14 +380,18 @@ export class FreteComponent implements OnInit, AfterViewInit {
     const complementoCalculo = this.formFrete.controls['complementoCalculo'].value ;
     this.formFrete.controls['pisCofins'].setValue((complementoCalculo + valorCarga) * aliquotaPisCofins);    
     this.calcularSaldo();
+    this.calcularCustos();
+    this.calcularIrcs();
   }
 
   calcularCustos(){
     const valorCarga = this.formFrete.controls['valorCarga'].value;
     const complementoCalculo = this.formFrete.controls['complementoCalculo'].value;
     const aliquotaCustos = this.formFrete.controls['aliquotaCustos'].value / 100;
+    const pisCofins = this.formFrete.controls['pisCofins'].value;
+    const icms = this.formFrete.controls['icms'].value;
 
-    const custos = (valorCarga + complementoCalculo) * aliquotaCustos;
+    const custos = (valorCarga + complementoCalculo - pisCofins - icms) * aliquotaCustos;
     this.formFrete.controls['custos'].setValue(custos);
     this.calcularSaldo();
   }
@@ -395,23 +400,30 @@ export class FreteComponent implements OnInit, AfterViewInit {
     const valorCarga = this.formFrete.controls['valorCarga'].value;
     const nfse = this.formFrete.controls['nfse'].value;
     const iss = this.formFrete.controls['iss'].value;
+    const pedagio = this.formFrete.controls['pedagio'].value;
     const complementoCalculo = this.formFrete.controls['complementoCalculo'].value;
     const aliquotaIcms = this.formFrete.controls['aliquotaIcms'].value / 100;
 
-    const icms = (valorCarga - nfse - iss + complementoCalculo) * aliquotaIcms;
+    const icms = (valorCarga - nfse - iss  - pedagio + complementoCalculo) * aliquotaIcms;
     this.formFrete.controls['icms'].setValue(icms);
     this.calcularSaldo();
+    this.calcularCustos();
+    this.calcularIrcs();
+
   }
 
   calcularIrcs(){
     const valorCarga = this.formFrete.controls['valorCarga'].value;
     const complementoCalculo = this.formFrete.controls['complementoCalculo'].value;
     const aliquotaIrcs = this.formFrete.controls['aliquotaIrcs'].value / 100;
-    const irCs = (valorCarga + complementoCalculo) * aliquotaIrcs;
+    const pisCofins = this.formFrete.controls['pisCofins'].value;
+    const icms = this.formFrete.controls['icms'].value;
+
+    const irCs = (valorCarga + complementoCalculo - pisCofins - icms) * aliquotaIrcs;
     this.formFrete.controls['irCs'].setValue(irCs);
     this.calcularSaldo();
   }
-
+//(Valor da Carga + Complemento - frete pago - pedagio - pis - icms - custos - ir)
   calcularSaldo(){
     const valorCarga = this.formFrete.controls['valorCarga'].value;
     const complementoCalculo = this.formFrete.controls['complementoCalculo'].value;
@@ -421,7 +433,7 @@ export class FreteComponent implements OnInit, AfterViewInit {
     const icms = this.formFrete.controls['icms'].value;
     const custos = this.formFrete.controls['custos'].value;
     const irCs = this.formFrete.controls['irCs'].value;
-    const saldo = valorCarga + complementoCalculo - fretePago + pedagio + pisCofins + icms + custos + irCs;
+    const saldo = valorCarga + complementoCalculo - fretePago - pedagio - pisCofins - icms - custos - irCs;
     this.formFrete.controls['saldo'].setValue(saldo);
     this.calcularMargem();
   }

@@ -29,8 +29,8 @@ export class ListarFretesComponent implements OnInit {
 
   formFilter: FormGroup;
   displayedColumns: string[] = ['numeroCarga', 'filial', 'placa', 'valorCarga','resultado', 'responsavel', 
-    'faturado', 'municipioDestino', 'cliente', 'volumes', 'dataLimiteCarregamento', 'dataLiberacaoFaturamento', 
-    'dataImpressaoMinuta', 'paletizado', 'observacoes'];
+    'faturado', 'municipioDestino', 'volumes', 'dataLimiteCarregamento', 'dataLiberacaoFaturamento', 
+    'dataImpressaoMinuta'];
   filiais: Filial[] = [];
 
 
@@ -54,9 +54,11 @@ export class ListarFretesComponent implements OnInit {
       numeroCarga: [undefined],
       todasFiliais: [false],
       pagina: [undefined], 
-      qtdPagina: [undefined]
+      qtdPagina: [undefined],
+      coluna: [undefined],
+      direcao: [undefined]
     });
-    this.formFilter.valueChanges.subscribe(res => this.filtrarCargas(res));
+   
     this.formFilter.controls[""]
     this.initFiltroCookie();
   }
@@ -72,6 +74,7 @@ export class ListarFretesComponent implements OnInit {
     if(filtroCookieText){
       const filtroCookie = JSON.parse(filtroCookieText);
       this.formFilter.patchValue(filtroCookie);
+      this.filtrarCargas(this.formFilter.getRawValue());
     } else {      
       this.filtrarCargas(new FreteFilter());
     }
@@ -82,6 +85,10 @@ export class ListarFretesComponent implements OnInit {
     filter.filiais = CheckAllFiliais(filial, this.filiais, this.formFilter);
     this.setLocalStorageFilter(filter);
     this.formFilter.patchValue(filter);
+  }
+
+  pesquisar(){
+    this.filtrarCargas(this.formFilter.getRawValue());
   }
 
   filtrarCargas(filtro: FreteFilter) {
@@ -95,7 +102,6 @@ export class ListarFretesComponent implements OnInit {
     this.freteService.getCargasDisponiveis(filtro).subscribe({
       next: resp =>{
         this.dataSource = new MatTableDataSource<Frete>(resp.fretes);
-      //  this.dataSource.paginator = this.paginator;
         this.totalLength = resp.qtd;
         this.setLocalStorageFilter(filtro);
       }, 
@@ -159,5 +165,11 @@ export class ListarFretesComponent implements OnInit {
 
   getFilialEmpty(){
     return new Filial();
+  }
+
+  sortTable(event: any){
+    this.formFilter.controls['coluna'].setValue(event.active);
+    this.formFilter.controls['direcao'].setValue(event.direction);
+    this.pesquisar();
   }
 }
