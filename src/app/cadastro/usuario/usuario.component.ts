@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Filial } from '../models/filial.model';
-import { FilialService } from '../services/filial.service';
-import { ConfirmService } from '../services/confirm.service';
 import { Observable } from 'rxjs';
-import { AlertService } from '../services/alert.service';
-import { Usuario } from '../models/usuario-cadastro.model';
-import { UsuarioService } from '../services/usuario.service';
-import { FuncaoService } from '../services/funcao.service';
-import { Funcao } from '../models/funcao.model';
 import { Router } from '@angular/router';
-import { compareFilial, compareFuncoes } from '../util/compares';
+import { Usuario } from 'src/app/models/usuario-cadastro.model';
+import { Filial } from 'src/app/models/filial.model';
+import { Funcao } from 'src/app/models/funcao.model';
+import { ConfirmService } from 'src/app/services/confirm.service';
+import { AlertService } from 'src/app/services/alert.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { FilialService } from 'src/app/services/filial.service';
+import { FuncaoService } from 'src/app/services/funcao.service';
+import { compareFilial, compareFuncoes } from 'src/app/util/compares';
 
 
 @Component({

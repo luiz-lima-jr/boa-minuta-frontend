@@ -1,16 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Filial } from '../models/filial.model';
-import { FilialService } from '../services/filial.service';
-import { Router } from '@angular/router';
-import { FreteService } from '../services/frete.service';
-import { compareFilial } from '../util/compares';
-import { FreteFilter as FreteFilter } from '../models/carga-filter.model';
-import { CheckAllFiliais } from '../util/select';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Frete } from '../models/frete.model';
+import { Router } from '@angular/router';
+import { FreteFilter } from '../../models/carga-filter.model';
+import { Filial } from '../../models/filial.model';
+import { Frete } from '../../models/frete.model';
+import { FilialService } from '../../services/filial.service';
+import { FreteService } from '../../services/frete.service';
+import { compareFilial } from '../../util/compares';
+import { CheckAllFiliais } from '../../util/select';
 
 
 @Component({
@@ -48,8 +48,8 @@ export class ListarFretesComponent implements OnInit {
       semPlaca: [undefined],
       comPlaca: [undefined],
       faturadas: [undefined],
-      dataInicioFaturamento: [undefined],
-      dataFimFaturamento: [undefined],
+      dataInicio: [undefined],
+      dataFim: [undefined],
       filiais: [undefined],
       numeroCarga: [undefined],
       todasFiliais: [false],
@@ -152,7 +152,6 @@ export class ListarFretesComponent implements OnInit {
   }
 
   paginaAlterada(event: any){
-    debugger
     this.formFilter.controls['pagina'].setValue(event.pageIndex);
     this.formFilter.controls['qtdPagina'].setValue(event.pageSize);
 

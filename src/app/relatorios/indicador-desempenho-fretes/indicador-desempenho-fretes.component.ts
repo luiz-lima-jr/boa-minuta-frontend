@@ -4,8 +4,8 @@ import { FormBuilder } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { AlertService } from "src/app/services/alert.service";
 import { FilialService } from "src/app/services/filial.service";
-import { BaseRelatorioComponent } from "../base-relatorio.component";
 import { IndicadorDesempenhoFreteService } from "src/app/services/relatorio/indicador-desempenho-frete.service";
+import { BaseRelatorioComponent } from "../base-relatorio.component";
 
 
 @Component({

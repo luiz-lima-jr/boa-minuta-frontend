@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
-import { ADMINISTRADOR, FuncaoType } from './models/funcao.model';
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from './auth/auth.service';
+import { ADMINISTRADOR, FuncaoType } from './models/funcao.model';
 import { SessionProfile } from './models/session-profile.model';
 
 @Component({
@@ -71,6 +71,12 @@ export class AppComponent implements OnInit, OnDestroy {
         {
           label: 'Markup',
           action: 'indicador-desempenho-markup',
+          funcoes: ['ADMINISTRADOR'],
+          icon: 'assignment',
+        },
+        {
+          label: 'Captação Caminhoneiros',
+          action: 'captacao-caminhoneiros',
           funcoes: ['ADMINISTRADOR'],
           icon: 'assignment',
         }

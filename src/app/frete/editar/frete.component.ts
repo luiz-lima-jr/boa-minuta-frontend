@@ -1,25 +1,25 @@
-import { Component, OnInit, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FilialService } from '../services/filial.service';
-import { Observable, map, startWith } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { compareExperienciaBom, compareFilial, compareFobCif, comparePagamentoPedagio } from '../util/compares';
-import { ExperienciaBomEnum, ExperienciaBomEnumMapping, FobCifEnum, Frete, PagamentoPedagioEnum } from '../models/frete.model';
-import { Caminhao } from '../models/caminhao.model';
-import { CaminhaoService } from '../services/caminhao.service';
-import { LoadingService } from '../services/loading.service';
-import { PessoaTransporte } from '../models/pessoa-transporte.model';
-import { PessoaTransporteService } from '../services/pessoa-transporte.service';
-import { FreteService } from '../services/frete.service';
-import { Usuario } from '../models/usuario-cadastro.model';
-import { UsuarioService } from '../services/usuario.service';
-import { Filial } from '../models/filial.model';
-import { AlertService } from '../services/alert.service';
-import { AuthService } from '../auth/auth.service';
-import { SessionProfile } from '../models/session-profile.model';
-import { isAdm, isFaturista, isOperacional } from '../util/funcao-helper';
-import { Municipio } from '../models/municipio.model';
-import { Motorista } from '../models/motorista.model';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../auth/auth.service';
+import { Caminhao } from '../../models/caminhao.model';
+import { Filial } from '../../models/filial.model';
+import { ExperienciaBomEnum, ExperienciaBomEnumMapping, FobCifEnum, Frete, PagamentoPedagioEnum } from '../../models/frete.model';
+import { Motorista } from '../../models/motorista.model';
+import { Municipio } from '../../models/municipio.model';
+import { PessoaTransporte } from '../../models/pessoa-transporte.model';
+import { SessionProfile } from '../../models/session-profile.model';
+import { Usuario } from '../../models/usuario-cadastro.model';
+import { AlertService } from '../../services/alert.service';
+import { CaminhaoService } from '../../services/caminhao.service';
+import { FilialService } from '../../services/filial.service';
+import { FreteService } from '../../services/frete.service';
+import { LoadingService } from '../../services/loading.service';
+import { PessoaTransporteService } from '../../services/pessoa-transporte.service';
+import { UsuarioService } from '../../services/usuario.service';
+import { compareExperienciaBom, compareFobCif, comparePagamentoPedagio } from '../../util/compares';
+import { isAdm, isFaturista } from '../../util/funcao-helper';
 
 
 @Component({
@@ -37,7 +37,7 @@ export class FreteComponent implements OnInit, AfterViewInit {
     'faturado', 'municipioDestino', 'cliente', 'volumes', 'dataLimiteCarregamento', 'dataLiberacaoFaturamento', 
     'dataImpressaoMinuta', 'paletizado', 'observacoes'];
   experienciaBomEnumMapping = ExperienciaBomEnumMapping;
-  //experienciaList: ExperienciaBomEnum[] = [ExperienciaBomEnum.NOVO_PARA_CARREGAMENTO, ExperienciaBomEnum.CARREGA_SEMPRE, ExperienciaBomEnum.RETORNANDO];
+
   experienciaList = Object.values(ExperienciaBomEnum);
   fobCifsList: FobCifEnum[] = Object.values(FobCifEnum);
   pagamentoPedagioList: PagamentoPedagioEnum[] = [PagamentoPedagioEnum.TAG, PagamentoPedagioEnum.CARTAO, PagamentoPedagioEnum.OUTRO];
@@ -183,7 +183,6 @@ export class FreteComponent implements OnInit, AfterViewInit {
   }
 
   montarCaminhao(frete: Frete){  
-    debugger 
     const caminhaoForm = this.formCaminhao.getRawValue();
     const caminhao = new Caminhao();
     caminhao.id = caminhaoForm.id;
@@ -296,7 +295,6 @@ export class FreteComponent implements OnInit, AfterViewInit {
           return;
         }
         this.loadingService.blockShow();
-        debugger
         if(value.pessoaTransporte && value.pessoaTransporte.nome){
           this.pessoasMotorstaObserver = this.pessoaTransporteService.getByNome(value.pessoaTransporte.nome.toUpperCase());
         } else {          

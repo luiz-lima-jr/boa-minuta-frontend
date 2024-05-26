@@ -1,0 +1,66 @@
+<form  name="form" #formCargaFilterT="ngForm"  novalidate  [formGroup]="formFilter">
+    <mat-card class="margin-r-2">
+        <div style="display: flex; ">
+            <mat-card-header><h2 style="width: 90%;">Capitação Caminhoneiro</h2></mat-card-header>          
+            <mat-form-field appearance="fill" class="field-data">
+                <mat-label>Filial</mat-label>
+                <mat-select [compareWith]="compareFilial" formControlName="filiais" multiple>
+                    <mat-option *ngFor="let filial of filiais" (click)="checkAllFiliais(filial)" [value]="filial">{{filial.nome}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-14 field-data margin-l-1" appearance="fill">
+                <mat-label>De</mat-label>
+                <input matInput [matDatepicker]="pickerInicio" formControlName="dataInicioCadastro">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerInicio">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #pickerInicio></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-14 field-data margin-l-1" appearance="fill" >
+                <mat-label>Até</mat-label>
+                <input matInput [matDatepicker]="pickerFim" formControlName="dataFimCadastro">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerFim">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #pickerFim></mat-datepicker>
+            </mat-form-field>     
+            <mat-form-field appearance="fill" class="field-data margin-l-1">
+                <mat-label>Responsável</mat-label>
+                <mat-select [compareWith]="compareUsuario" formControlName="responsaveis" multiple>
+                    <mat-option *ngFor="let usuario of responsaveis" (click)="checkAllUsuario(usuario)" [value]="usuario">{{usuario.nome}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="field-data margin-l-1">
+                <mat-label>Experiência</mat-label>
+                <mat-select [compareWith]="compareExperienciaBom" formControlName="experienciasBom" multiple>
+                    <mat-option *ngFor="let experiencia of experienciaList" [value]="experiencia">{{experienciaBomEnumMapping[experiencia]}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button class="button-secundary align-self-center col-8 margin-l-2 margin-r-1" mat-flat-button printSectionId="print-section" ngxPrint [useExistingCss]="true">Imprimir </button>
+        </div>
+        <hr><br>
+        <div id="print-section">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="sortTable($event)">
+                <ng-container matColumnDef="responsavel">
+                    <th mat-header-cell *matHeaderCellDef style="width: 16%;" mat-sort-header="responsavelOperacional.nome"> Responsável </th>
+                    <td mat-cell *matCellDef="let carga"> {{carga.responsavel}} </td>
+                </ng-container>
+                <ng-container matColumnDef="placa">
+                    <th mat-header-cell *matHeaderCellDef style="width: 12%;" mat-sort-header="placa" > Placa </th>
+                    <td mat-cell *matCellDef="let carga"> {{carga.placa}} </td>
+                </ng-container>
+                <ng-container matColumnDef="experiencia">
+                    <th mat-header-cell *matHeaderCellDef style="width: 12%;" mat-sort-header="caminhao.motorista.experiencia" > Experiência </th>
+                    <td mat-cell *matCellDef="let carga"> {{carga.experiencia}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table> 
+        </div>
+        <div style="text-align: center;">Novo para carregamento = {{result?.novoParaCarregamento}}    /   Carrega Sempre = {{result?.carregaSempre}}    /   Retornando = {{result?.retornando}}</div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" 
+        (page)="paginaAlterada($event)" showFirstLastButtons [pageSize]="10">TOTAL: </mat-paginator>
+
+    </mat-card>
+</form>

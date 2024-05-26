@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Aliquota } from '../models/aliquota.model';
-import { AliquotaService } from '../services/aliquota.service';
-import { ConfirmService } from '../services/confirm.service';
 import { Observable } from 'rxjs';
-import { AlertService } from '../services/alert.service';
 import { Router } from '@angular/router';
-import { EstadoService } from '../services/estado.service';
-import { TipoAliquotaService } from '../services/tipo-aliquota.service';
-import { Estado } from '../models/estado.model';
-import { TipoAliquota } from '../models/tipo-aliquota.model';
-import { compareEstado, compareFilial, compareTipoAliquota } from '../util/compares';
-import { Filial } from '../models/filial.model';
-import { FilialService } from '../services/filial.service';
+import { Aliquota } from 'src/app/models/aliquota.model';
+import { TipoAliquota } from 'src/app/models/tipo-aliquota.model';
+import { Estado } from 'src/app/models/estado.model';
+import { Filial } from 'src/app/models/filial.model';
+import { EstadoService } from 'src/app/services/estado.service';
+import { AliquotaService } from 'src/app/services/aliquota.service';
+import { TipoAliquotaService } from 'src/app/services/tipo-aliquota.service';
+import { ConfirmService } from 'src/app/services/confirm.service';
+import { FilialService } from 'src/app/services/filial.service';
+import { AlertService } from 'src/app/services/alert.service';
+import { compareEstado, compareFilial, compareTipoAliquota } from 'src/app/util/compares';
 
 
 @Component({

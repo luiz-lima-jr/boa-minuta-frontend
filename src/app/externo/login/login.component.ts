@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, Subject, take, takeUntil } from 'rxjs';
+import { Subject, filter, takeUntil } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { AlertService } from '../../services/alert.service';
 
