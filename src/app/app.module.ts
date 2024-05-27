@@ -60,6 +60,7 @@ import { AliquotaComponent } from './cadastro/aliquota/aliquota.component';
 import { PerfilComponent } from './cadastro/usuario/perfil/perfil.component';
 import { UsuarioComponent } from './cadastro/usuario/usuario.component';
 import { CaptacaoCaminhoneiroComponent } from './relatorios/captacao-caminhoneiro/captacao-caminhoneiro.component';
+import { DreComponent } from './relatorios/dre/dre.component';
 
 registerLocaleData(localePt);
 
@@ -86,7 +87,8 @@ registerLocaleData(localePt);
     MargemOperacionalComponent,
     IndicadorDesempenhoFretesComponent,
     IndicadorDesempenhoMarkupComponent,
-    CaptacaoCaminhoneiroComponent
+    CaptacaoCaminhoneiroComponent,
+    DreComponent
   ],
   imports: [
     BrowserModule,

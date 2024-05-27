@@ -79,6 +79,12 @@ export class AppComponent implements OnInit, OnDestroy {
           action: 'captacao-caminhoneiros',
           funcoes: ['ADMINISTRADOR'],
           icon: 'assignment',
+        },
+        {
+          label: 'DRE',
+          action: 'dre',
+          funcoes: ['ADMINISTRADOR'],
+          icon: 'assignment',
         }
       ]
     }

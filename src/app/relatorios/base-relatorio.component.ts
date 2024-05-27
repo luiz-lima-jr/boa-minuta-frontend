@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
-import { FilialService } from "../services/filial.service";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { AlertService } from "../services/alert.service";
-import { Filial } from "../models/filial.model";
-import { Usuario } from "../models/usuario-cadastro.model";
-import { CheckAllFiliais, CheckAllUsuario } from "../util/select";
-import { FreteFilter } from "../models/carga-filter.model";
-import { BaseRelatorioService } from "../services/relatorio/base-relatorio-service.service";
-import { compareFilial, compareUsuario } from "../util/compares";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
+import { ActivatedRoute } from "@angular/router";
+import { FreteFilter } from "../models/carga-filter.model";
+import { Filial } from "../models/filial.model";
+import { Usuario } from "../models/usuario-cadastro.model";
+import { AlertService } from "../services/alert.service";
+import { FilialService } from "../services/filial.service";
+import { BaseRelatorioService } from "../services/relatorio/base-relatorio-service.service";
+import { compareFilial, compareUsuario } from "../util/compares";
+import { CheckAllFiliais, CheckAllUsuario } from "../util/select";
 
 @Component({
     template: ''
@@ -55,7 +55,7 @@ export abstract class BaseRelatorioComponent implements OnInit{
     this.relatorioService.filtrar(this.formFilter.getRawValue()).subscribe({
       next: resp => { 
         this.result = resp;        
-        this.resultsLength = this.result.list.length
+        this.resultsLength = this.result.list?.length
         this.dataSource = new MatTableDataSource<any>(this.result.list);
         this.dataSource.paginator = this.paginator;
       }

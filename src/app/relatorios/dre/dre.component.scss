@@ -9,6 +9,10 @@ h2 {
     text-align: center;
 }
 
+table {
+    font-size: 0.8em;
+    width: 100% !important;
+}
 .title-page {
     @media(max-width: 1300px){
         font-size: 1.5em;
@@ -18,4 +22,17 @@ h2 {
 
 ::ng-deep .mat-sort-header-container {
     display: ruby !important;
+}
+.text-align-left {
+    text-align: left !important;
+}
+.text-align-right {
+    text-align: right !important;
+}
+.linha {
+    font-weight: 400;
+    width: 12%;
+}
+th {
+    color: rgba(0, 0, 0, 0.87) !important;
 }

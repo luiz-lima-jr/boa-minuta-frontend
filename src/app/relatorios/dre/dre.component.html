@@ -1,0 +1,134 @@
+<form  name="form" #formCargaFilterT="ngForm"  novalidate  [formGroup]="formFilter">
+    <mat-card class="margin-r-2">
+        <div style="display: flex; ">
+            <mat-card-header><h2 style="width: 90%;">DRE</h2></mat-card-header>          
+            <mat-form-field appearance="fill" class="field-data">
+                <mat-label>Filial</mat-label>
+                <mat-select [compareWith]="compareFilial" formControlName="filiais" multiple>
+                    <mat-option *ngFor="let filial of filiais" (click)="checkAllFiliais(filial)" [value]="filial">{{filial.nome}}</mat-option>
+                </mat-select>
+            </mat-form-field>  
+            <mat-form-field class="field-data margin-l-1">
+                <mat-label>Exercício</mat-label>
+                <mat-select formControlName="anoExercicio">
+                    <mat-option *ngFor="let ano of anos" [value]="ano">{{ano}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-14 field-data margin-l-1" appearance="fill">
+                <mat-label>De</mat-label>
+                <input matInput [matDatepicker]="pickerInicio" formControlName="dataInicioFaturamento">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerInicio">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #pickerInicio></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-14 field-data margin-l-1" appearance="fill" >
+                <mat-label>Até</mat-label>
+                <input matInput [matDatepicker]="pickerFim" formControlName="dataFimFaturamento">
+                <mat-datepicker-toggle matIconSuffix [for]="pickerFim">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #pickerFim></mat-datepicker>
+            </mat-form-field>   
+            <button class="button-secundary align-self-center col-8 margin-l-2 margin-r-1" mat-flat-button printSectionId="print-section" ngxPrint [useExistingCss]="true">Imprimir </button>
+        </div>
+        <hr><br>
+        <div id="print-section">
+            <table class="mat-table">
+                <thead>
+                  <tr>
+                    <th class="mat-header-cell text-align-left">Receitas</th>
+                    <td class="mat-cell" *ngFor="let i of result">
+                      <b>{{i.nomeMes}}</b>
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr class="cinza">
+                      <th class="mat-header-cell text-align-right linha">Valor Carga</th>
+                      <td class="mat-cell" *ngFor="let i of result">
+                        {{format(i.valorCarga) | number }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-right linha">Complemento</th>
+                      <td class="mat-cell" *ngFor="let i of result">
+                        {{format(i.complemento) | number}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-right">Total</th>
+                      <td class="mat-cell" *ngFor="let i of result">
+                        {{format(i.totalReceitas) | number}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-left">Pagamentos</th>
+                      <td class="mat-cell" *ngFor="let i of result"></td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-right linha">Frete Pago</th>
+                      <td class="mat-cell" *ngFor="let i of result">
+                        {{format(i.fretePago) | number}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-right linha">Pedágio</th>
+                      <td class="mat-cell" *ngFor="let i of result">
+                        {{format(i.pedagio) | number}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-right">Total</th>
+                      <td class="mat-cell" *ngFor="let i of result">
+                        {{format(i.totalPagamentos) | number}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-left">Resultado</th>
+                      <td class="mat-cell" *ngFor="let i of result"></td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-right linha">Receitas - Pagamentos</th>
+                      <td class="mat-cell" *ngFor="let i of result">
+                        {{format(i.resultado) | number}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-left">Despesas</th>
+                      <td class="mat-cell" *ngFor="let i of result"></td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-right linha">Impostos</th>
+                      <td class="mat-cell" *ngFor="let i of result">
+                        {{format(i.impostos) | number}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-right linha">Custos</th>
+                      <td class="mat-cell" *ngFor="let i of result">
+                        {{format(i.custos) | number}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-right">Total</th>
+                      <td class="mat-cell" *ngFor="let i of result">
+                        {{format(i.totalDespesas) | number}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-left">Final</th>
+                      <td class="mat-cell" *ngFor="let i of result"></td>
+                    </tr>
+                    <tr>
+                      <th class="mat-header-cell text-align-right">Resultado - Despesas</th>
+                      <td class="mat-cell" *ngFor="let i of result">
+                        {{format(i.valorFinal) | number}}
+                      </td>
+                    </tr>
+                </tbody>
+              </table>
+          
+        </div>
+    </mat-card>
+</form>

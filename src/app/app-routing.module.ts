@@ -13,6 +13,7 @@ import { ListarFretesComponent } from './frete/listar-fretes/listar-fretes.compo
 import { HomeComponent } from './home/home.component';
 import { ADMINISTRADOR, FATURISTA, OPERACIONAL } from './models/funcao.model';
 import { CaptacaoCaminhoneiroComponent } from './relatorios/captacao-caminhoneiro/captacao-caminhoneiro.component';
+import { DreComponent } from './relatorios/dre/dre.component';
 import { IndicadorDesempenhoFretesComponent } from './relatorios/indicador-desempenho-fretes/indicador-desempenho-fretes.component';
 import { IndicadorDesempenhoMarkupComponent } from './relatorios/indicador-desempenho-markup/indicador-desempenho-markup.component';
 import { MargemOperacionalComponent } from './relatorios/margem-operacional/margem-operacional.component';
@@ -111,6 +112,14 @@ const routes: Routes = [
   {
     path: 'captacao-caminhoneiros',
     component: CaptacaoCaminhoneiroComponent,
+    canActivate: [ AuthGuard ],
+    data: {
+      funcoes: [ADMINISTRADOR]
+    }
+  },
+  {
+    path: 'dre',
+    component: DreComponent,
     canActivate: [ AuthGuard ],
     data: {
       funcoes: [ADMINISTRADOR]
