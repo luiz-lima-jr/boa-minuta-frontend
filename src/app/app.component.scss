@@ -11,7 +11,7 @@
 }
 
 .app-sidenav {
-    width: 230px;
+    width: 21%;
 }
 
 .app-sidenav-content {
@@ -112,7 +112,7 @@ mat-toolbar {
 }
 
 mat-expansion-panel {
-    width: 90%;
+    width: 98%;
 }
 
 ::ng-deep .mat-expansion-indicator::after {
@@ -144,11 +144,12 @@ mat-expansion-panel {
   }
 
 ::ng-deep .mat-expansion-panel-body {
-    padding: 0 0.5em !important;
+    padding: 0 0.1em !important;
 }
 $menu-padding-left: 5px;
 ::ng-deep  .mat-expansion-panel-header.mat-expanded{
     padding-left: $menu-padding-left !important;
+    height: 52px !important;
 }
 
 ::ng-deep .mat-expansion-panel-header {
@@ -162,4 +163,11 @@ $menu-padding-left: 5px;
     border-right: none;
     border-left: none;
     border-color: $primary-color;
+}
+
+::ng-deep .mdc-list-item{
+    padding-right: 0px !important;
+}
+::ng-deep .mdc-list{
+    padding: 1px  !important;
 }
