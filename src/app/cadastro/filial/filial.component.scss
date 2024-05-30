@@ -44,21 +44,47 @@ h2 mat-icon {
 .mat-mdc-card-content{
   padding: 0;
 }
+.nome {
+  @media (max-width: 1000px) {    
+    width: 50% !important;
+  }
+  @media (min-width: 1001px) {    
+    width: 30% !important;
+  }
+}
 .codigo-mili {
   @media (max-width: 1000px) {    
-    width: 40% !important;
+    width: 45% !important;
   }
   @media (min-width: 1001px) {    
     width: 20% !important;
   }
 }
 
-.senha {
+.estado {
   @media (max-width: 1000px) {    
-    width: 40% !important;
+    width: 45% !important;
   }
   @media (min-width: 1001px) {    
-    width: 20% !important;
+    width: 15% !important;
+  }
+}
+
+.municipio {
+  @media (max-width: 1000px) {    
+    width: 50% !important;
+  }
+  @media (min-width: 1001px) {    
+    width: 25% !important;
+  }
+}
+
+.local {
+  @media (max-width: 1000px) {    
+    width: 50% !important;
+  }
+  @media (min-width: 1001px) {    
+    width: 30% !important;
   }
 }
 

@@ -12,6 +12,9 @@
 
 .app-sidenav {
     width: 21%;
+    @media (max-width: 1000px) {    
+      width: 60% !important;
+    }
 }
 
 .app-sidenav-content {

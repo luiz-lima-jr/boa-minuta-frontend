@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -27,7 +27,7 @@ import { isAdm, isFaturista } from '../../util/funcao-helper';
   templateUrl: './frete.component.html',
   styleUrls: ['./frete.component.scss']
 })
-export class FreteComponent implements OnInit, AfterViewInit {
+export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('inputMotorista') inputMotorista : any;
 
@@ -72,7 +72,6 @@ export class FreteComponent implements OnInit, AfterViewInit {
     this.initFreteForm();
     this.initCaminhaoForm();
     this.getDetalheCarga();
-    this.initChanges();
     const session = this.authService.getSessionProfile();
     if(session){
       this.session = session;
@@ -85,6 +84,9 @@ export class FreteComponent implements OnInit, AfterViewInit {
       motorista.disable();
       this.copiarValorTransportador(false);
     }
+  }
+  ngOnDestroy(): void {
+      this.loadingService.unblockShow();
   }
 
   initFreteForm(){
@@ -265,6 +267,7 @@ export class FreteComponent implements OnInit, AfterViewInit {
   initTransportadorObserver() {
     this.formCaminhao.controls['transportador'].valueChanges.subscribe(
       value => {
+        debugger
         this.loadingService.blockShow();
         if(value.nome){
           this.pessoasTransportadorObserver = this.pessoaTransporteService.getByNome(value.nome.toUpperCase());
@@ -278,6 +281,7 @@ export class FreteComponent implements OnInit, AfterViewInit {
   initUsuarioObserver(){    
     this.formFrete.controls['responsavelOperacional'].valueChanges.subscribe(
       value => {
+        debugger
         this.loadingService.blockShow();
         if(value?.nome){
           this.usuarioObserver = this.usuarioService.getByNome(value.nome.toUpperCase());
@@ -294,6 +298,7 @@ export class FreteComponent implements OnInit, AfterViewInit {
         if(this.isMotoristaDiferente()) {
           return;
         }
+        debugger
         this.loadingService.blockShow();
         if(value.pessoaTransporte && value.pessoaTransporte.nome){
           this.pessoasMotorstaObserver = this.pessoaTransporteService.getByNome(value.pessoaTransporte.nome.toUpperCase());
@@ -329,6 +334,7 @@ export class FreteComponent implements OnInit, AfterViewInit {
   initPlacaChanges() {
     this.formCaminhao.controls['placa'].valueChanges.subscribe(
       value => {
+        debugger
         this.loadingService.blockShow();
         this.caminhoesObserver = this.caminhaoService.getByPlaca(value.toUpperCase());
       }
@@ -494,6 +500,7 @@ export class FreteComponent implements OnInit, AfterViewInit {
   getDetalheCarga(){
     this.cargaService.getReceberDetalheCarga(this.numeroCarga, this.idFilial).subscribe({
       next: result => {    
+        this.initChanges();
         this.setCaminhaoPlaca(result);
         if(result.dataSaida){
           result.dataSaida = new Date(result.dataSaida);
