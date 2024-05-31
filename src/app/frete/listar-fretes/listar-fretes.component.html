@@ -45,6 +45,10 @@
                 <th mat-header-cell *matHeaderCellDef style="width: 5%;" mat-sort-header="filial.nome"> Filial </th>
                 <td mat-cell *matCellDef="let carga"> {{abreviarNomeFilial(carga.filial.nome)}} </td>
             </ng-container>
+            <ng-container matColumnDef="municipioOrigem">
+                <th mat-header-cell *matHeaderCellDef style="width: 6%;" mat-sort-header="municipioOrigem.nome"> Carreg. </th>
+                <td mat-cell *matCellDef="let carga"> {{abreviarNomeCidade(carga.municipioOrigem.nome)}} </td>
+            </ng-container>
             <ng-container matColumnDef="placa">
                 <th mat-header-cell *matHeaderCellDef style="width: 6%;"  mat-sort-header="placa"> Placa </th>
                 <td mat-cell *matCellDef="let carga"> {{ carga.placa}} </td>

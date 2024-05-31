@@ -28,7 +28,7 @@ export class ListarFretesComponent implements OnInit {
   totalLength = 0;
 
   formFilter: FormGroup;
-  displayedColumns: string[] = ['numeroCarga', 'filial', 'placa', 'valorCarga','resultado', 'responsavel', 
+  displayedColumns: string[] = ['numeroCarga', 'filial', 'municipioOrigem', 'placa', 'valorCarga','resultado', 'responsavel', 
     'faturado', 'municipioDestino', 'volumes', 'dataLimiteCarregamento', 'dataLiberacaoFaturamento', 
     'dataImpressaoMinuta'];
   filiais: Filial[] = [];
@@ -149,6 +149,13 @@ export class ListarFretesComponent implements OnInit {
 
   abreviarNomeFilial(nome: string){
     return nome.length > 10 ? nome.substring(0, 10) : nome;
+  }
+  abreviarNomeCidade(nome: string){
+    let iniciais = '';
+    for(let palavra of nome.split(' ')){
+      iniciais += palavra.substring(0, 1);
+    }
+    return iniciais;
   }
 
   paginaAlterada(event: any){
