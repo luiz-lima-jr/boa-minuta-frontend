@@ -45,8 +45,7 @@ export class ListarFretesComponent implements OnInit {
 
   initFilterForm(){
     this.formFilter = this.formBuilder.group({
-      semPlaca: [undefined],
-      comPlaca: [undefined],
+      lancadas: [undefined],
       faturadas: [undefined],
       dataInicio: [undefined],
       dataFim: [undefined],
@@ -88,11 +87,13 @@ export class ListarFretesComponent implements OnInit {
   }
 
   pesquisar(){
+    debugger
     this.filtrarCargas(this.formFilter.getRawValue());
   }
 
   filtrarCargas(filtro: FreteFilter) {
     if(!this.filtroFilialIgualStorage(filtro)){
+      
       return;
     }
     if(filtro.filiais.length === 0){
