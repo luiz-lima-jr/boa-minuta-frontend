@@ -1,6 +1,6 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { FreteFilter } from '../models/carga-filter.model';
 import { Frete } from '../models/frete.model';
 import { ListarFrete } from '../models/listar-fretes.model';

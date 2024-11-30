@@ -3,9 +3,28 @@
     <mat-card class="margin-r-2">
         <div style="display: flex;">
             <mat-card-header>
-                <span style="align-self: center; margin-right: 3em;"><b>Carga n°: {{numeroCarga}}</b></span>
-                <span style="align-self: center; margin-right: 3em;">Filial: {{filial?.nome}}</span>
-                <mat-checkbox class="faturadoLabel" formControlName="faturado">Faturado{{getResponsavelFaturamento()}}</mat-checkbox>
+                <div *ngIf="!edicaoNro" >
+                    <span style="align-self: center;"><b>Carga n°: {{numeroCarga}}</b></span>
+                    <button mat-icon-button style="align-self: center; margin-right: 2em;" class="botao-edit" (click)="alterarNumeroCarga()"> <mat-icon class="botao-login-toolbar">edit</mat-icon>  </button>
+                    <span style="align-self: center; margin-right: 3em;">Filial: {{filial?.nome}}</span>
+                    <mat-checkbox class="faturadoLabel" formControlName="faturado">Faturado{{getResponsavelFaturamento()}}</mat-checkbox>
+                </div>
+                <div *ngIf="edicaoNro" >
+                    <mat-form-field  class="col-30" *ngIf="edicaoNro">
+                        <mat-label>Número Carga</mat-label>
+                        <input type="number" matInput class="form-control" placeholder="Número Carga" formControlName="numeroCarga">
+                        <mat-error>
+                            Obrigatório
+                        </mat-error>
+                    </mat-form-field>  
+                    <button mat-icon-button style="align-self: center; margin-right: 1em;" class="botao-edit" (click)="pesquisarNovaCarga()"> <mat-icon class="botao-login-toolbar">check</mat-icon>  </button>
+                    <mat-form-field appearance="fill" class="col-40">
+                        <mat-label>Filial</mat-label>
+                        <mat-select [compareWith]="compareFilial" formControlName="filial">
+                            <mat-option *ngFor="let filial of filiais"  [value]="filial">{{filial.nome}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>  
+                </div> 
             </mat-card-header>
         </div>
         <hr><br>
@@ -35,7 +54,7 @@
             </mat-form-field>
             <mat-form-field class="margin-r-1 col-15">
                 <mat-label>Complemento</mat-label>
-                <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Complemento" formControlName="complemento" readonly>
+                <input type="text" matInput mask="separator.2" thousandSeparator="."  decimalMarker="," [allowNegativeNumbers]="true" class="form-control" placeholder="Complemento" formControlName="complemento">
                 <mat-error>
                     Obrigatório
                 </mat-error>
@@ -73,8 +92,8 @@
             <div class="campos-formulario">
                 <mat-form-field class="margin-r-1 col-10">
                     <mat-label>Placa</mat-label>
-                    <input type="text" maxlength="8" matInput formControlName="placa" [matAutocomplete]="autoPlaca">
-                    <mat-autocomplete #autoPlaca="matAutocomplete">
+                    <input type="text" maxlength="8" matInput (ngModelChange)="upperPlaca($event)" formControlName="placa" [matAutocomplete]="autoPlaca">
+                    <mat-autocomplete #autoPlaca="matAutocomplete" (optionSelected)="caminhaoChange($event)">
                         <mat-option *ngFor="let caminhao of caminhoesObserver | async" [value]="caminhao">
                             {{caminhao.placa}}
                         </mat-option>
@@ -95,7 +114,7 @@
                         Obrigatório
                     </mat-error>
                 </mat-form-field>
-                <input type="checkbox" id="idInputCopiarDeTransportador" (click)="habilitarCampoMotoristaClick()" formControlName="motoristaDiferente">
+                <input type="checkbox" id="idInputCopiarDeTransportador" (click)="habilitarCampoMotoristaClick()" (ngModelChange)="upperMotorista($event)"  formControlName="motoristaDiferente">
                 <mat-form-field id="formMotorista" class="margin-r-1 col-20">
                     <mat-label>Motorista</mat-label>
                     <input #inputMotorista type="text" matInput formControlName="motorista" [matAutocomplete]="autoMotorista">

@@ -1,7 +1,10 @@
 import { Caminhao } from "./caminhao.model";
 import { Filial } from "./filial.model";
+import { Municipio } from "./municipio.model";
+import { Usuario } from "./usuario-cadastro.model";
 
 export class Frete {
+    id?: number;
     dataSaida: Date;
     numeroCarga: number;
     placa: string;
@@ -36,6 +39,11 @@ export class Frete {
     saldo: number;
     margem: number;
     markup: number;
+    responsavelOperacional: Usuario;
+    responsavelFaturamento: Usuario;
+    entregas: number;
+    municipioOrigem: Municipio;
+    municipioDestino: Municipio;
 }
 
 export enum ExperienciaBomEnum {
@@ -58,5 +66,6 @@ export enum FobCifEnum{
 export enum PagamentoPedagioEnum {
     TAG = 'TAG',
     CARTAO = 'CARTAO',
-    OUTRO = 'OUTRO'
+    OUTRO = 'OUTRO',
+    SEM_PEDAGIO='SEM_PEDAGIO'
 }

@@ -1,3 +1,4 @@
+import { Caminhao } from "../models/caminhao.model";
 import { Estado } from "../models/estado.model";
 import { Filial } from "../models/filial.model";
 import { ExperienciaBomEnum, FobCifEnum, PagamentoPedagioEnum } from "../models/frete.model";
@@ -37,5 +38,8 @@ export const   comparePagamentoPedagio = (f1: PagamentoPedagioEnum, f2: Pagament
   return f1 === f2;
 }
 export const   compareUsuario = (f1: Usuario, f2: Usuario): boolean => {
+  return f1 === f2;
+}
+export const   compareCaminhao = (f1: Caminhao, f2: Caminhao): boolean => {
   return f1 === f2;
 }

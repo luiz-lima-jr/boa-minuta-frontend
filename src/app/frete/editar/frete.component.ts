@@ -18,7 +18,7 @@ import { FreteService } from '../../services/frete.service';
 import { LoadingService } from '../../services/loading.service';
 import { PessoaTransporteService } from '../../services/pessoa-transporte.service';
 import { UsuarioService } from '../../services/usuario.service';
-import { compareExperienciaBom, compareFobCif, comparePagamentoPedagio } from '../../util/compares';
+import { compareCaminhao, compareExperienciaBom, compareFilial, compareFobCif, comparePagamentoPedagio } from '../../util/compares';
 import { isAdm, isFaturista } from '../../util/funcao-helper';
 
 
@@ -40,7 +40,7 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   experienciaList = Object.values(ExperienciaBomEnum);
   fobCifsList: FobCifEnum[] = Object.values(FobCifEnum);
-  pagamentoPedagioList: PagamentoPedagioEnum[] = [PagamentoPedagioEnum.TAG, PagamentoPedagioEnum.CARTAO, PagamentoPedagioEnum.OUTRO];
+  pagamentoPedagioList: PagamentoPedagioEnum[] = Object.values(PagamentoPedagioEnum);
   caminhoesObserver: Observable<Caminhao[]>;
   caminhoesList: Caminhao[];
   pessoasTransportadorObserver: Observable<PessoaTransporte[]>;
@@ -48,11 +48,15 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
   usuarioObserver: Observable<Usuario[]>;
   pessoasList: PessoaTransporte[];
   numeroCarga: number;
-  idFilial: number;
-  filial?: Filial;
+  filial: Filial;
+  filiais: Filial[];
   session = new SessionProfile();
   isFaturado: boolean;
-
+  fretePesquisado: Frete;
+  placaUppada = false;
+  transportadorUppado = false;
+  motoristaUppado = false;
+  edicaoNro = false;
 
 
   constructor(private alertService: AlertService,  private authService: AuthService, private formBuilder: FormBuilder, private caminhaoService: CaminhaoService, 
@@ -61,17 +65,19 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
             private router: Router, private loadingService: LoadingService, private filialService: FilialService) {
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {   
     this.activatedRoute.params.subscribe((params) => { 
       this.numeroCarga = params['numeroCarga'];
-      this.idFilial = params['idFilial'];
+      this.filialService.getById(params['idFilial']).subscribe(f => {
+        this.filial = f;
+        this.getDetalheCarga();
+      });
+      
     })
 
-    this.filialService.getById(this.idFilial).subscribe(f => this.filial = f);
-
+    this.buscarFiliais();
     this.initFreteForm();
     this.initCaminhaoForm();
-    this.getDetalheCarga();
     const session = this.authService.getSessionProfile();
     if(session){
       this.session = session;
@@ -95,22 +101,22 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
       numeroCarga: ['', Validators.required],
       faturado: [null],
       filial: [null],
+      dataLiberacaoFaturamento: [{value: null, disabled: true}],
       responsavelFaturamento: [null],
       responsavelOperacional: [{value: null, disabled: true}],
       entregas: [{value: null, disabled: true}],
       m3: [{value: null, disabled: true}],
-      complemento: [{value: null, disabled: true}],
+      complemento: [{value: null}],
       municipioOrigem: [{value: null, disabled: true}],
       municipioDestino: [{value: null, disabled: true}],
       dataSaida: [{value: null, disabled: true}],
-      dataLiberacaoFaturamento: [{value: null, disabled: true}],
       valorCarga: [{value: null, disabled: true}, Validators.required],
-      pedagio: [null],
-      complementoCalculo: [null],
-      descontos: [null],
+      pedagio: [0],
+      complementoCalculo: [0],
+      descontos: [0],
       frete: [{value: null, disabled: true}],
-      fobCif: [null],
-      pagamentoPedagio: [null],
+      fobCif: [FobCifEnum.CIF],
+      pagamentoPedagio: [PagamentoPedagioEnum.SEM_PEDAGIO],
       nfse: [null],
       fretePago: [null],
       iss: [{value: null, disabled: true}],
@@ -174,7 +180,7 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
       this.montarCaminhao(frete);
       this.cargaService.salvar(frete).subscribe({
         next: () => {
-          this.getDetalheCarga();
+          this.resetForms();
           this.alertService.success('Frete salvo com sucesso!');
         },
         error: erro => {
@@ -267,11 +273,10 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
   initTransportadorObserver() {
     this.formCaminhao.controls['transportador'].valueChanges.subscribe(
       value => {
-        debugger
         this.loadingService.blockShow();
-        if(value.nome){
+        if(value?.nome){
           this.pessoasTransportadorObserver = this.pessoaTransporteService.getByNome(value.nome.toUpperCase());
-        } else {          
+        } else if(value) {          
           this.pessoasTransportadorObserver = this.pessoaTransporteService.getByNome(value.toUpperCase());
         }
       }
@@ -281,7 +286,6 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
   initUsuarioObserver(){    
     this.formFrete.controls['responsavelOperacional'].valueChanges.subscribe(
       value => {
-        debugger
         this.loadingService.blockShow();
         if(value?.nome){
           this.usuarioObserver = this.usuarioService.getByNome(value.nome.toUpperCase());
@@ -298,11 +302,10 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
         if(this.isMotoristaDiferente()) {
           return;
         }
-        debugger
         this.loadingService.blockShow();
-        if(value.pessoaTransporte && value.pessoaTransporte.nome){
+        if(value?.pessoaTransporte && value?.pessoaTransporte.nome){
           this.pessoasMotorstaObserver = this.pessoaTransporteService.getByNome(value.pessoaTransporte.nome.toUpperCase());
-        } else {          
+        } else if(value && typeof(value) === 'string') {          
           this.pessoasMotorstaObserver = this.pessoaTransporteService.getByNome(value.toUpperCase());
         }
       }
@@ -319,7 +322,6 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   motoristaChange(event: any){
-    debugger
     const experiencia = event.option.value.experiencia;
     this.formCaminhao.controls['experiencia'].setValue(experiencia);
   }
@@ -334,11 +336,40 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
   initPlacaChanges() {
     this.formCaminhao.controls['placa'].valueChanges.subscribe(
       value => {
-        debugger
         this.loadingService.blockShow();
-        this.caminhoesObserver = this.caminhaoService.getByPlaca(value.toUpperCase());
+        if(value && typeof(value) === 'string') {
+          this.caminhoesObserver = this.caminhaoService.getByPlaca(value.toUpperCase());
+        }
       }
     );
+  }   
+  
+  caminhaoChange(event: any){    
+    this.formCaminhao.patchValue(event.option.value);
+    this.formCaminhao.controls['experiencia'].setValue(event.option?.value?.motorista?.experiencia)
+  }
+
+  upperPlaca(evento: any){
+    if(!this.placaUppada){
+      this.placaUppada = true;
+      this.formCaminhao.controls['placa'].setValue(evento.toUpperCase());
+      this.placaUppada = false;
+    }
+  }
+  
+  upperTransportador(evento: any){
+    if(!this.transportadorUppado){
+      this.transportadorUppado = true;
+      this.formCaminhao.controls['transportador'].setValue(evento.toUpperCase());
+      this.transportadorUppado = false;
+    }
+  }
+  upperMotorista(evento: any){
+    if(!this.motoristaUppado){
+      this.transportadorUppado = true;
+      this.formCaminhao.controls['motorista'].setValue(evento.toUpperCase());
+      this.motoristaUppado = false;
+    }
   }
 
   valorCargaChange(){
@@ -357,6 +388,7 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
       this.calcularValorFrete();
       this.calcularSaldo();
       this.calcularIcms();
+      this.calcularMargem();
     });
   }
   
@@ -376,6 +408,7 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
     const valorIss = this.formFrete.controls['aliquotaIss'].value / 100;
     this.formFrete.controls['iss'].setValue(valorNfse * valorIss);
     this.calcularIcms();
+    this.calcularSaldo();
   }
 
   calcularPisCofins(){
@@ -402,13 +435,18 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   calcularIcms(){
     const valorCarga = this.formFrete.controls['valorCarga'].value;
-    const nfse = this.formFrete.controls['nfse'].value;
+    const frete = this.formFrete.controls['frete'].value;
+    let pedagio = this.formFrete.controls['pedagio'].value;
     const iss = this.formFrete.controls['iss'].value;
-    const pedagio = this.formFrete.controls['pedagio'].value;
     const complementoCalculo = this.formFrete.controls['complementoCalculo'].value;
     const aliquotaIcms = this.formFrete.controls['aliquotaIcms'].value / 100;
+    const origem = this.formFrete.controls['municipioOrigem'].value;
 
-    const icms = (valorCarga - nfse - iss  - pedagio + complementoCalculo) * aliquotaIcms;
+    if(origem?.municipio?.estado?.sigla === 'PR'){
+      pedagio = 0;
+    }
+
+    const icms = (frete + pedagio + complementoCalculo) * aliquotaIcms;
     this.formFrete.controls['icms'].setValue(icms);
     this.calcularSaldo();
     this.calcularCustos();
@@ -437,18 +475,20 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
     const icms = this.formFrete.controls['icms'].value;
     const custos = this.formFrete.controls['custos'].value;
     const irCs = this.formFrete.controls['irCs'].value;
-    const saldo = valorCarga + complementoCalculo - fretePago - pedagio - pisCofins - icms - custos - irCs;
+    const iss = this.formFrete.controls['iss'].value;
+    const saldo = valorCarga + complementoCalculo - fretePago - pedagio - pisCofins - icms - custos - irCs - iss;
     this.formFrete.controls['saldo'].setValue(saldo);
     this.calcularMargem();
   }
 
   calcularMargem() {
     const saldo = this.formFrete.controls['saldo'].value;
-    const valorCarga = this.formFrete.controls['valorCarga'].value;
+    const frete = this.formFrete.controls['frete'].value;
     const complementoCalculo = this.formFrete.controls['complementoCalculo'].value;
     const pisCofins = this.formFrete.controls['pisCofins'].value;
+    const pedagio = this.formFrete.controls['pedagio'].value;
     const icms = this.formFrete.controls['icms'].value;
-    const margem = saldo / (valorCarga + complementoCalculo - pisCofins - icms) * 100;
+    const margem = saldo / (frete + pedagio + complementoCalculo - pisCofins - icms) * 100;
     this.formFrete.controls['margem'].setValue(margem);
   }
 
@@ -482,8 +522,30 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
   resetForm(ngFormFrete: any, ngFormCaminhao: any){
     ngFormFrete.resetForm();
     ngFormCaminhao.resetForm();
+
+    this.formFrete.controls['id'].setValue(this.fretePesquisado.id);
+    this.formFrete.controls['numeroCarga'].setValue(this.fretePesquisado.numeroCarga);
+    this.formFrete.controls['faturado'].setValue(this.fretePesquisado.faturado);
+    this.formFrete.controls['filial'].setValue(this.fretePesquisado.filial);
+    this.formFrete.controls['dataLiberacaoFaturamento'].setValue(this.fretePesquisado.dataLiberacaoFaturamento);
+    this.formFrete.controls['responsavelFaturamento'].setValue(this.fretePesquisado.responsavelFaturamento);
+    this.formFrete.controls['entregas'].setValue(this.fretePesquisado.entregas);
+    this.formFrete.controls['responsavelOperacional'].setValue(this.fretePesquisado.responsavelOperacional);this.formFrete.controls['m3'].setValue(this.fretePesquisado.m3);
+    this.formFrete.controls['entregas'].setValue(this.fretePesquisado.entregas);
+    this.formFrete.controls['dataSaida'].setValue(this.fretePesquisado.dataSaida);
+    this.formFrete.controls['municipioOrigem'].setValue(this.fretePesquisado.municipioOrigem);
+    this.formFrete.controls['municipioOrigem'].setValue(this.fretePesquisado.municipioOrigem);
+   
     ngFormFrete.markAsUntouched();
-  }
+}
+
+resetForms(){
+  this.formFrete.reset();
+  this.formFrete.markAsUntouched();
+  this.formCaminhao.reset();
+  this.formFrete.controls['filial'].setValue(this.fretePesquisado.filial);
+  this.edicaoNro = true;
+}
 
   compareExperienciaBom(f1: ExperienciaBomEnum, f2: ExperienciaBomEnum){
     return compareExperienciaBom(f1, f2)
@@ -497,9 +559,15 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
     return comparePagamentoPedagio(f1, f2)
   }
 
+  compareCaminhao(f1: Caminhao, f2: Caminhao){
+    return compareCaminhao(f1, f2)
+  }
+
   getDetalheCarga(){
-    this.cargaService.getReceberDetalheCarga(this.numeroCarga, this.idFilial).subscribe({
+    this.cargaService.getReceberDetalheCarga(this.numeroCarga, this.filial?.id).subscribe({
       next: result => {    
+        this.fretePesquisado = result;
+        
         this.initChanges();
         this.setCaminhaoPlaca(result);
         if(result.dataSaida){
@@ -509,6 +577,9 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
         this.formFrete.patchValue(result);
         this.validarDesabilitarCampos();
         this.calcularCampos();
+        this.edicaoNro = false; 
+        this.router.navigateByUrl(`frete/${this.numeroCarga}/${this.filial?.id}`);
+        debugger
       },
       error: error => this.alertService.error(error.error.detail)
     })
@@ -546,7 +617,6 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   
   habilitarCampoMotoristaClick(){
-    debugger
     const motoristaDiferente = this.formCaminhao.controls['motoristaDiferente'];
     const habilitar = !this.isMotoristaDiferente();
     motoristaDiferente.setValue(habilitar);
@@ -583,4 +653,21 @@ export class FreteComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.formCaminhao.controls['motoristaDiferente'].value;
   }
 
+  alterarNumeroCarga(){
+    this.edicaoNro = true;
+  }
+
+  pesquisarNovaCarga(){    
+    this.numeroCarga =  this.formFrete.controls['numeroCarga'].value;  
+    this.filial =  this.formFrete.controls['filial'].value;  
+    this.getDetalheCarga();
+  }
+  
+  compareFilial(f1: Filial, f2: Filial): boolean {
+    return compareFilial(f1, f2);
+  }
+
+  buscarFiliais(){
+    this.filialService.getAllUsuario().subscribe(f => this.filiais = f);
+  }
 }

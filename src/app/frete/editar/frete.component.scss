@@ -1,3 +1,5 @@
+@import '../../../assets/colors.scss';
+
 .title {
   width: 100%;
   display: inline-flex;
@@ -76,4 +78,7 @@ h3 {
 ::ng-deep .mat-mdc-select-disabled .mat-mdc-select-value{
   color: #1b1b1b !important;
 
+}
+.botao-edit {
+  color:$primary-color  !important;
 }
